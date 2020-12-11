@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+// use App\Models\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -14,7 +15,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::all();
+        // return view('event.index', compact('events'));
     }
 
     /**
@@ -24,7 +26,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $pages = 'event';
+        // $users = User::all();
+        // return view('event.addEvent', compact('pages', 'users'));
     }
 
     /**
@@ -35,7 +39,8 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Event::create($request->all());
+        // return redirect()->route('event.index');
     }
 
     /**
@@ -46,7 +51,10 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        $pages = 'event';
+        $event = Event::findOrFail($id);
+
+        // return view('event.detail', compact('pages', 'event'));
     }
 
     /**
@@ -57,7 +65,9 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $pages = 'event';
+        // $users = User::all();
+        // return view('event.editEvent', compact('event'));
     }
 
     /**
@@ -80,6 +90,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        // return redirect()->route('event.index');
     }
 }
