@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-// use App\Models\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -16,6 +16,7 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::all();
+        $pages = 'event';
         // return view('event.index', compact('events'));
     }
 
@@ -49,12 +50,18 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show($id)
     {
         $pages = 'event';
         $event = Event::findOrFail($id);
 
-        // return view('event.detail', compact('pages', 'event'));
+        $events = Event::all()->except($id)->pluck('id');
+        $guestList = User::whereNotIn('id', function($query) use ($events) {
+            $query->select('user_id')->from('event_user')
+                ->whereNotIn('event_id', $events);
+        })->where('role_id', 3)->get();
+
+        // return view('creator.event.detail', compact('event', 'guestList'));
     }
 
     /**
@@ -79,7 +86,8 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $event->update($request->all());
+        // return redirect()->route('event.index');
     }
 
     /**
