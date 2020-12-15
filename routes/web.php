@@ -39,3 +39,7 @@ Route::group(['middleware' => 'student','prefix' => 'student', 'as' => 'student.
     Route::resource('student', StudentController::class);
     Route::resource('event', EventController::class);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
