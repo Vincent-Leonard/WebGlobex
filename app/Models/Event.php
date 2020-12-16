@@ -13,9 +13,10 @@ class Event extends Model
         'type',
         'date',
         'duration',
-        'location',
+        'country',
+        'city',
         'organizer',
-        'lecturer',
         'file',
+        'status',
     ];
 }

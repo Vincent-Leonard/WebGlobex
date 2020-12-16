@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePositionsTable extends Migration
+class CreateDepartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePositionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('positions', function (Blueprint $table) {
-            $table->id('jabatan_id');
-            $table->varchar('inisial');
-            $table->varchar('prodi');
+        Schema::create('departments', function (Blueprint $table) {
+            $table->id('department_id');
+            $table->varchar('initial');
+            $table->varchar('department_name');
         });
     }
 
@@ -27,6 +27,6 @@ class CreatePositionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('positions');
+        Schema::dropIfExists('departments');
     }
 }

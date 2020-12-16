@@ -14,13 +14,18 @@ class CreateLecturersTable extends Migration
     public function up()
     {
         Schema::create('lecturers', function (Blueprint $table) {
-            $table->id('dosen_id');
+            $table->id('lecturer_id');
             $table->varchar('nip');
             $table->varchar('nidn');
-            $table->varchar('nama');
-            $table->varchar('email');
-            $table->text('keterangan');
-            $table->text('passfoto');
+            $table->varchar('lecturer_name');
+            $table->varchar('lecturer_email');
+            $table->text('description');
+            $table->text('lecturer_photo');
+            $table->enum('lecturer_gender', ['0','1'])
+                ->default('0')
+                ->comment('0 = male, 1 = female');
+            $table->varchar('lecturer_phone');
+            $table->varchar('lecturer_line_account');
             $table->timestamps();
         });
     }

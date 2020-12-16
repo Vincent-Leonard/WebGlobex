@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Major extends Model
+class Title extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'prodi_id',
-        'inisial',
-        'prodi'
+        'initial',
+        'title_name',
     ];
 }
