@@ -18,10 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Auth::routes();
-// Route::get('/home', HomeController::class, 'index'])->name('home');
-// Route::get('activate', [ActivationController::class, 'activate'])->name('activate');
-
 Route::resource('event', EventController::class);
 Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('student', StudentController::class);
