@@ -15,6 +15,8 @@ class AddProdiIdToLecturersTable extends Migration
     {
         Schema::table('lecturers', function (Blueprint $table) {
             $table->unsignedBigInteger('prodi_id')->index()->after('passfoto');
+
+            $table->foreign('prodi')->references('id')->on('prodi');
         });
     }
 

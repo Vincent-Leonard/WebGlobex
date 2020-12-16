@@ -15,6 +15,8 @@ class AddProdiIdToStudentsTable extends Migration
     {
         Schema::table('students', function (Blueprint $table) {
             $table->unsignedBigInteger('prodi_id')->index()->after('passfoto');
+
+            $table->foreign('prodi')->references('id')->on('prodi');
         });
     }
 
