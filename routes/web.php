@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-// Auth::routes();
-// Route::get('/home', HomeController::class, 'index'])->name('home');
-// Route::get('activate', [ActivationController::class, 'activate'])->name('activate');
 
 Route::resource('event', EventController::class);
 Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
