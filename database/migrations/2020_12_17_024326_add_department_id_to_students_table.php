@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddProdiIdToLecturersTable extends Migration
+class AddDepartmentIdToStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddProdiIdToLecturersTable extends Migration
      */
     public function up()
     {
-        Schema::table('lecturers', function (Blueprint $table) {
-            $table->unsignedBigInteger('prodi_id')->index()->after('lecturer_photo');
+        Schema::table('students', function (Blueprint $table) {
+            $table->unsignedBigInteger('department_id')->index()->after('student_photo');
         });
     }
 
@@ -25,8 +25,8 @@ class AddProdiIdToLecturersTable extends Migration
      */
     public function down()
     {
-        Schema::table('lecturers', function (Blueprint $table) {
-            $table->dropColumn('prodi_id');
+        Schema::table('students', function (Blueprint $table) {
+            $table->dropColumn('department_id');
         });
     }
 }
