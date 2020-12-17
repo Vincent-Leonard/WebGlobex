@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Models\User;
+use App\Events\ActivationEvent;
 
 class RegisterController extends Controller
 {
     public function register(Request $request){
 
         $this->validate($request, [
-            'name' => 'required', 
+            'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8|confirmed'
         ]);
@@ -42,6 +43,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             // 'role_id' => 2,
             // 'activation_token' => Str::random(20),
-        ]);    
+        ]);
     }
 }

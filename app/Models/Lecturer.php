@@ -19,4 +19,16 @@ class Lecturer extends Model
         'lecturer_phone',
         'lecturer_line_account',
     ];
+
+    public function department(){
+        return $this->belongsTo(Department::class, 'department_id', 'department_id');
+    }
+
+    public function title(){
+        return $this->belongsTo(Department::class, 'department_id', 'department_id');
+    }
+
+    public function jaka(){
+        return $this->belongsTo(Department::class, 'department_id', 'department_id');
+    }
 }

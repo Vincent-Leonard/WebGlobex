@@ -12,4 +12,12 @@ class Title extends Model
         'initial',
         'title_name',
     ];
+
+    public function student(){
+        return $this->hasMany(Student::class);
+    }
+
+    public function lecturer(){
+        return $this->hasMany(Lecturer::class);
+    }
 }

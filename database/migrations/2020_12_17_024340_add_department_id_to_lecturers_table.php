@@ -14,7 +14,8 @@ class AddDepartmentIdToLecturersTable extends Migration
     public function up()
     {
         Schema::table('lecturers', function (Blueprint $table) {
-            $table->unsignedBigInteger('department_id')->index()->after('lecturer_photo');
+            $table->unsignedBigInteger('department_id')->index()->after('lecturer_line_account');
+            $table->foreign('department_id')->references('department_id')->on('departments');
         });
     }
 

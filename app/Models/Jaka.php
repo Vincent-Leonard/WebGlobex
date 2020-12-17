@@ -11,4 +11,8 @@ class Jaka extends Model
     protected $fillable = [
         'jaka_name',
     ];
+
+    public function lecturer(){
+        return $this->hasMany(Lecturer::class);
+    }
 }

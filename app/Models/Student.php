@@ -19,4 +19,8 @@ class Student extends Model
         'student_phone',
         'student_line_account',
     ];
+
+    public function department(){
+        return $this->belongsTo(Department::class, 'department_id', 'department_id');
+    }
 }

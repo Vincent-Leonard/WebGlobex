@@ -15,6 +15,7 @@ class AddTitleIdToLecturersTable extends Migration
     {
         Schema::table('lecturers', function (Blueprint $table) {
             $table->unsignedBigInteger('title_id')->index()->after('department_id');
+            $table->foreign('title_id')->references('title_id')->on('titles');
         });
     }
 
