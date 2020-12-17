@@ -1,5 +1,10 @@
 <?php
 
+use App\http\controllers\EventController;
+use App\http\controllers\LecturerController;
+use App\http\controllers\StaffController;
+use App\http\controllers\StudentController;
+use App\http\controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('student', StudentController::class);
 Route::resource('event', EventController::class);
 Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('student', StudentController::class);
@@ -29,17 +35,13 @@ Route::group(['middleware' => 'lecturer','prefix' => 'lecturer', 'as' => 'lectur
     Route::resource('lecturer', LecturerController::class);
     Route::resource('event', EventController::class);
 
-    Route::post('guests/{id}/approve', [CreatorGuestController::class, 'approve'])->name('guests.approve');
-    Route::post('guests/{id}/decline', [CreatorGuestController::class, 'decline'])->name('guests.decline');
+    // Route::post('guests/{id}/approve', [CreatorGuestController::class, 'approve'])->name('guests.approve');
+    // Route::post('guests/{id}/decline', [CreatorGuestController::class, 'decline'])->name('guests.decline');
 });
 Route::group(['middleware' => 'student','prefix' => 'student', 'as' => 'student.'], function () {
     Route::resource('student', StudentController::class);
     Route::resource('event', EventController::class);
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 

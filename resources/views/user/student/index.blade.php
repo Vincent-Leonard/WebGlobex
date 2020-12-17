@@ -3,42 +3,41 @@
 
         <div class="container" style="margin-top: 20px;">
             <div class="row">
-                <h1 class="col">List Data</h1>
+                <h1 class="col">List student</h1>
             </div>
             <div class="row">
-                @auth
+                {{-- @auth --}}
                 <div class="col-md-2 offset-md-10">
-                    <a href="{{route('event.create')}}" class="btn btn-danger btn-block" role="button" aria-pressed="true">Tambah</a>
+                    <a href="{{route('student.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
                 </div>
-                @endauth
+                {{-- @endauth --}}
             </div>
             <div class="row" style="margin-top: 30px;">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Event</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Detail</th>
+                            <th scope="col">NIM</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Batch</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($events as $event)
+                        @foreach ($students as $student)
                             <tr>
-                                <td><a href="@auth{{route('event.edit', $event)}}@endauth">{{$event->event}}</td>
-                                <td>{{$event->type}}</td>
-                                <td>{{$event->date}}</td>
-                                <td>{{$event->status}}</td>
+                                <td><a href="@auth{{route('student.edit', $student)}}@endauth">{{$event->event}}</td>
+                                <td>{{$student->name}}</td>
+                                <td>{{$student->email}}</td>
+                                <td>{{$student->batch}}</td>
                                 @auth
                                 <td>
-                                    <form action="{{ route('creator.event.show', $event) }}" method="GET">
+                                    <form action="{{ route('creator.student.show', $student) }}" method="GET">
                                         @csrf
                                         <button class="btn btn-primary" type="submit">Detail</button>
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{route('event.destroy', $event)}}" method="post">
+                                    <form action="{{route('student.destroy', $student)}}" method="post">
                                         {{csrf_field()}}
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -47,7 +46,7 @@
                                 @endauth
                             </tr>
                         @endforeach
-                        
+
                     </tbody>
                 </table>
             </div>

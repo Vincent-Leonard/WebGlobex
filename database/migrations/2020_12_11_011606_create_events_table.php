@@ -21,9 +21,13 @@ class CreateEventsTable extends Migration
                 ->comment('0 = student exchange, 1 = student excursion');
             $table->date('event_date');
             $table->string('duration');
-            $table->string('location');
+            $table->string('country');
+            $table->string('city');
             $table->string('organizer');
             $table->text('file');
+            $table->enum('status', ['0', '1'. '2', '3'])
+                ->default('0')
+                ->comment('0 = pending, 1 = approved, 2 = rejeced, 3 = revision');
             $table->timestamps();
         });
     }

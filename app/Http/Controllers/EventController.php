@@ -17,7 +17,7 @@ class EventController extends Controller
     {
         $events = Event::all();
         $pages = 'event';
-        // return view('event.index', compact('events'));
+        return view('event.index', compact('events'));
     }
 
     /**
@@ -28,8 +28,8 @@ class EventController extends Controller
     public function create()
     {
         $pages = 'event';
-        // $users = User::all();
-        // return view('event.addEvent', compact('pages', 'users'));
+        $users = User::all();
+        return view('event.addEvent', compact('pages', 'users'));
     }
 
     /**
@@ -41,7 +41,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         Event::create($request->all());
-        // return redirect()->route('event.index');
+        return redirect()->route('event.index');
     }
 
     /**
@@ -56,10 +56,10 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
 
         $events = Event::all()->except($id)->pluck('id');
-        $guestList = User::whereNotIn('id', function($query) use ($events) {
-            $query->select('user_id')->from('event_user')
-                ->whereNotIn('event_id', $events);
-        })->where('role_id', 3)->get();
+        // $guestList = User::whereNotIn('id', function($query) use ($events) {
+        //     $query->select('user_id')->from('event_user')
+        //         ->whereNotIn('event_id', $events);
+        // })->where('role_id', 3)->get();
 
         // return view('creator.event.detail', compact('event', 'guestList'));
     }
@@ -73,8 +73,8 @@ class EventController extends Controller
     public function edit(Event $event)
     {
         $pages = 'event';
-        // $users = User::all();
-        // return view('event.editEvent', compact('event'));
+        $users = User::all();
+        return view('event.editEvent', compact('event'));
     }
 
     /**
@@ -87,7 +87,7 @@ class EventController extends Controller
     public function update(Request $request, Event $event)
     {
         $event->update($request->all());
-        // return redirect()->route('event.index');
+        return redirect()->route('event.index');
     }
 
     /**
@@ -99,6 +99,6 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         $event->delete();
-        // return redirect()->route('event.index');
+        return redirect()->route('event.index');
     }
 }
