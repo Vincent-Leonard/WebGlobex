@@ -14,7 +14,7 @@ class AddDepartmentIdToStaffsTable extends Migration
     public function up()
     {
         Schema::table('staffs', function (Blueprint $table) {
-            $table->unsignedBigInteger('department_id')->index()->after('staffs_photo');
+            $table->unsignedBigInteger('department_id')->index()->after('staff_photo');
         });
     }
 
