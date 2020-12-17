@@ -15,17 +15,17 @@ class CreateLecturersTable extends Migration
     {
         Schema::create('lecturers', function (Blueprint $table) {
             $table->id('lecturer_id');
-            $table->varchar('nip');
-            $table->varchar('nidn');
-            $table->varchar('lecturer_name');
-            $table->varchar('lecturer_email');
+            $table->string('nip');
+            $table->string('nidn');
+            $table->string('lecturer_name');
+            $table->string('lecturer_email');
             $table->text('description');
             $table->text('lecturer_photo');
             $table->enum('lecturer_gender', ['0','1'])
                 ->default('0')
                 ->comment('0 = male, 1 = female');
-            $table->varchar('lecturer_phone');
-            $table->varchar('lecturer_line_account');
+            $table->string('lecturer_phone');
+            $table->string('lecturer_line_account');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class AddProdiIdToLecturersTable extends Migration
     public function up()
     {
         Schema::table('lecturers', function (Blueprint $table) {
-            $table->unsignedBigInteger('prodi_id')->index()->after('passfoto');
+            $table->unsignedBigInteger('prodi_id')->index()->after('lecturer_photo');
         });
     }
 

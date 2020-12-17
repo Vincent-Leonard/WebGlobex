@@ -15,17 +15,17 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id('student_id');
-            $table->varchar('nim');
-            $table->varchar('student_name');
-            $table->varchar('student_email');
-            $table->int('batch');
+            $table->string('nim');
+            $table->string('student_name');
+            $table->string('student_email');
+            $table->integer('batch');
             $table->text('description');
             $table->text('student_photo');
             $table->enum('student_gender', ['0','1'])
                 ->default('0')
                 ->comment('0 = male, 1 = female');
-            $table->varchar('student_phone');
-            $table->varchar('student_line_account');
+            $table->string('student_phone');
+            $table->string('student_line_account');
             $table->timestamps();
         });
     }

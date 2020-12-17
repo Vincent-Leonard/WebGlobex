@@ -15,16 +15,16 @@ class CreateStaffTable extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id('staff_id');
-            $table->varchar('nidn');
-            $table->varchar('staff_name');
-            $table->varchar('staff_email');
+            $table->string('nidn');
+            $table->string('staff_name');
+            $table->string('staff_email');
             $table->text('description');
             $table->text('staff_photo');
             $table->enum('staff_gender', ['0','1'])
                 ->default('0')
                 ->comment('0 = male, 1 = female');
-            $table->varchar('staff_phone');
-            $table->varchar('staff_line_account');
+            $table->string('staff_phone');
+            $table->string('staff_line_account');
             $table->timestamps();
         });
     }

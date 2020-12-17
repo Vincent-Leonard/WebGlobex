@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePositionsTable extends Migration
+class CreateTitleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreatePositionsTable extends Migration
     {
         Schema::create('titles', function (Blueprint $table) {
             $table->id('title_id');
-            $table->varchar('title_name');
+            $table->string('title_name');
         });
     }
 
@@ -26,6 +26,6 @@ class CreatePositionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('positions');
+        Schema::dropIfExists('titles');
     }
 }

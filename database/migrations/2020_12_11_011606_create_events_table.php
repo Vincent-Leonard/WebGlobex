@@ -16,8 +16,9 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id('event_id');
             $table->string('event');
-            $table->enum('type', ['student exchange', 'student excursion'])
-                ->default('0');
+            $table->enum('type', ['0', '1'])
+                ->default('0')
+                ->comment('0 = student exchange, 1 = student excursion');
             $table->date('event_date');
             $table->string('duration');
             $table->string('location');
