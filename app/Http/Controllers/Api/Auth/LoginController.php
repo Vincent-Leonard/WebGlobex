@@ -27,7 +27,6 @@ class LoginController extends Controller
         $user = [
             'email' => $request->email,
             'password' => $request->password,
-            'role_id' => 3,
             'is_login' => '0',
         ];
 

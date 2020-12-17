@@ -21,7 +21,7 @@ class RegisterController extends Controller
 
         $user = $this->newUser($request->all());
 
-        event(new ActivationEvent($user));
+        // event(new ActivationEvent($user));
 
         if(empty($user)){
             return response([
