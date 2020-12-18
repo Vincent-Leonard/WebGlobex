@@ -26,4 +26,8 @@ class Staff extends Model
     public function title(){
         return $this->belongsTo(Department::class, 'department_id', 'department_id');
     }
+
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }
