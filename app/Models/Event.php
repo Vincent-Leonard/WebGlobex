@@ -19,4 +19,8 @@ class Event extends Model
         'file',
         'status',
     ];
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }
