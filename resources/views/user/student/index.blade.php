@@ -20,6 +20,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Batch</th>
+                            <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
