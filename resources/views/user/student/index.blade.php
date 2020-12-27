@@ -16,10 +16,11 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">NIM</th>
+                            <th scope="col">ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Batch</th>
+                            <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
                     </thead>
@@ -27,18 +28,18 @@
                         @foreach ($students as $student)
                             <tr>
                                 <td>{{$student->student_id}}</td>
-                                <td>{{$student->student_name}}</td>
+                                <td><a href="{{ route('student.show', $student) }}">{{ $student->student_name }}</a></td>
                                 <td>{{$student->student_email}}</td>
                                 <td>{{$student->batch}}</td>
                                 {{-- @auth --}}
                                 <td>
-                                    <form action="" method="GET">
+                                    <form action="{{ route('student.edit', $student) }}" method="GET">
                                         @csrf
-                                        <button class="btn btn-primary" type="submit">Detail</button>
+                                        <button class="btn btn-primary" type="submit">Edit</button>
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{route('student.destroy', $student)}}" method="post">
+                                    <form action="{{ route('student.destroy', $student) }}" method="post">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -47,7 +48,6 @@
                                 {{-- @endauth --}}
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>

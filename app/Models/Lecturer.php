@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Lecturer extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = "lecturer_id";
+
     protected $fillable = [
         'nip',
         'nidn',

@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\Student;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -19,7 +17,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        $pages = 'student';
+        // $pages = 'student';
         return view('user.student.index', compact('students'));
     }
 
@@ -30,7 +28,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $pages = 'student';
+        // $pages = 'student';
         $departments = Department::all();
         return view('user.addUser', compact('departments'));
     }
@@ -55,7 +53,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $pages = 'student';
+        // $pages = 'student';
         $student = Student::findOrFail($id);
 
         // $student = Student::all()->except($id)->pluck('id');
@@ -77,10 +75,10 @@ class StudentController extends Controller
     {
         $pages = 'student';
         $departments = Department::all();
-        return view('user.student.editEvent', compact('departments'));
+        return view('user.student.editEvent', compact('pages', 'departments'));
     }
 
-    /**
+    /*
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -90,7 +88,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $student->update($request->all());
-        return redirect()->route('student.index');
+        return redirect()->route('user.student.index');
     }
 
     /**
