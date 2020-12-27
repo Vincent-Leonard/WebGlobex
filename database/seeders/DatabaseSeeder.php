@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             RoleSeeder::class,
+            DepartmentSeeder::class,
+            JakaSeeder::class,
+            TitleSeeder::class,
         ]);
 
         Model::reguard();
