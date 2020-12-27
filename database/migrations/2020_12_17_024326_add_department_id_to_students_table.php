@@ -14,7 +14,7 @@ class AddDepartmentIdToStudentsTable extends Migration
     public function up()
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->unsignedBigInteger('department_id')->index()->after('student_line_account');
+            $table->unsignedBigInteger('department_id')->index()->after('student_line_account')->nullable();
             $table->foreign('department_id')->references('department_id')->on('departments');
         });
     }

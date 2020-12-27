@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -28,8 +29,8 @@ class StudentController extends Controller
     public function create()
     {
         $pages = 'student';
-        $users = User::all();
-        return view('user.addUser', compact('pages', 'users'));
+        $departments = Department::all();
+        return view('user.addUser', compact('pages', 'departments'));
     }
 
     /**
@@ -41,7 +42,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         Student::create($request->all());
-        return redirect()->route('user.student.index');
+        return redirect()->route('student.index');
     }
 
     /**
@@ -73,8 +74,8 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $pages = 'student';
-        $users = User::all();
-        return view('user.student.editEvent', compact('student'));
+        $departments = Department::all();
+        return view('user.student.editEvent', compact('pages', 'departments'));
     }
 
     /**

@@ -14,7 +14,7 @@ class AddDepartmentIdToStaffsTable extends Migration
     public function up()
     {
         Schema::table('staffs', function (Blueprint $table) {
-            $table->unsignedBigInteger('department_id')->index()->after('staff_line_account');
+            $table->unsignedBigInteger('department_id')->index()->after('staff_line_account')->nullable();
             $table->foreign('department_id')->references('department_id')->on('departments');
         });
     }
