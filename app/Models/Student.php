@@ -18,6 +18,7 @@ class Student extends Model
         'student_gender',
         'student_phone',
         'student_line_account',
+        'department_id',
     ];
 
     public function department(){

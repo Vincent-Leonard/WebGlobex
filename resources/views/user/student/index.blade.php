@@ -25,9 +25,9 @@
                     <tbody>
                         @foreach ($students as $student)
                             <tr>
-                                <td><a href="@auth{{route('student.edit', $student)}}@endauth">{{$event->event}}</td>
-                                <td>{{$student->name}}</td>
-                                <td>{{$student->email}}</td>
+                                <td>{{$student->student_id}}</td>
+                                <td>{{$student->student_name}}</td>
+                                <td>{{$student->student_email}}</td>
                                 <td>{{$student->batch}}</td>
                                 @auth
                                 <td>

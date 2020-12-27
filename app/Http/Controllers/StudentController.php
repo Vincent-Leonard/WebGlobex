@@ -41,7 +41,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         Student::create($request->all());
-        return redirect()->route('user.student.index');
+        return redirect()->route('student.index');
     }
 
     /**
