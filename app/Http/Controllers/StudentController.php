@@ -30,7 +30,7 @@ class StudentController extends Controller
     {
         $pages = 'student';
         $departments = Department::all();
-        return view('user.addUser', compact('pages', 'departments'));
+        return view('user.addUser', compact('departments'));
     }
 
     /**
@@ -56,13 +56,13 @@ class StudentController extends Controller
         $pages = 'student';
         $student = Student::findOrFail($id);
 
-        $student = Student::all()->except($id)->pluck('id');
+        // $student = Student::all()->except($id)->pluck('id');
         // $guestList = User::whereNotIn('id', function($query) use ($events) {
         //     $query->select('user_id')->from('event_user')
         //         ->whereNotIn('event_id', $events);
         // })->where('role_id', 3)->get();
 
-        // return view('creator.event.detail', compact('event', 'guestList'));
+        return view('student.detail', compact('student'));
     }
 
     /**
@@ -75,7 +75,7 @@ class StudentController extends Controller
     {
         $pages = 'student';
         $departments = Department::all();
-        return view('user.student.editEvent', compact('pages', 'departments'));
+        return view('user.student.editEvent', compact('departments'));
     }
 
     /**
@@ -88,7 +88,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $student->update($request->all());
-        return redirect()->route('user.student.index');
+        return redirect()->route('student.index');
     }
 
     /**
@@ -100,6 +100,6 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
-        return redirect()->route('user.student.index');
+        return redirect()->route('student.index');
     }
 }

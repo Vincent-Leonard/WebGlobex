@@ -29,21 +29,21 @@
                                 <td>{{$student->student_name}}</td>
                                 <td>{{$student->student_email}}</td>
                                 <td>{{$student->batch}}</td>
-                                @auth
+                                {{-- @auth --}}
                                 <td>
-                                    <form action="{{ route('creator.student.show', $student) }}" method="GET">
+                                    <form action="" method="GET">
                                         @csrf
                                         <button class="btn btn-primary" type="submit">Detail</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="{{route('student.destroy', $student)}}" method="post">
-                                        {{csrf_field()}}
+                                        @csrf
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
                                 </td>
-                                @endauth
+                                {{-- @endauth --}}
                             </tr>
                         @endforeach
 
