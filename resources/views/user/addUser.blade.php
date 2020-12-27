@@ -49,9 +49,9 @@
                     </div>
                     <div class="form-group">
                         <label>Department:</label>
-                        <select name="departmen_id" class="custom-select">
-                            @foreach($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        <select name="department" class="custom-select">
+                            @foreach($departments as $department)
+                            <option value="{{ $department->department_id }}">{{ $department->department_name .'('. $department->initial .')' }}</option>
                             @endforeach
                         </select>
                     </div>
