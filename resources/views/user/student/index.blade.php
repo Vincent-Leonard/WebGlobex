@@ -20,6 +20,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Batch</th>
+                            <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,12 +31,12 @@
                                 <td>{{$student->student_email}}</td>
                                 <td>{{$student->batch}}</td>
                                 @auth
-                                <td>
+                                {{-- <td>
                                     <form action="{{ route('creator.student.show', $student) }}" method="GET">
                                         @csrf
                                         <button class="btn btn-primary" type="submit">Detail</button>
                                     </form>
-                                </td>
+                                </td> --}}
                                 <td>
                                     <form action="{{route('student.destroy', $student)}}" method="post">
                                         {{csrf_field()}}
