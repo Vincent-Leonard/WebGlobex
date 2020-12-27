@@ -13,9 +13,14 @@ class Event extends Model
         'type',
         'date',
         'duration',
-        'location',
+        'country',
+        'city',
         'organizer',
-        'lecturer',
         'file',
+        'status',
     ];
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }

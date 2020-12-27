@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Position extends Model
+class Jaka extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'jabatan_id',
-        'inisial',
-        'prodi'
+        'jaka_name',
     ];
+
+    public function lecturer(){
+        return $this->hasMany(Lecturer::class);
+    }
 }

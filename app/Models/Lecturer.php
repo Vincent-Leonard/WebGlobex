@@ -9,15 +9,30 @@ class Lecturer extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'dosen_id',
         'nip',
         'nidn',
-        'nama',
-        'email',
-        'keterangan',
-        'passfoto',
-        'prodi_id',
-        'jabatan_id',
-        'jaka_id',
+        'lecturer_name',
+        'lecturer_email',
+        'description',
+        'lecturer_photo',
+        'lecturer_gender',
+        'lecturer_phone',
+        'lecturer_line_account',
     ];
+
+    public function department(){
+        return $this->belongsTo(Department::class, 'department_id', 'department_id');
+    }
+
+    public function title(){
+        return $this->belongsTo(Department::class, 'department_id', 'department_id');
+    }
+
+    public function jaka(){
+        return $this->belongsTo(Department::class, 'department_id', 'department_id');
+    }
+
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }
