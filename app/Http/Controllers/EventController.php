@@ -101,4 +101,25 @@ class EventController extends Controller
         $event->delete();
         return redirect()->route('event.index');
     }
+
+    public function approve(Request $request)
+    {
+        $event = Event::findOrFail($request->id);
+        $event->update(['status' => '1']);
+        return redirect()->back()->with('Success', 'Event Approved');
+    }
+
+    public function reject(Request $request)
+    {
+        $event = Event::findOrFail($request->id);
+        $event->update(['status' => '2']);
+        return redirect()->back()->with('Success', 'Event Rejected');
+    }
+
+    public function revise(Request $request)
+    {
+        $event = Event::findOrFail($request->id);
+        $event->update(['status' => '3']);
+        return redirect()->back()->with('Success', 'Event Needs Revision');
+    }
 }

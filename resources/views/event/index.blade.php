@@ -21,27 +21,56 @@
                             <th scope="col">Date</th>
                             <th scope="col">Status</th>
                             <th scope="col">Detail</th>
+                            <th scope="col">Approve</th>
+                            <th scope="col">Reject</th>
+                            <th scope="col">Revise</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($events as $event)
                             <tr>
-                                <td><a href="@auth{{route('event.edit', $event)}}@endauth">{{$event->event}}</td>
-                                <td>{{$event->type}}</td>
-                                <td>{{$event->date}}</td>
-                                <td>{{$event->status}}</td>
+                                <td><a href="@auth{{route('event.show', $event)}}@endauth">{{$event->event}}</td>
+                                @if($event->type == 0)
+                                    <td>Student Exchange</td>
+                                @else
+                                    <td>Student Excursion</td>
+                                @endif
+                                <td>{{$event->event_date}}</td>
+                                @if($event->status == 0)
+                                    <td>Pending</td>
+                                @elseif($event->status == 1)
+                                    <td>Approved</td>
+                                @elseif($event->status == 2)
+                                    <td>Rejected</td>
+                                @else
+                                    <td>Need Revision</td>
+                                @endif
                                 @auth
                                 <td>
-                                    <form action="{{ route('creator.event.show', $event) }}" method="GET">
+                                    <form action="{{ route('event.edit', $event) }}" method="GET">
                                         @csrf
-                                        <button class="btn btn-primary" type="submit">Detail</button>
+                                        <button class="btn btn-primary" type="submit">Edit</button>
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{route('event.destroy', $event)}}" method="post">
-                                        {{csrf_field()}}
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    <form action="{{route('event.approve')}}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input name="id" type="hidden" value="{{$event->event_id}}">
+                                        <button class="btn btn-success btn-circle" title="Approve" type="submit"></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{route('event.reject')}}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input name="id" type="hidden" value="{{$event->event_id}}">
+                                        <button class="btn btn-danger btn-circle" title="Reject" type="submit"></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{route('event.revise')}}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input name="id" type="hidden" value="{{$event->event_id}}">
+                                        <button class="btn btn-warning btn-circle" title="Revise" type="submit"></button>
                                     </form>
                                 </td>
                                 @endauth

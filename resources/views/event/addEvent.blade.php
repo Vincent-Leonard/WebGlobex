@@ -13,12 +13,15 @@
                         <input type="text" class="form-control" id="event" name="event">
                     </div>
                     <div class="form-group">
-                        <label for="barcode">Type:</label>
-                        <input type="text" class="form-control" id="type" name="type">
+                        <label for="user">Type:</label>
+                        <select name = "type" class = "custom-select">
+                            <option value="0">Student Exchange</option>
+                            <option value="1">Student Excursion</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="nama">Date:</label>
-                        <input type="date" class="form-control" id="date" name="date">
+                        <input type="date" class="form-control" id="date" name="event_date">
                     </div>
                     <div class="form-group">
                         <label for="barcode">Duration:</label>
