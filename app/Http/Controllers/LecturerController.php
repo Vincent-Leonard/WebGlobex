@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lecturer;
+use App\Models\Department;
+use App\Models\Title;
+use App\Models\Jaka;
 use Illuminate\Http\Request;
 
 class LecturerController extends Controller
@@ -14,7 +17,9 @@ class LecturerController extends Controller
      */
     public function index()
     {
-        //
+        $lecturers = Lecturer::all();
+        $pages = 'lecturer';
+        return view('user.lecturer.index', compact('lecturers', 'pages'));
     }
 
     /**
@@ -24,7 +29,11 @@ class LecturerController extends Controller
      */
     public function create()
     {
-        //
+        $pages = 'lecturer';
+        $departments = Department::all();
+        $titles = Title::all();
+        $jakas = Jaka::all();
+        return view('user.lecturer.addLecturer', compact('departments', 'titles', 'jakas', 'pages'));
     }
 
     /**
@@ -35,7 +44,8 @@ class LecturerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Lecturer::create($request->all());
+        return redirect()->route('lecturer.index');
     }
 
     /**
@@ -44,9 +54,12 @@ class LecturerController extends Controller
      * @param  \App\Models\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function show(Lecturer $lecturer)
+    public function show($id)
     {
-        //
+        $pages = 'lecturer';
+        $lecturer = Lecturer::findOrFail($id);
+
+        return view('lecturer.detail', compact('lecturer', 'pages'));
     }
 
     /**
@@ -57,7 +70,11 @@ class LecturerController extends Controller
      */
     public function edit(Lecturer $lecturer)
     {
-        //
+        $pages = 'lecturer';
+        $departments = Department::all();
+        $titles = Title::all();
+        $jakas = Jaka::all();
+        return view('user.lecturer.editLecturer', compact('lecturer', 'departments', 'titles', 'jakas', 'pages'));
     }
 
     /**
@@ -69,7 +86,8 @@ class LecturerController extends Controller
      */
     public function update(Request $request, Lecturer $lecturer)
     {
-        //
+        $lecturer->update($request->all());
+        return redirect()->route('lecturer.index');
     }
 
     /**
@@ -80,6 +98,7 @@ class LecturerController extends Controller
      */
     public function destroy(Lecturer $lecturer)
     {
-        //
+        $lecturer->delete();
+        return redirect()->route('lecturer.index');
     }
 }

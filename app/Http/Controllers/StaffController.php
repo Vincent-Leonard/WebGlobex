@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Staff;
+use App\Models\Department;
+use App\Models\Title;
+use App\Models\Jaka;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -14,7 +17,9 @@ class StaffController extends Controller
      */
     public function index()
     {
-        //
+        $staffs = Staff::all();
+        $pages = 'staff';
+        return view('user.staff.index', compact('staffs', 'pages'));
     }
 
     /**
@@ -24,7 +29,11 @@ class StaffController extends Controller
      */
     public function create()
     {
-        //
+        $pages = 'staff';
+        $departments = Department::all();
+        $titles = Title::all();
+        $jakas = Jaka::all();
+        return view('user.staff.addStaff', compact('departments', 'titles', 'jakas', 'pages'));
     }
 
     /**
@@ -35,7 +44,8 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Staff::create($request->all());
+        return redirect()->route('staff.index');
     }
 
     /**
@@ -44,9 +54,12 @@ class StaffController extends Controller
      * @param  \App\Models\Staff  $staff
      * @return \Illuminate\Http\Response
      */
-    public function show(Staff $staff)
+    public function show($id)
     {
-        //
+        $pages = 'staff';
+        $staff = Staff::findOrFail($id);
+
+        return view('staff.detail', compact('staff', 'pages'));
     }
 
     /**
@@ -57,7 +70,11 @@ class StaffController extends Controller
      */
     public function edit(Staff $staff)
     {
-        //
+        $pages = 'staff';
+        $departments = Department::all();
+        $titles = Title::all();
+        $jakas = Jaka::all();
+        return view('user.staff.editStaff', compact('staff', 'departments', 'titles', 'jakas', 'pages'));
     }
 
     /**
@@ -69,7 +86,8 @@ class StaffController extends Controller
      */
     public function update(Request $request, Staff $staff)
     {
-        //
+        $staff->update($request->all());
+        return redirect()->route('staff.index');
     }
 
     /**
@@ -80,6 +98,7 @@ class StaffController extends Controller
      */
     public function destroy(Staff $staff)
     {
-        //
+        $staff->delete();
+        return redirect()->route('lecturer.index');
     }
 }

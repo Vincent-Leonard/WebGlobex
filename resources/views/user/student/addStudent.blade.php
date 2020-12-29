@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col">
             <form action="{{route('student.store')}}" method="post">
-                {{csrf_field()}}
+                @csrf
                     <div class="form-group">
                         <label>NIM:</label>
                         <input type="text" class="form-control" name="nim">

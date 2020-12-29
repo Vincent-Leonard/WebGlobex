@@ -3,12 +3,12 @@
 
         <div class="container" style="margin-top: 20px;">
             <div class="row">
-                <h1 class="col">List student</h1>
+                <h1 class="col">List Lecturer</h1>
             </div>
             <div class="row">
                 {{-- @auth --}}
                 <div class="col-md-2 offset-md-10">
-                    <a href="{{route('student.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
+                    <a href="{{ route('lecturer.create') }}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
                 </div>
                 {{-- @endauth --}}
             </div>
@@ -18,28 +18,28 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Title</th>
                             <th scope="col">Department</th>
-                            <th scope="col">Batch</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($students as $student)
+                        @foreach ($lecturers as $lecturer)
                             <tr>
-                                <td>{{$student->student_id}}</td>
-                                <td><a href="{{ route('student.show', $student) }}">{{ $student->student_name }}</a></td>
-                                <td>{{$student->department_id}}</td>
-                                <td>{{$student->batch}}</td>
+                                <td>{{$lecturer->lecturer_id}}</td>
+                                <td><a href="{{ route('lecturer.show', $lecturer) }}">{{ $lecturer->lecturer_name }}</a></td>
+                                <td>{{$lecturer->title_id}}</td>
+                                <td>{{$lecturer->department_id}}</td>
                                 {{-- @auth --}}
                                 <td>
-                                    <form action="{{ route('student.edit', $student) }}" method="GET">
+                                    <form action="{{ route('lecturer.edit', $lecturer) }}" method="GET">
                                         @csrf
                                         <button class="btn btn-primary" type="submit">Edit</button>
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{ route('student.destroy', $student) }}" method="post">
+                                    <form action="{{ route('lecturer.destroy', $lecturer) }}" method="post">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger">Delete</button>

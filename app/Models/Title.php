@@ -8,13 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Title extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = "title_id";
+
     protected $fillable = [
         'initial',
         'title_name',
     ];
 
-    public function student(){
-        return $this->hasMany(Student::class);
+    public function staff(){
+        return $this->hasMany(Staff::class);
     }
 
     public function lecturer(){

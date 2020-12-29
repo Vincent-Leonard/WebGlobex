@@ -25,6 +25,8 @@ Route::get('/', function () {
 
 Route::resource('student', StudentController::class);
 Route::resource('event', EventController::class);
+Route::resource('lecturer', LecturerController::class);
+Route::resource('staff', StaffController::class);
 
 // Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
 //     Route::resource('student', StudentController::class);

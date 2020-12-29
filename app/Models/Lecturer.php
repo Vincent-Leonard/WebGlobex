@@ -21,6 +21,9 @@ class Lecturer extends Model
         'lecturer_gender',
         'lecturer_phone',
         'lecturer_line_account',
+        'department_id',
+        'title_id',
+        'jaka_id',
     ];
 
     public function department(){
@@ -28,11 +31,11 @@ class Lecturer extends Model
     }
 
     public function title(){
-        return $this->belongsTo(Department::class, 'department_id', 'department_id');
+        return $this->belongsTo(Title::class, 'title_id', 'title_id');
     }
 
     public function jaka(){
-        return $this->belongsTo(Department::class, 'department_id', 'department_id');
+        return $this->belongsTo(Jaka::class, 'jaka_id', 'jaka_id');
     }
 
     public function user(){

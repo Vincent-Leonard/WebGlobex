@@ -14,7 +14,7 @@ class AddJakaIdToLecturersTable extends Migration
     public function up()
     {
         Schema::table('lecturers', function (Blueprint $table) {
-            $table->unsignedBigInteger('jaka_id')->index()->after('title_id');
+            $table->unsignedBigInteger('jaka_id')->index()->after('title_id')->nullable();
             $table->foreign('jaka_id')->references('jaka_id')->on('jakas');
         });
     }

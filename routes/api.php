@@ -24,6 +24,6 @@ Route::post('api-login', [LoginController::class, 'login']);
 Route::post('api-register', [RegisterController::class, 'register']);
 Route::post('refresh', [LoginController::class, 'refresh']);
 
-Route::group(['middleware'=>'auth:api'], function(){\
+Route::group(['middleware'=>'auth:api'], function(){
     Route::post('logout', [LoginController::class, 'logout']);
 });

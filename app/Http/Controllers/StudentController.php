@@ -17,8 +17,8 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        // $pages = 'student';
-        return view('user.student.index', compact('students'));
+        $pages = 'student';
+        return view('user.student.index', compact('students', 'pages'));
     }
 
     /**
@@ -28,9 +28,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        // $pages = 'student';
+        $pages = 'student';
         $departments = Department::all();
-        return view('user.addUser', compact('departments'));
+        return view('user.student.addStudent', compact('departments', 'pages'));
     }
 
     /**
@@ -48,12 +48,12 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Student $student
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        // $pages = 'student';
+        $pages = 'student';
         $student = Student::findOrFail($id);
 
         // $student = Student::all()->except($id)->pluck('id');
@@ -62,39 +62,39 @@ class StudentController extends Controller
         //         ->whereNotIn('event_id', $events);
         // })->where('role_id', 3)->get();
 
-        return view('student.detail', compact('student'));
+        return view('student.detail', compact('student', 'pages'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Student $student
      * @return \Illuminate\Http\Response
      */
     public function edit(Student $student)
     {
         $pages = 'student';
         $departments = Department::all();
-        return view('user.student.editEvent', compact('pages', 'departments'));
+        return view('user.student.editStudent', compact('student', 'departments', 'pages'));
     }
 
     /*
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Student $student)
     {
         $student->update($request->all());
-        return redirect()->route('user.student.index');
+        return redirect()->route('student.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
     public function destroy(Student $student)

@@ -14,7 +14,7 @@ class AddTitleIdToStaffsTable extends Migration
     public function up()
     {
         Schema::table('staffs', function (Blueprint $table) {
-            $table->unsignedBigInteger('title_id')->index()->after('department_id');
+            $table->unsignedBigInteger('title_id')->index()->after('department_id')->nullable();
             $table->foreign('title_id')->references('title_id')->on('titles');
         });
     }

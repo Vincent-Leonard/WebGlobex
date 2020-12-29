@@ -20,6 +20,8 @@ class Staff extends Model
         'staff_gender',
         'staff_phone',
         'staff_line_account',
+        'department_id',
+        'title_id',
     ];
 
     public function department(){
