@@ -9,10 +9,12 @@ class Staff extends Model
 {
     use HasFactory;
 
+    protected $table = 'staffs';
+
     protected $primaryKey = "staff_id";
 
     protected $fillable = [
-        'nip',
+        'nidn',
         'staff_name',
         'staff_email',
         'description',
@@ -29,7 +31,7 @@ class Staff extends Model
     }
 
     public function title(){
-        return $this->belongsTo(Department::class, 'department_id', 'department_id');
+        return $this->belongsTo(Title::class, 'title_id', 'title_id');
     }
 
     public function user(){

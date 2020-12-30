@@ -6,8 +6,9 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{ route('student.store') }}" method="post">
+            <form action="{{ route('student.update', $model->student_id) }}" method="post">
                 @csrf
+                    <input type="hidden" name="_method" value="PATCH"/>
                     <div class="form-group">
                         <label>NIM:</label>
                         <input type="text" class="form-control" name="nim" value="{{ $student->nim }}">

@@ -74,7 +74,7 @@ class LecturerController extends Controller
         $departments = Department::all();
         $titles = Title::all();
         $jakas = Jaka::all();
-        return view('user.lecturer.editLecturer', compact('lecturer', 'departments', 'titles', 'jakas', 'pages'));
+        return view('user.lecturer.editLecturer', ['model' => $lecturer], compact('lecturer', 'departments', 'titles', 'jakas', 'pages'));
     }
 
     /**

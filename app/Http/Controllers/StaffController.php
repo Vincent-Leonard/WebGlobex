@@ -74,7 +74,7 @@ class StaffController extends Controller
         $departments = Department::all();
         $titles = Title::all();
         $jakas = Jaka::all();
-        return view('user.staff.editStaff', compact('staff', 'departments', 'titles', 'jakas', 'pages'));
+        return view('user.staff.editStaff', ['model' => $staff], compact('staff', 'departments', 'titles', 'jakas', 'pages'));
     }
 
     /**
@@ -99,6 +99,6 @@ class StaffController extends Controller
     public function destroy(Staff $staff)
     {
         $staff->delete();
-        return redirect()->route('lecturer.index');
+        return redirect()->route('staff.index');
     }
 }

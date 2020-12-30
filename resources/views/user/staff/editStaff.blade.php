@@ -6,15 +6,16 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{ route('staff.store') }}" method="post">
+            <form action="{{ route('staff.update', $model->staff_id) }}" method="post">
                 @csrf
+                    <input type="hidden" name="_method" value="PATCH"/>
                     <div class="form-group">
                         <label>NIDN:</label>
                         <input type="text" class="form-control" name="nidn" value="{{ $staff->nidn }}">
                     </div>
                     <div class="form-group">
                         <label>Name:</label>
-                        <input type="text" class="form-control" name="staff_name" vvalue="{{ $staff->staff_name }}">
+                        <input type="text" class="form-control" name="staff_name" value="{{ $staff->staff_name }}">
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
@@ -32,11 +33,11 @@
                         <label>Gender:</label>
                         <?php
                         $selected_male = '';
-                        if ( $staff->staff_gender == "Male" ) {
+                        if ( $staff->staff_gender == "0" ) {
                             $selected_male = 'selected';
                         }
                         $selected_female = '';
-                        if ( $staff->staff_gender == "Female" ) {
+                        if ( $staff->staff_gender == "1" ) {
                             $selected_female = 'selected';
                         }
                         ?>

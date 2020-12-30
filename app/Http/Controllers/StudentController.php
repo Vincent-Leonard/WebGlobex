@@ -75,7 +75,7 @@ class StudentController extends Controller
     {
         $pages = 'student';
         $departments = Department::all();
-        return view('user.student.editStudent', compact('student', 'departments', 'pages'));
+        return view('user.student.editStudent', ['model' => $student], compact('student', 'departments', 'pages'));
     }
 
     /*

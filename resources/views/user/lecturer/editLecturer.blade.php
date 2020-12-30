@@ -6,8 +6,9 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{ route('lecturer.update') }}" method="post">
+            <form action="{{ route('lecturer.update', $model->lecturer_id) }}" method="post">
                 @csrf
+                    <input type="hidden" name="_method" value="PATCH"/>
                     <div class="form-group">
                         <label>NIP:</label>
                         <input type="text" class="form-control" name="nip" value="{{ $lecturer->nip }}">

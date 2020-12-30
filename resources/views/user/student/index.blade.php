@@ -3,7 +3,7 @@
 
         <div class="container" style="margin-top: 20px;">
             <div class="row">
-                <h1 class="col">List student</h1>
+                <h1 class="col">List Student</h1>
             </div>
             <div class="row">
                 {{-- @auth --}}
