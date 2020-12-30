@@ -25,7 +25,7 @@ class CreateEventsTable extends Migration
             $table->string('city');
             $table->string('organizer');
             $table->text('file');
-            $table->enum('status', ['0', '1'. '2', '3'])
+            $table->enum('status', ['0', '1', '2', '3'])
                 ->default('0')
                 ->comment('0 = pending, 1 = approved, 2 = rejeced, 3 = revision');
             $table->timestamps();

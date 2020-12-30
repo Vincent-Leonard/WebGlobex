@@ -29,6 +29,10 @@ Route::resource('lecturer', LecturerController::class);
 Route::resource('staff', StaffController::class);
 Route::resource('user', UserController::class);
 
+Route::post('event/approve', [EventController::class, 'approve'])->name('event.approve');
+Route::post('event/reject', [EventController::class, 'reject'])->name('event.reject');
+Route::post('event/revise', [EventController::class, 'revise'])->name('event.revise');
+
 // Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
 //     Route::resource('student', StudentController::class);
 //     Route::resource('lecturer', LecturerController::class);
