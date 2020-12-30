@@ -35,8 +35,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->all());
-        // return redirect()->route('.index');
+        //
     }
 
     /**
@@ -70,8 +69,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->update($request->all());
-        // return redirect()->route('staff.index');
+        //
     }
 
     /**
@@ -82,7 +80,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        // return redirect()->route('staff.index');
+        //
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lecturer;
+use App\Models\User;
 use App\Models\Department;
 use App\Models\Title;
 use App\Models\Jaka;
@@ -44,7 +45,9 @@ class LecturerController extends Controller
      */
     public function store(Request $request)
     {
-        Lecturer::create($request->all());
+        Lecturer::create($request->except(['password']));
+        $email = $request->lecturer_email;
+        User::create($request->only('password', 'email'));
         return redirect()->route('lecturer.index');
     }
 
