@@ -74,7 +74,7 @@ class EventController extends Controller
     {
         $pages = 'event';
         $users = User::all();
-        return view('event.editEvent', compact('event'));
+        return view('event.editEvent', ['model' => $event], compact('event', 'pages'));
     }
 
     /**
