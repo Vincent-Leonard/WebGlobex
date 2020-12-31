@@ -65,8 +65,10 @@ class LecturerController extends Controller
     {
         $pages = 'lecturer';
         $lecturer = Lecturer::findOrFail($id);
-
-        return view('lecturer.detail', compact('lecturer', 'pages'));
+        $departments = Department::findOrFail($lecturer->department_id);
+        $titles = Title::findOrFail($lecturer->title_id);
+        $jakas = Jaka::findOrFail($lecturer->jaka_id);
+        return view('user.lecturer.profile', compact('departments', 'titles', 'jakas', 'lecturer', 'pages'));
     }
 
     /**

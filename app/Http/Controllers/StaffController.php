@@ -65,8 +65,9 @@ class StaffController extends Controller
     {
         $pages = 'staff';
         $staff = Staff::findOrFail($id);
-
-        return view('staff.detail', compact('staff', 'pages'));
+        $departments = Department::findOrFail($staff->department_id);
+        $titles = Title::findOrFail($staff->title_id);
+        return view('user.staff.profile', compact('departments', 'titles', 'staff', 'pages'));
     }
 
     /**

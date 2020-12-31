@@ -63,14 +63,9 @@ class StudentController extends Controller
     {
         $pages = 'student';
         $student = Student::findOrFail($id);
+        $departments = Department::findOrFail($student->department_id);
 
-        // $student = Student::all()->except($id)->pluck('id');
-        // $guestList = User::whereNotIn('id', function($query) use ($events) {
-        //     $query->select('user_id')->from('event_user')
-        //         ->whereNotIn('event_id', $events);
-        // })->where('role_id', 3)->get();
-
-        return view('student.detail', compact('student', 'pages'));
+        return view('user.student.profile', compact('departments', 'student', 'pages'));
     }
 
     /**
