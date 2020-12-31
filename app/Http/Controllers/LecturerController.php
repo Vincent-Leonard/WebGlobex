@@ -8,6 +8,7 @@ use App\Models\Department;
 use App\Models\Title;
 use App\Models\Jaka;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LecturerController extends Controller
 {
@@ -45,9 +46,12 @@ class LecturerController extends Controller
      */
     public function store(Request $request)
     {
-        Lecturer::create($request->except(['password']));
-        $email = $request->lecturer_email;
-        User::create($request->only('password', 'email'));
+        $lecturer = Lecturer::create($request->except(['password']));
+        User::create([
+            'password' => Hash::make($request['password']),
+            'email' => $request['email'],
+            'lecturer_id' => $lecturer->lecturer_id,
+        ]);
         return redirect()->route('lecturer.index');
     }
 

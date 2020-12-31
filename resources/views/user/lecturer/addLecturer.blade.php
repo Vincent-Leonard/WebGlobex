@@ -20,14 +20,14 @@
                         <label>Name:</label>
                         <input type="text" class="form-control" name="lecturer_name">
                     </div>
-                    {{-- <div class="form-group">
-                        <label>Email:</label>
-                        <input type="text" class="form-control" name="email">
-                    </div> --}}
                     <div class="form-group">
                         <label>Email:</label>
-                        <input type="text" class="form-control" name="lecturer_email">
+                        <input type="text" class="form-control" name="email">
                     </div>
+                    {{-- <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" class="form-control" name="lecturer_email">
+                    </div> --}}
                     <div class="form-group">
                         <label>Password:</label>
                         <input type="password" class="form-control" name="password">

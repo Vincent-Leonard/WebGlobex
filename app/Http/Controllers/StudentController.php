@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -41,7 +43,13 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        Student::create($request->all());
+        $student = Student::create($request->except(['password']));
+        User::create([
+            'password' => Hash::make($request['password']),
+            'email' => $request['email'],
+            'student_id' => $student->student_id,
+        ]);
+
         return redirect()->route('student.index');
     }
 

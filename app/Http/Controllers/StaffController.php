@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Staff;
+use App\Models\User;
 use App\Models\Department;
 use App\Models\Title;
 use App\Models\Jaka;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StaffController extends Controller
 {
@@ -44,7 +46,12 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        Staff::create($request->all());
+        $staff = Staff::create($request->except(['password']));
+        User::create([
+            'password' => Hash::make($request['password']),
+            'email' => $request['email'],
+            'staff_id' => $staff->staff_id,
+        ]);
         return redirect()->route('staff.index');
     }
 

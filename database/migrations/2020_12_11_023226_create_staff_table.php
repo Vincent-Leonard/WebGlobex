@@ -17,7 +17,6 @@ class CreateStaffTable extends Migration
             $table->id('staff_id');
             $table->string('nidn');
             $table->string('staff_name');
-            $table->string('staff_email');
             $table->text('description');
             $table->text('staff_photo');
             $table->enum('staff_gender', ['0','1'])
