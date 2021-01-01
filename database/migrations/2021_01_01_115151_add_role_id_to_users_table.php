@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIsLoginToUserTable extends Migration
+class AddRoleIdToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddIsLoginToUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('is_login', ['0','1'])
-            ->default('0');
+            $table->unsignedBigInteger('role_id')->index()->after('updated_at');
+            $table->foreign('role_id')->references('role_id')->on('roles');
         });
     }
 
@@ -26,8 +26,8 @@ class AddIsLoginToUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('user', function (Blueprint $table) {
-            //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('role_id');
         });
     }
 }

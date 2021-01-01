@@ -46,28 +46,22 @@ class LoginController extends Controller
         $student = [
             'email' => $request->email,
             'password' => $request->password,
-            // 'role_id' => 1,
+            'role_id' => 1,
             'is_login' => '0',
-            // 'is_active' => '1',
-            // 'is_verified' => '1',
         ];
 
         $lecturer = [
             'email' => $request->email,
             'password' => $request->password,
-            // 'role_id' => 2,
+            'role_id' => 2,
             'is_login' => '0',
-            // 'is_active' => '1',
-            // 'is_verified' => '1',
         ];
 
         $staff = [
             'email' => $request->email,
             'password' => $request->password,
-            // 'role_id' => 3,
+            'role_id' => 3,
             'is_login' => '0',
-            // 'is_active' => '1',
-            // 'is_verified' => '1',
         ];
 
         if(Auth::attempt($student)){

@@ -18,11 +18,14 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call([
-            UserSeeder::class,
             RoleSeeder::class,
             DepartmentSeeder::class,
             JakaSeeder::class,
             TitleSeeder::class,
+            StaffSeeder::class,
+            StudentSeeder::class,
+            LecturerSeeder::class,
+            UserSeeder::class,
         ]);
 
         Model::reguard();

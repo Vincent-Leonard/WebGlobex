@@ -20,6 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->enum('is_login', ['0','1'])
+                ->default('0');
+            $table->enum('is_admin', ['0','1'])
+                ->default('0');
         });
     }
 

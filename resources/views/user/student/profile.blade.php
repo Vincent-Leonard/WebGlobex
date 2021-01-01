@@ -8,6 +8,14 @@
             <div class="col">
                 <div class="row">
                     <div class="col-md-3">
+                        <h6>NIM</h6>
+                    </div>
+                    <div class="col-md-9">
+                        : {{$student->nim}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
                         <h6>Name</h6>
                     </div>
                     <div class="col-md-9">
@@ -16,10 +24,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <h6>NIM</h6>
+                        <h6>Email</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$student->nim}}
+                        : {{$student->student_name}}
                     </div>
                 </div>
                 <div class="row">
