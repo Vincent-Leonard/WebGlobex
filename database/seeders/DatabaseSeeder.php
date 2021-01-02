@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             JakaSeeder::class,
             TitleSeeder::class,
+            EventSeeder::class,
             StaffSeeder::class,
             StudentSeeder::class,
             LecturerSeeder::class,

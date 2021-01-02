@@ -33,12 +33,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="{{ route('event.index') }}">Event List</a>
-                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('student.index') }}">User List</a>
-                        </li> --}}
+                            <a class="nav-link" href="{{ route('lecturer.event.index') }}">Event List</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -59,10 +56,15 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{-- {{ Auth::user()->lecturer_name }} --}}
+                                    Account
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('lecturer.lecturer.profile', Auth::user()->lecturer_id) }}">
+                                        Profile
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

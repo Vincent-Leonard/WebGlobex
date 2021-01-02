@@ -66,13 +66,13 @@ class LoginController extends Controller
 
         if(Auth::attempt($student)){
             $this->isLogin(Auth::id());
-            return redirect()->route('student.index');
+            return redirect()->route('student.event.index');
         } elseif(Auth::attempt($lecturer)){
             $this->isLogin(Auth::id());
-            return redirect()->route('lecturer.index');
+            return redirect()->route('lecturer.event.index');
         } elseif(Auth::attempt($staff)){
             $this->isLogin(Auth::id());
-            return redirect()->route('staff.index');
+            return redirect()->route('staff.event.index');
         }
 
         return redirect()->route('login');
