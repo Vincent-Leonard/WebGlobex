@@ -1,4 +1,4 @@
-@extends('user.lecturer.layouts.app')
+@extends('lecturer.layouts.app')
 @section('content')
     <div class="container" style="margin-top: 20px;">
         <div class="row">
@@ -11,7 +11,7 @@
                         <h6>Name</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$lecturer->lecturer_name}}
+                        : {{$lecturer->lecturer->lecturer_name}}
                     </div>
                 </div>
                 <div class="row">
@@ -19,7 +19,7 @@
                         <h6>NIP</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$lecturer->nip}}
+                        : {{$lecturer->lecturer->nip}}
                     </div>
                 </div>
                 <div class="row">
@@ -27,7 +27,7 @@
                         <h6>NIDN</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$lecturer->nidn}}
+                        : {{$lecturer->lecturer->nidn}}
                     </div>
                 </div>
                 <div class="row">
@@ -35,7 +35,7 @@
                         <h6>Description</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$lecturer->description}}
+                        : {{$lecturer->lecturer->description}}
                     </div>
                 </div>
                 <div class="row">
@@ -43,7 +43,7 @@
                         <h6>Gender</h6>
                     </div>
                     <div class="col-md-9">
-                        : @switch($lecturer->lecturer_gender)
+                        : @switch($lecturer->lecturer->lecturer_gender)
                             @case('0')
                             Male
                             @break
@@ -58,7 +58,7 @@
                         <h6>Phone</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$lecturer->lecturer_phone}}
+                        : {{$lecturer->lecturer->lecturer_phone}}
                     </div>
                 </div>
                 <div class="row">
@@ -66,7 +66,7 @@
                         <h6>Line Account</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$lecturer->lecturer_line_account}}
+                        : {{$lecturer->lecturer->lecturer_line_account}}
                     </div>
                 </div>
                 <div class="row">
@@ -74,7 +74,7 @@
                         <h6>Department</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$departments->department_name}}
+                        : {{$lecturer->lecturer->department->department_name}}
                     </div>
                 </div>
                 <div class="row">
@@ -82,7 +82,7 @@
                         <h6>Title</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$titles->title_name}}
+                        : {{$lecturer->lecturer->title->title_name}}
                     </div>
                 </div>
                 <div class="row">
@@ -90,7 +90,7 @@
                         <h6>Jaka</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$jakas->jaka_name}}
+                        : {{$lecturer->lecturer->jaka->jaka_name}}
                     </div>
                 </div>
             </div>

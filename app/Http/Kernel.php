@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use App\Http\Middleware\Staff;
 use App\Http\Middleware\Lecturer;
 use App\Http\Middleware\Student;
+use App\Http\Middleware\Admin;
 
 class Kernel extends HttpKernel
 {
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'staff' => Staff::class,
         'lecturer' => Lecturer::class,
         'student' => Student::class,
+        'admin' => Admin::class,
     ];
 }

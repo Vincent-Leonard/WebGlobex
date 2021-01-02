@@ -36,6 +36,16 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('lecturer.event.index') }}">Event List</a>
                         </li>
+                        <?php
+                            if(Auth::user()->isAdmin())
+                            {
+                                ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.student.index') }}">User List</a>
+                                </li>
+                                <?php
+                            }
+                        ?>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -60,7 +70,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('lecturer.lecturer.profile', Auth::user()->lecturer_id) }}">
+                                    <a class="dropdown-item" href="{{ route('lecturer.user.show', Auth::id()) }}">
                                         Profile
                                     </a>
 
