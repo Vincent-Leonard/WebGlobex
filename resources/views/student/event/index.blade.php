@@ -7,7 +7,7 @@
             </div>
             <div class="row">
                 <div class="col-md-2 offset-md-10">
-                    <a href="{{route('lecturer.event.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
+                    <a href="{{route('student.event.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
@@ -29,7 +29,7 @@
                     <tbody>
                         @foreach ($events as $event)
                             <tr>
-                                <td><a href="@auth{{route('lecturer.event.show', $event)}}@endauth">{{$event->event}}</td>
+                                <td><a href="@auth{{route('student.event.show', $event)}}@endauth">{{$event->event}}</td>
                                 @if($event->type == 0)
                                     <td>Student Exchange</td>
                                 @else
@@ -46,7 +46,7 @@
                                     <td>Need Revision</td>
                                 @endif
                                 <td>
-                                    <form action="{{ route('lecturer.event.edit', $event) }}" method="GET">
+                                    <form action="{{ route('student.event.edit', $event) }}" method="GET">
                                         @csrf
                                         <button class="btn btn-primary" type="submit">Edit</button>
                                     </form>

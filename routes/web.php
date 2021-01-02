@@ -14,7 +14,6 @@ use App\http\controllers\lecturer\UserController as LecturerUserController;
 use App\http\controllers\student\EventController as StudentEventController;
 use App\http\controllers\student\UserController as StudentUserController;
 
-
 use App\http\controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +30,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    redirect()->route('home');
+    return redirect()->route('home');
 });
 
 // Route::resource('event', EventController::class);
@@ -45,7 +44,7 @@ Route::post('event/reject', [EventController::class, 'reject'])->name('event.rej
 Route::post('event/revise', [EventController::class, 'revise'])->name('event.revise');
 
 Route::group(['middleware' => 'staff', 'prefix' => 'staff', 'as' => 'staff.'], function () {
-    Route::resource('event', StaffEventController::class);
+    // Route::resource('event', StaffEventController::class);
     Route::resource('user', StaffUserController::class);
 });
 
@@ -63,6 +62,7 @@ Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], fu
     Route::resource('student', StudentController::class);
     Route::resource('lecturer', LecturerController::class);
     Route::resource('staff', StaffController::class);
+    Route::resource('event', StaffEventController::class);
 });
 
 Auth::routes();

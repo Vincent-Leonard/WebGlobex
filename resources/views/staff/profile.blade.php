@@ -1,4 +1,4 @@
-@extends('user.lecturer.layouts.app')
+@extends('layouts.app')
 @section('content')
     <div class="container" style="margin-top: 20px;">
         <div class="row">
@@ -11,7 +11,7 @@
                         <h6>Name</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$staff->staff_name}}
+                        : {{$user->staff->staff_name}}
                     </div>
                 </div>
                 <div class="row">
@@ -19,7 +19,7 @@
                         <h6>NIDN</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$staff->nidn}}
+                        : {{$user->staff->nidn}}
                     </div>
                 </div>
                 <div class="row">
@@ -27,7 +27,7 @@
                         <h6>Description</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$staff->description}}
+                        : {{$user->staff->description}}
                     </div>
                 </div>
                 <div class="row">
@@ -35,7 +35,7 @@
                         <h6>Gender</h6>
                     </div>
                     <div class="col-md-9">
-                        : @switch($staff->staff_gender)
+                        : @switch($user->staff->staff_gender)
                             @case('0')
                             Male
                             @break
@@ -50,7 +50,7 @@
                         <h6>Phone</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$staff->staff_phone}}
+                        : {{$user->staff->staff_phone}}
                     </div>
                 </div>
                 <div class="row">
@@ -58,7 +58,7 @@
                         <h6>Line Account</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$staff->staff_line_account}}
+                        : {{$user->staff->staff_line_account}}
                     </div>
                 </div>
                 <div class="row">
@@ -66,7 +66,7 @@
                         <h6>Department</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$departments->department_name}}
+                        : {{$user->staff->department->department_name}}
                     </div>
                 </div>
                 <div class="row">
@@ -74,7 +74,7 @@
                         <h6>Title</h6>
                     </div>
                     <div class="col-md-9">
-                        : {{$titles->title_name}}
+                        : {{$user->staff->title->title_name}}
                     </div>
                 </div>
             </div>

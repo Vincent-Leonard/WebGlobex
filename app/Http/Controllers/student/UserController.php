@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Lecturer;
+namespace App\Http\Controllers\Student;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -49,8 +49,8 @@ class UserController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $pages = 'lecturer';
-        return view('lecturer.profile', compact('user', 'pages'));
+        $pages = 'student';
+        return view('student.profile', compact('user', 'pages'));
     }
 
     /**

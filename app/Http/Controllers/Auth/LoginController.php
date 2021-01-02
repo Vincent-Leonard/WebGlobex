@@ -46,7 +46,7 @@ class LoginController extends Controller
         $student = [
             'email' => $request->email,
             'password' => $request->password,
-            'role_id' => 1,
+            'role_id' => 3,
             'is_login' => '0',
         ];
 
@@ -60,8 +60,17 @@ class LoginController extends Controller
         $staff = [
             'email' => $request->email,
             'password' => $request->password,
-            'role_id' => 3,
+            'role_id' => 1,
             'is_login' => '0',
+            'is_admin' => '0'
+        ];
+
+        $staffadmin = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'role_id' => 1,
+            'is_login' => '0',
+            'is_admin' => '1'
         ];
 
         if(Auth::attempt($student)){
@@ -72,8 +81,12 @@ class LoginController extends Controller
             return redirect()->route('lecturer.event.index');
         } elseif(Auth::attempt($staff)){
             $this->isLogin(Auth::id());
-            return redirect()->route('staff.event.index');
+            return redirect()->route('home');
+        } elseif(Auth::attempt($staffadmin)){
+            $this->isLogin(Auth::id());
+            return redirect()->route('admin.event.index');
         }
+
 
         return redirect()->route('login');
     }

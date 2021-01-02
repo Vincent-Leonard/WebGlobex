@@ -6,11 +6,9 @@
                 <h1 class="col">List Event</h1>
             </div>
             <div class="row">
-                {{-- @auth --}}
                 <div class="col-md-2 offset-md-10">
-                    <a href="{{route('event.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
+                    <a href="{{route('lecturer.event.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
                 </div>
-                {{-- @endauth --}}
             </div>
             <div class="row" style="margin-top: 30px;">
                 <table class="table table-striped">
@@ -21,15 +19,17 @@
                             <th scope="col">Date</th>
                             <th scope="col">Status</th>
                             <th scope="col">Detail</th>
+                            @if (Auth::user()->isAdmin())
                             <th scope="col">Approve</th>
                             <th scope="col">Reject</th>
                             <th scope="col">Revise</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($events as $event)
                             <tr>
-                                <td><a href="@auth{{route('event.show', $event)}}@endauth">{{$event->event}}</td>
+                                <td><a href="@auth{{route('lecturer.event.show', $event)}}@endauth">{{$event->event}}</td>
                                 @if($event->type == 0)
                                     <td>Student Exchange</td>
                                 @else
@@ -45,13 +45,13 @@
                                 @else
                                     <td>Need Revision</td>
                                 @endif
-                                @auth
                                 <td>
-                                    <form action="{{ route('event.edit', $event) }}" method="GET">
+                                    <form action="{{ route('lecturer.event.edit', $event) }}" method="GET">
                                         @csrf
                                         <button class="btn btn-primary" type="submit">Edit</button>
                                     </form>
                                 </td>
+                                @if (Auth::user()->isAdmin())
                                 <td>
                                     <form action="{{route('event.approve')}}" method="POST">
                                         {{ csrf_field() }}
@@ -73,7 +73,7 @@
                                         <button class="btn btn-warning btn-circle" title="Revise" type="submit"></button>
                                     </form>
                                 </td>
-                                @endauth
+                                @endif
                             </tr>
                         @endforeach
 

@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{route('lecturer.event.update', $model->event_id)}}" method="post">
+            <form action="{{route('student.event.update', $model->event_id)}}" method="post">
                 {{csrf_field()}}
                 <input name="_method" type="hidden" value="PATCH">
                     <div class="form-group">
