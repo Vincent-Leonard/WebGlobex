@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\student;
+namespace App\Http\Controllers\Lecturer;
 
 use App\Models\Lecturer;
 use App\Models\User;
@@ -110,5 +110,15 @@ class LecturerController extends Controller
     {
         $lecturer->delete();
         return redirect()->route('lecturer.index');
+    }
+
+    public function profile($id)
+    {
+        $pages = 'lecturer';
+        $lecturer = Lecturer::findOrFail($id);
+        $departments = Department::findOrFail($lecturer->department_id);
+        $titles = Title::findOrFail($lecturer->title_id);
+        $jakas = Jaka::findOrFail($lecturer->jaka_id);
+        return view('lecturer.profile', compact('departments', 'titles', 'jakas', 'lecturer', 'pages'));
     }
 }

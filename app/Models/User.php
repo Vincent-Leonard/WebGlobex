@@ -70,4 +70,32 @@ class User extends Authenticatable
     public function staff(){
         return $this->belongsTo(Staff::class, 'staff_id', 'staff_id');
     }
+
+    public function isStaff() {
+        if($this->role->role_name == 'Staff' && $this->is_login == '1'){
+            return true;
+        }
+        return false;
+    }
+
+    public function isLecturer() {
+        if($this->role->role_name == 'Lecturer' && $this->is_login == '1'){
+            return true;
+        }
+        return false;
+    }
+
+    public function isStudent() {
+        if($this->role->role_name == 'Student' && $this->is_login == '1'){
+            return true;
+        }
+        return false;
+    }
+
+    public function isAdmin() {
+        if($this->is_admin == '1' && $this->is_login == '1'){
+            return true;
+        }
+        return false;
+    }
 }

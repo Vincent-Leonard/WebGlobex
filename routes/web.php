@@ -6,19 +6,14 @@ use App\http\controllers\StaffController;
 use App\http\controllers\StudentController;
 
 use App\http\controllers\staff\EventController as StaffEventController;
-use App\http\controllers\staff\LecturerController as StaffLecturerController;
 use App\http\controllers\staff\StaffController as StaffStaffController;
-use App\http\controllers\staff\StudentController as StaffStudentController;
 
-use App\http\controllers\Lecturer\EventController as LecturerEventController;
+use App\http\controllers\lecturer\EventController as LecturerEventController;
 use App\http\controllers\lecturer\LecturerController as LecturerLecturerController;
-use App\http\controllers\lecturer\StaffController as LecturerStaffController;
-use App\http\controllers\lecturer\StudentController as LecturerStudentController;
 
 use App\http\controllers\student\EventController as StudentEventController;
-use App\http\controllers\student\LecturerController as StudentLecturerController;
-use App\http\controllers\student\StaffController as StudentStaffController;
 use App\http\controllers\student\StudentController as StudentStudentController;
+
 
 use App\http\controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +46,7 @@ Route::post('event/revise', [EventController::class, 'revise'])->name('event.rev
 
 Route::group(['middleware' => 'staff', 'prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::resource('event', StaffEventController::class);
+    Route::post('profile', [StaffStaffController::class, 'profile'])->name('profile');
 });
 
 Route::group(['middleware' => 'lecturer','prefix' => 'lecturer', 'as' => 'lecturer.'], function () {
@@ -60,6 +56,7 @@ Route::group(['middleware' => 'lecturer','prefix' => 'lecturer', 'as' => 'lectur
 
 Route::group(['middleware' => 'student','prefix' => 'student', 'as' => 'student.'], function () {
     Route::resource('event', StudentEventController::class);
+    Route::post('profile', [StudentStudentController::class, 'profile'])->name('profile');
 });
 
 Auth::routes();
