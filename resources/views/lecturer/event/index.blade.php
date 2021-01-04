@@ -7,7 +7,7 @@
             </div>
             <div class="row">
                 <div class="col-md-2 offset-md-10">
-                    <a href="{{route('lecturer.event.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
+                    <a href="{{route('lecturer.event.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Add Individual Event</a>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">

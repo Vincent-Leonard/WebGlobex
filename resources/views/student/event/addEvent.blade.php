@@ -20,6 +20,14 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Lecturer:</label>
+                        <select name="user_id" class="custom-select">
+                            @foreach($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->lecturer->lecturer_id.'. '. $user->lecturer->lecturer_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="nama">Date:</label>
                         <input type="date" class="form-control" id="date" name="event_date">
                     </div>
