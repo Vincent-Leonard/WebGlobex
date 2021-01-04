@@ -17,7 +17,10 @@ class AdminEventController extends Controller
      */
     public function index()
     {
-        //
+        $id = Auth::user()->id;
+        $events = Event::all()->where('is_group', 1);
+        $pages = 'event';
+        return view('student.event.joinEvent', compact('events'));
     }
 
     /**
@@ -88,5 +91,13 @@ class AdminEventController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function join(Request $request)
+    {
+        $event = Event::findOrFail($request->id);
+        $event->users()->attach(Auth::user()->id);
+        // dd($event);
+        return redirect()->back()->with('Success');
     }
 }

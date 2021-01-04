@@ -44,6 +44,7 @@ Route::post('event/approve', [EventController::class, 'approve'])->name('event.a
 Route::post('event/reject', [EventController::class, 'reject'])->name('event.reject');
 Route::post('event/revise', [EventController::class, 'revise'])->name('event.revise');
 
+
 Route::group(['middleware' => 'staff', 'prefix' => 'staff', 'as' => 'staff.'], function () {
     // Route::resource('event', StaffEventController::class);
     Route::resource('user', StaffUserController::class);
@@ -58,6 +59,7 @@ Route::group(['middleware' => 'student','prefix' => 'student', 'as' => 'student.
     Route::resource('event', StudentEventController::class);
     Route::resource('user', StudentUserController::class);
     Route::resource('admin', StudentAdminController::class);
+    Route::post('admin/join', [StudentAdminController::class, 'join'])->name('admin.join');
 });
 
 Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], function () {

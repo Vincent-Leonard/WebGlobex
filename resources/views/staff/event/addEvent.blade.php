@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{route('lecturer.event.store')}}" method="post">
+            <form action="{{route('staff.event.store')}}" method="post">
                 {{csrf_field()}}
                     <div class="form-group">
                         <label for="nama">Event:</label>
@@ -18,6 +18,9 @@
                             <option value="0">Student Exchange</option>
                             <option value="1">Student Excursion</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="is_group" name="is_group" value="0">
                     </div>
                     <div class="form-group">
                         <label for="nama">Date:</label>

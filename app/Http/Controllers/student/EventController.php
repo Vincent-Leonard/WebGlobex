@@ -78,8 +78,12 @@ class EventController extends Controller
     public function edit(Event $event)
     {
         $pages = 'event';
-        $users = User::all();
-        return view('student.event.editEvent', ['model' => $event], compact('event', 'pages'));
+        $id = $event->event_id;
+        $current = Event::find($id)->users->where('lecturer_id', '<>', null)->first();
+        $current_id = $current->id;
+        $users = User::all()->where('lecturer_id', '<>', null);
+        //dd($current);
+        return view('student.event.editEvent', ['model' => $event], compact('event', 'pages', 'current_id', 'users'));
     }
 
     /**

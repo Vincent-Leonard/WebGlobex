@@ -14,6 +14,7 @@ class Event extends Model
     protected $fillable = [
         'event',
         'type',
+        'is_group',
         'event_date',
         'duration',
         'country',

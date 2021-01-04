@@ -20,6 +20,9 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <input type="hidden" class="form-control" id="is_group" name="is_group" value="0">
+                    </div>
+                    <div class="form-group">
                         <label>Lecturer:</label>
                         <select name="user_id" class="custom-select">
                             @foreach($users as $user)
