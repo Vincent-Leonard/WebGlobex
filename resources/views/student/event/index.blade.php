@@ -7,7 +7,10 @@
             </div>
             <div class="row">
                 <div class="col-md-2 offset-md-10">
-                    <a href="{{route('student.event.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
+                    <a href="{{route('student.event.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Create Individual Event</a>
+                </div>
+                <div class="col-md-2 offset-md-10">
+                    <a href="{{route('student.admin.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Create Group Event</a>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">

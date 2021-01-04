@@ -13,6 +13,7 @@ use App\http\controllers\lecturer\UserController as LecturerUserController;
 
 use App\http\controllers\student\EventController as StudentEventController;
 use App\http\controllers\student\UserController as StudentUserController;
+use App\http\controllers\student\AdminEventController as StudentAdminController;
 
 use App\http\controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,7 @@ Route::group(['middleware' => 'lecturer','prefix' => 'lecturer', 'as' => 'lectur
 Route::group(['middleware' => 'student','prefix' => 'student', 'as' => 'student.'], function () {
     Route::resource('event', StudentEventController::class);
     Route::resource('user', StudentUserController::class);
+    Route::resource('admin', StudentAdminController::class);
 });
 
 Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], function () {
