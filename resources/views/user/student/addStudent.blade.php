@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{route('student.store')}}" method="post">
+            <form action="{{route('admin.student.store')}}" method="post">
                 @csrf
                     <div class="form-group">
                         <label>NIM:</label>
@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" name="student_email">
                     </div>
                     <div class="form-group">
                         <label>Password:</label>

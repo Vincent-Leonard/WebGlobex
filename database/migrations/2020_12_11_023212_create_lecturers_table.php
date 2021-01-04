@@ -18,6 +18,7 @@ class CreateLecturersTable extends Migration
             $table->string('nip');
             $table->string('nidn');
             $table->string('lecturer_name');
+            $table->string('lecturer_email');
             $table->text('description');
             $table->text('lecturer_photo');
             $table->enum('lecturer_gender', ['0','1'])

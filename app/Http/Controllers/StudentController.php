@@ -46,11 +46,12 @@ class StudentController extends Controller
         $student = Student::create($request->except(['password']));
         User::create([
             'password' => Hash::make($request['password']),
-            'email' => $request['email'],
+            'email' => $request['student_email'],
             'student_id' => $student->student_id,
+            'role_id' => '3',
         ]);
 
-        return redirect()->route('student.index');
+        return redirect()->route('admin.student.index');
     }
 
     /**
@@ -61,11 +62,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $pages = 'student';
         $student = Student::findOrFail($id);
-        $departments = Department::findOrFail($student->department_id);
-
-        return view('user.student.profile', compact('departments', 'student', 'pages'));
+        return redirect()->route('admin.student.index');
     }
 
     /**
@@ -91,7 +89,11 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $student->update($request->all());
-        return redirect()->route('student.index');
+        // User::update([
+        //     'password' => Hash::make($request['password']),
+        //     'email' => $request['student_email'],
+        // ]);
+        return redirect()->route('admin.student.index');
     }
 
     /**
@@ -103,6 +105,7 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
-        return redirect()->route('student.index');
+        // User::delete();
+        return redirect()->route('admin.student.index');
     }
 }

@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{ route('staff.store') }}" method="post">
+            <form action="{{ route('admin.staff.store') }}" method="post">
                 @csrf
                     <div class="form-group">
                         <label>NIDN:</label>

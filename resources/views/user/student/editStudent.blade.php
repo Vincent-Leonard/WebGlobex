@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{ route('student.update', $model->student_id) }}" method="post">
+            <form action="{{ route('admin.student.update', $model->student_id) }}" method="post">
                 @csrf
                     <input type="hidden" name="_method" value="PATCH"/>
                     <div class="form-group">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
-                        <input type="text" class="form-control" name="student_email" value="{{ $student->student_email }}">
+                        <input type="text" class="form-control" name="email" value="{{ $student->student_email }}">
                     </div>
                     <div class="form-group">
                         <label>Batch:</label>

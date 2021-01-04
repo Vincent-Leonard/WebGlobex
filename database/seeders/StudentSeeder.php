@@ -18,12 +18,13 @@ class StudentSeeder extends Seeder
         $student = new Student();
         $student->nim = '0706011910023';
         $student->student_name = 'Vincent';
+        $student->student_email = 'vincent@student.com';
         $student->batch = '2019';
-        $student->description = 'Vincent';
-        $student->student_photo = 'Vincent';
+        $student->description = 'sultan';
+        $student->student_photo = 'vincent.png';
         $student->student_gender = '0';
         $student->student_phone = '0812372385';
-        $student->student_line_account = 'Vincent';
+        $student->student_line_account = 'vincent.id';
         $student->department_id = '1';
         $student->save();
     }

@@ -6,11 +6,14 @@
                 <h1 class="col">List Staff</h1>
             </div>
             <div class="row">
-                {{-- @auth --}}
-                <div class="col-md-2 offset-md-10">
-                    <a href="{{ route('staff.create') }}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
+                <div>
+                    <a href="{{route('admin.student.index')}}" class="col">Student</a>
+                    <a href="{{route('admin.lecturer.index')}}" class="col">Lecturer</a>
+                    <a href="{{route('admin.staff.index')}}" class="col"><b>Staff</b></a>
                 </div>
-                {{-- @endauth --}}
+                <div class="col-md-2 offset-md-10">
+                    <a href="{{ route('admin.staff.create') }}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
+                </div>
             </div>
             <div class="row" style="margin-top: 30px;">
                 <table class="table table-striped">
@@ -28,18 +31,18 @@
                         @foreach ($staffs as $staff)
                             <tr>
                                 <td>{{$staff->staff_id}}</td>
-                                <td><a href="{{ route('staff.show', $staff) }}">{{ $staff->staff_name }}</a></td>
+                                <td><a href="{{ route('admin.staff.show', $staff) }}">{{ $staff->staff_name }}</a></td>
                                 <td>{{$staff->title_id}}</td>
                                 <td>{{$staff->department_id}}</td>
                                 {{-- @auth --}}
                                 <td>
-                                    <form action="{{ route('staff.edit', $staff) }}" method="GET">
+                                    <form action="{{ route('admin.staff.edit', $staff) }}" method="GET">
                                         @csrf
                                         <button class="btn btn-primary" type="submit">Edit</button>
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{ route('staff.destroy', $staff) }}" method="post">
+                                    <form action="{{ route('admin.staff.destroy', $staff) }}" method="post">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger">Delete</button>

@@ -32,6 +32,14 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
+                        <h6>Email</h6>
+                    </div>
+                    <div class="col-md-9">
+                        : {{$user->email}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
                         <h6>Description</h6>
                     </div>
                     <div class="col-md-9">

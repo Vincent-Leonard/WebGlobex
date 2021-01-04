@@ -17,6 +17,7 @@ class CreateStudentsTable extends Migration
             $table->id('student_id');
             $table->string('nim');
             $table->string('student_name');
+            $table->string('student_email');
             $table->integer('batch');
             $table->text('description');
             $table->text('student_photo');
