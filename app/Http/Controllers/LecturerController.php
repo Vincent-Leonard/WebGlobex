@@ -46,12 +46,39 @@ class LecturerController extends Controller
      */
     public function store(Request $request)
     {
-        $lecturer = Lecturer::create($request->except(['password']));
-        User::create([
-            'password' => Hash::make($request['password']),
-            'email' => $request['email'],
-            'lecturer_id' => $lecturer->lecturer_id,
+        $data = $request->validate([
+            'lecturer_photo' => 'image',
         ]);
+
+        if ($request->has('lecturer_photo')) {
+            $file_name = time() . '-' . $data['lecturer_photo']->getClientOriginalName();
+            $request->lecturer_photo->move(public_path('images\profile_picture\lecturer'), $file_name);
+        } else {
+            $file_name = null;
+        }
+
+        $lecturer = Lecturer::create([
+            'nip' => $request->nim,
+            'nidn' => $request->nidn,
+            'lecturer_name' => $request->lecturer_name,
+            'lecturer_email' => $request->lecturer_email,
+            'description' => $request->description,
+            'lecturer_photo' => $file_name,
+            'lecturer_gender' => $request->lecturer_gender,
+            'lecturer_phone' => $request->lecturer_phone,
+            'lecturer_line_account'=> $request->lecturer_line_account,
+            'department_id' => $request->department_id,
+            'title_id' => $request->title_id,
+            'jaka_id' => $request->jaka_id,
+        ]);
+
+        $user = User::create([
+            'password' => Hash::make($request['password']),
+            'email' => $request['lecturer_email'],
+            'lecturer_id' => $lecturer->lecturer_id,
+            'role_id' => '2',
+        ]);
+
         return redirect()->route('lecturer.index');
     }
 

@@ -5,7 +5,6 @@ use App\http\controllers\LecturerController;
 use App\http\controllers\StaffController;
 use App\http\controllers\StudentController;
 
-use App\http\controllers\staff\EventController as StaffEventController;
 use App\http\controllers\staff\UserController as StaffUserController;
 
 use App\http\controllers\lecturer\EventController as LecturerEventController;
@@ -40,11 +39,6 @@ Route::get('/', function () {
 // Route::resource('staff', StaffController::class);
 // Route::resource('user', UserController::class);
 
-Route::post('event/approve', [EventController::class, 'approve'])->name('event.approve');
-Route::post('event/reject', [EventController::class, 'reject'])->name('event.reject');
-Route::post('event/revise', [EventController::class, 'revise'])->name('event.revise');
-
-
 Route::group(['middleware' => 'staff', 'prefix' => 'staff', 'as' => 'staff.'], function () {
     // Route::resource('event', StaffEventController::class);
     Route::resource('user', StaffUserController::class);
@@ -66,7 +60,11 @@ Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], fu
     Route::resource('student', StudentController::class);
     Route::resource('lecturer', LecturerController::class);
     Route::resource('staff', StaffController::class);
-    Route::resource('event', StaffEventController::class);
+    Route::resource('event', EventController::class);
+
+    Route::post('event/approve', [EventController::class, 'approve'])->name('event.approve');
+    Route::post('event/reject', [EventController::class, 'reject'])->name('event.reject');
+    Route::post('event/revise', [EventController::class, 'revise'])->name('event.revise');
 });
 
 Auth::routes();

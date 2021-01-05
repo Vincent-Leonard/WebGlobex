@@ -56,8 +56,17 @@ class UserSeeder extends Seeder
         $user->password =  Hash::make('12345678');
         $user->role_id = '3';
         $user->is_login = '0';
-        $user->is_admin = '0';
+        $user->is_admin = '1';
         $user->student_id = '2';
+        $user->save();
+
+        $user = new User();
+        $user->email = 'santoso@staff.com';
+        $user->password =  Hash::make('12345678');
+        $user->role_id = '1';
+        $user->is_login = '0';
+        $user->is_admin = '0';
+        $user->staff_id = '2';
         $user->save();
     }
 }

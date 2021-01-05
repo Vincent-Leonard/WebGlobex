@@ -5,9 +5,9 @@
             <h1 class="col">Student Profile</h1>
         </div>
         <div style="float: right">
-        <img src="/images/profile_picture/student/{{$user->student->student_photo}}" style="height: 250px" alt="">
+            <img src="/images/profile_picture/student/{{$user->student->student_photo}}" style="height: 250px" alt="">
         </div>
-        <div style="float: left" class="row">
+        <div class="row">
             <div class="col">
                 <div class="row">
                     <div class="col-md-3">

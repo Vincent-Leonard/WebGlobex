@@ -34,6 +34,7 @@ class LecturerSeeder extends Seeder
         $lecturer->nip = '23813';
         $lecturer->nidn = '10002';
         $lecturer->lecturer_name = 'Fernando';
+        $lecturer->lecturer_email = 'fernando@lecturer.com';
         $lecturer->description = 'Fernando';
         $lecturer->lecturer_photo = 'Fernando';
         $lecturer->lecturer_gender = '0';

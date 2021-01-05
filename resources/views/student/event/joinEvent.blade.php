@@ -12,13 +12,7 @@
                             <th scope="col">Event</th>
                             <th scope="col">Type</th>
                             <th scope="col">Date</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Detail</th>
-                            @if (Auth::user()->isAdmin())
-                            <th scope="col">Approve</th>
-                            <th scope="col">Reject</th>
-                            <th scope="col">Revise</th>
-                            @endif
+                            <th scope="col">Join</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,15 +25,6 @@
                                     <td>Student Excursion</td>
                                 @endif
                                 <td>{{$event->event_date}}</td>
-                                @if($event->status == 0)
-                                    <td>Pending</td>
-                                @elseif($event->status == 1)
-                                    <td>Approved</td>
-                                @elseif($event->status == 2)
-                                    <td>Rejected</td>
-                                @else
-                                    <td>Need Revision</td>
-                                @endif
                                 <td>
                                     <form action="{{ route('student.admin.join') }}" method="POST">
                                         @csrf
@@ -47,32 +32,8 @@
                                         <button class="btn btn-primary" type="submit">Join</button>
                                     </form>
                                 </td>
-                                @if (Auth::user()->isAdmin())
-                                <td>
-                                    <form action="{{route('event.approve')}}" method="POST">
-                                        {{ csrf_field() }}
-                                        <input name="id" type="hidden" value="{{$event->event_id}}">
-                                        <button class="btn btn-success btn-circle" title="Approve" type="submit"></button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="{{route('event.reject')}}" method="POST">
-                                        {{ csrf_field() }}
-                                        <input name="id" type="hidden" value="{{$event->event_id}}">
-                                        <button class="btn btn-danger btn-circle" title="Reject" type="submit"></button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="{{route('event.revise')}}" method="POST">
-                                        {{ csrf_field() }}
-                                        <input name="id" type="hidden" value="{{$event->event_id}}">
-                                        <button class="btn btn-warning btn-circle" title="Revise" type="submit"></button>
-                                    </form>
-                                </td>
-                                @endif
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>

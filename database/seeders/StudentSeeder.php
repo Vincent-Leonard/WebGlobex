@@ -31,6 +31,7 @@ class StudentSeeder extends Seeder
         $student = new Student();
         $student->nim = '0706011910024';
         $student->student_name = 'Valentino';
+        $student->student_email = 'valentino@student.com';
         $student->batch = '2019';
         $student->description = 'Valentino';
         $student->student_photo = 'Valentino';

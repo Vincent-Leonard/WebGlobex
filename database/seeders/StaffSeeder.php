@@ -27,5 +27,18 @@ class StaffSeeder extends Seeder
         $staff->department_id = '1';
         $staff->title_id = '1';
         $staff->save();
+
+        $staff = new Staff();
+        $staff->nidn = '20002';
+        $staff->staff_name = 'Santoso';
+        $staff->staff_email = 'santoso@staff.com';
+        $staff->description = 'jelek';
+        $staff->staff_photo = 'santoso.png';
+        $staff->staff_gender = '0';
+        $staff->staff_phone = '0812302943';
+        $staff->staff_line_account = 'santoso.id';
+        $staff->department_id = '5';
+        $staff->title_id = '2';
+        $staff->save();
     }
 }

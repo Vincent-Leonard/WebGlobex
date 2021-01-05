@@ -46,12 +46,39 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $staff = Staff::create($request->except(['password']));
-        User::create([
-            'password' => Hash::make($request['password']),
-            'email' => $request['email'],
-            'staff_id' => $staff->staff_id,
+        $data = $request->validate([
+            'staff_photo' => 'image',
         ]);
+
+        if ($request->has('staff_photo')) {
+            $file_name = time() . '-' . $data['staff_photo']->getClientOriginalName();
+            $request->staff_photo->move(public_path('images\profile_picture\staff'), $file_name);
+        } else {
+            $file_name = null;
+        }
+
+        $staff = staff::create([
+            'nip' => $request->nim,
+            'nidn' => $request->nidn,
+            'staff_name' => $request->staff_name,
+            'staff_email' => $request->staff_email,
+            'description' => $request->description,
+            'staff_photo' => $file_name,
+            'staff_gender' => $request->staff_gender,
+            'staff_phone' => $request->staff_phone,
+            'staff_line_account'=> $request->staff_line_account,
+            'department_id' => $request->department_id,
+            'title_id' => $request->title_id,
+            'jaka_id' => $request->jaka_id,
+        ]);
+
+        $user = User::create([
+            'password' => Hash::make($request['password']),
+            'email' => $request['staff_email'],
+            'staff_id' => $staff->staff_id,
+            'role_id' => '1',
+        ]);
+
         return redirect()->route('staff.index');
     }
 
