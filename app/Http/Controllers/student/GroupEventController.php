@@ -68,6 +68,7 @@ class GroupEventController extends Controller
             'city' => $request->city,
             'organizer' => $request->organizer,
             'file' => $file_name,
+            'status' => '1',
         ]);
 
         $event->users()->attach($request->user_id);

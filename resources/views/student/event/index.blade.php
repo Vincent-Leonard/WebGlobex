@@ -39,6 +39,7 @@
                         <th scope="col">Date</th>
                         <th scope="col">Status</th>
                         <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,32 +57,48 @@
                                 <td>Group</td>
                             @endif
                             <td>{{ $event->event_date }}</td>
-                            @if ($event->status == 0)
-                                <td>Pending</td>
-                            @elseif($event->status == 1)
-                                <td>Approved</td>
-                            @elseif($event->status == 2)
-                                <td>Rejected</td>
-                            @else
-                                <td>Need Revision</td>
-                            @endif
                             @if ($event->is_group == 0)
                                 @if ($event->status == 0)
+                                    <td>Pending</td>
                                     <td>
                                         <form action="{{ route('student.event.edit', $event) }}" method="GET">
                                             @csrf
                                             <button class="btn btn-primary" type="submit">Edit</button>
                                         </form>
                                     </td>
-                                @else
+                                    <td>
+                                        <form action="{{ route('student.event.destroy', $event) }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                @elseif($event->status == 1)
+                                    <td>Approved</td>
                                     <td>
                                         <form action="{{ route('student.event.edit', $event) }}" method="GET">
                                             @csrf
                                             <button class="btn btn-primary" type="submit">Re-Submit</button>
                                         </form>
                                     </td>
+                                    <td>-</td>
+                                @elseif($event->status == 2)
+                                    <td>Rejected</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                @else
+                                    <td>Need Revision</td>
+                                    <td>
+                                        <form action="{{ route('student.event.edit', $event) }}" method="GET">
+                                            @csrf
+                                            <button class="btn btn-primary" type="submit">Re-Submit</button>
+                                        </form>
+                                    </td>
+                                    <td>-</td>
                                 @endif
                             @else
+                                <td>-</td>
+                                <td>-</td>
                                 <td>-</td>
                             @endif
                         </tr>
