@@ -18,7 +18,11 @@ class AdminEventController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-        $events = Event::all()->where('is_group', 1);
+        // $userevents = User::find($id)->events->where('is_group', 1)->pluck('event_id');
+        $users = Auth::user()->events->where('is_group', 1)->pluck('event_id');
+        $eventsAll = Event::select('*')->from('events')->whereNotIn('event_id', $users)->get();
+        $events = $eventsAll->where('is_group', 1);
+        // dd($events);
         $pages = 'event';
         return view('student.event.joinEvent', compact('events'));
     }
