@@ -4,7 +4,10 @@
         <div class="row">
             <h1 class="col">Student Profile</h1>
         </div>
-        <div class="row">
+        <div style="float: right">
+        <img src="/images/profile_picture/student/{{$user->student->student_photo}}" style="height: 250px" alt="">
+        </div>
+        <div style="float: left" class="row">
             <div class="col">
                 <div class="row">
                     <div class="col-md-3">
@@ -85,7 +88,6 @@
                         : {{$user->student->department->department_name}}
                     </div>
                 </div>
-                <img src="/images/{{$user->student->student_photo}}" alt="">
             </div>
         </div>
     </div>
