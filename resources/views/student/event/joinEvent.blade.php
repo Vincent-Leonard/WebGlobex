@@ -26,7 +26,7 @@
                                 @endif
                                 <td>{{$event->event_date}}</td>
                                 <td>
-                                    <form action="{{ route('student.admin.join') }}" method="POST">
+                                    <form action="{{ route('student.group.join') }}" method="POST">
                                         @csrf
                                         <input name="id" type="hidden" value="{{$event->event_id}}">
                                         <button class="btn btn-primary" type="submit">Join</button>

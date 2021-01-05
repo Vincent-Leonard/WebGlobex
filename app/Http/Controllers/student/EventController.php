@@ -43,7 +43,29 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $event = Event::create($request->except(['user_id']));
+        $data = $request->validate([
+            'file' => 'image',
+        ]);
+
+        if ($request->has('file')) {
+            $file_name = time() . '-' . $data['file']->getClientOriginalName();
+            $request->file->move(public_path('images\event\individual'), $file_name);
+        } else {
+            $file_name = null;
+        }
+
+        $event = Event::create([
+            'event' => $request->event,
+            'type' => $request->type,
+            'is_group' => $request->is_group,
+            'event_date' => $request->event_date,
+            'duration' => $request->duration,
+            'country' => $request->country,
+            'city' => $request->city,
+            'organizer' => $request->organizer,
+            'file' => $file_name,
+        ]);
+
         $event->users()->attach($request->user_id);
         $event->users()->attach(Auth::user()->id);
         return redirect()->route('student.event.index');
@@ -109,26 +131,5 @@ class EventController extends Controller
     {
         $event->delete();
         return redirect()->route('student.event.index');
-    }
-
-    public function approve(Request $request)
-    {
-        $event = Event::findOrFail($request->id);
-        $event->update(['status' => '1']);
-        return redirect()->back()->with('Success', 'Event Approved');
-    }
-
-    public function reject(Request $request)
-    {
-        $event = Event::findOrFail($request->id);
-        $event->update(['status' => '2']);
-        return redirect()->back()->with('Success', 'Event Rejected');
-    }
-
-    public function revise(Request $request)
-    {
-        $event = Event::findOrFail($request->id);
-        $event->update(['status' => '3']);
-        return redirect()->back()->with('Success', 'Event Needs Revision');
     }
 }

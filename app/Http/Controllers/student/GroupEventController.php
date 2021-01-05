@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminEventController extends Controller
+class GroupEventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,7 +43,29 @@ class AdminEventController extends Controller
      */
     public function store(Request $request)
     {
-        $event = Event::create($request->except(['user_id']));
+        $data = $request->validate([
+            'file' => 'image',
+        ]);
+
+        if ($request->has('file')) {
+            $file_name = time() . '-' . $data['file']->getClientOriginalName();
+            $request->file->move(public_path('images\event\group'), $file_name);
+        } else {
+            $file_name = null;
+        }
+
+        $event = Event::create([
+            'event' => $request->event,
+            'type' => $request->type,
+            'is_group' => $request->is_group,
+            'event_date' => $request->event_date,
+            'duration' => $request->duration,
+            'country' => $request->country,
+            'city' => $request->city,
+            'organizer' => $request->organizer,
+            'file' => $file_name,
+        ]);
+
         $event->users()->attach($request->user_id);
         return redirect()->route('student.event.index');
     }
@@ -56,7 +78,7 @@ class AdminEventController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**

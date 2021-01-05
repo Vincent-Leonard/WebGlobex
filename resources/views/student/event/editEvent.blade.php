@@ -64,6 +64,8 @@
                         <br>
                         <input type="file" id="file" name="file">
                     </div>
+                    {{ $event->file }}
+                    <br>
                     <br>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

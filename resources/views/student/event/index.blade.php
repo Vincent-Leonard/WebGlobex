@@ -3,7 +3,7 @@
 
     <div class="container" style="margin-top: 20px;">
         <div class="row">
-            <h1 class="col">My List Events</h1>
+            <h1 class="col">My Events</h1>
         </div>
         <div class="row">
             @if (Auth::user()->isAdmin())
@@ -20,12 +20,12 @@
             </div>
             @if (Auth::user()->isAdmin())
                 <div class="col-md-2 offset-md-0">
-                    <a href="{{ route('student.admin.create') }}" class="btn btn-primary btn-block" role="button"
+                    <a href="{{ route('student.group.create') }}" class="btn btn-primary btn-block" role="button"
                         aria-pressed="true">Create Group Event</a>
                 </div>
             @endif
             <div class="col-md-2 offset-md-0">
-                <a href="{{ route('student.admin.index') }}" class="btn btn-primary btn-block" role="button"
+                <a href="{{ route('student.group.index') }}" class="btn btn-primary btn-block" role="button"
                     aria-pressed="true">Join Group Event</a>
             </div>
         </div>
