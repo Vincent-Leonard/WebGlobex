@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{ route('admin.lecturer.store') }}" method="post">
+            <form action="{{ route('admin.lecturer.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                     <div class="form-group">
                         <label>NIP:</label>

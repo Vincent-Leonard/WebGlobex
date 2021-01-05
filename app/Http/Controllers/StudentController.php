@@ -43,8 +43,31 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $student = Student::create($request->except(['password']));
-        User::create([
+        $data = $request->validate([
+            'student_photo' => 'image',
+        ]);
+
+        if ($request->has('student_photo')) {
+            $file_name = time() . '-' . $data['student_photo']->getClientOriginalName();
+            $request->student_photo->move(public_path('images\profile_picture\student'), $file_name);
+        } else {
+            $file_name = null;
+        }
+
+        $student = Student::create([
+            'nim' => $request->nim,
+            'student_name' => $request->student_name,
+            'student_email' => $request->student_email,
+            'batch' => $request->batch,
+            'description' => $request->description,
+            'student_photo' => $file_name,
+            'student_gender' => $request->student_gender,
+            'student_phone' => $request->student_phone,
+            'student_line_account'=> $request->student_line_account,
+            'department_id' => $request->department_id,
+            ]);
+
+        $user = User::create([
             'password' => Hash::make($request['password']),
             'email' => $request['student_email'],
             'student_id' => $student->student_id,
@@ -89,8 +112,8 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $student->update($request->all());
-        // User::update([
-        //     'password' => Hash::make($request['password']),
+        // $student->user->update([
+        //     // 'password' => Hash::make($request['password']),
         //     'email' => $request['student_email'],
         // ]);
         return redirect()->route('admin.student.index');
@@ -104,8 +127,13 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        $id = $student->student_id;
+        // User::delete()->where('student_id', $id);
         $student->delete();
-        // User::delete();
         return redirect()->route('admin.student.index');
     }
 }
+
+
+
+
