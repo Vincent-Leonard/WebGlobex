@@ -6,7 +6,7 @@
                 <h1 class="col">List Event</h1>
             </div>
             <div class="row">
-                <div class="col-md-2 offset-md-10">
+                <div class="col-md-3 offset-md-12">
                     <a href="{{route('student.event.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Create Individual Event</a>
                 </div>
                 <div class="col-md-2 offset-md-12">
@@ -22,6 +22,7 @@
                         <tr>
                             <th scope="col">Event</th>
                             <th scope="col">Type</th>
+                            <th scope="col">Participation</th>
                             <th scope="col">Date</th>
                             <th scope="col">Status</th>
                             <th scope="col">Detail</th>
@@ -41,6 +42,11 @@
                                 @else
                                     <td>Student Excursion</td>
                                 @endif
+                                @if($event->is_group == 0)
+                                    <td>Individual</td>
+                                @else
+                                    <td>Group</td>
+                                @endif
                                 <td>{{$event->event_date}}</td>
                                 @if($event->status == 0)
                                     <td>Pending</td>
@@ -51,12 +57,25 @@
                                 @else
                                     <td>Need Revision</td>
                                 @endif
-                                <td>
-                                    <form action="{{ route('student.event.edit', $event) }}" method="GET">
-                                        @csrf
-                                        <button class="btn btn-primary" type="submit">Edit</button>
-                                    </form>
-                                </td>
+                                @if($event->status == 0)
+                                    @if($event->is_group == 0)
+                                    <td>
+                                        <form action="{{ route('student.event.edit', $event) }}" method="GET">
+                                            @csrf
+                                            <button class="btn btn-primary" type="submit">Edit</button>
+                                        </form>
+                                    </td>
+                                    @elseif($event->is_group == 1)
+                                        @if(Auth::user()->isAdmin())
+                                        <td>
+                                            <form action="{{ route('student.event.edit', $event) }}" method="GET">
+                                                @csrf
+                                                <button class="btn btn-primary" type="submit">Edit</button>
+                                            </form>
+                                        </td>
+                                        @endif
+                                    @endif
+                                @endif
                                 @if (Auth::user()->isAdmin())
                                 <td>
                                     <form action="{{route('event.approve')}}" method="POST">
