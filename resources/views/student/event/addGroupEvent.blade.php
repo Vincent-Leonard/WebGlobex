@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{route('student.event.store')}}" method="post">
+            <form action="{{route('student.admin.store')}}" method="post">
                 {{csrf_field()}}
                     <div class="form-group">
                         <label for="nama">Event:</label>
@@ -20,7 +20,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="hidden" class="form-control" id="is_group" name="is_group" value="0">
+                        <input type="hidden" class="form-control" id="is_group" name="is_group" value="1">
                     </div>
                     <div class="form-group">
                         <label>Lecturer:</label>

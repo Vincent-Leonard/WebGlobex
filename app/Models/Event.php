@@ -14,6 +14,7 @@ class Event extends Model
     protected $fillable = [
         'event',
         'type',
+        'is_group',
         'event_date',
         'duration',
         'country',
@@ -24,6 +25,6 @@ class Event extends Model
     ];
 
     public function users(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_event', 'event_id', 'user_id');
     }
 }

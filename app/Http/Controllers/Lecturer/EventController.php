@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -16,7 +17,12 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        $id = Auth::user()->id;
+        // $events = Event::select('*')->from('user_event')->where('user_id', $id)->get();
+        // $events = Event::find(8);
+        // dd($events->users);
+        $events = User::find($id)->events;
+        // dd($events);
         $pages = 'event';
         return view('lecturer.event.index', compact('events'));
     }
@@ -29,7 +35,7 @@ class EventController extends Controller
     public function create()
     {
         $pages = 'event';
-        $users = User::all();
+        $users = User::all()->where('student_id', '<>', null);
         return view('lecturer.event.addEvent', compact('pages', 'users'));
     }
 
@@ -41,7 +47,9 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        Event::create($request->all());
+        $event = Event::create($request->except(['user_id']));
+        $event->users()->attach($request->user_id);
+        $event->users()->attach(Auth::user()->id);
         return redirect()->route('lecturer.event.index');
     }
 

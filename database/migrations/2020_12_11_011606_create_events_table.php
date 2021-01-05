@@ -19,6 +19,9 @@ class CreateEventsTable extends Migration
             $table->enum('type', ['0', '1'])
                 ->default('0')
                 ->comment('0 = student exchange, 1 = student excursion');
+            $table->enum('is_group', ['0', '1'])
+                ->default('0')
+                ->comment('0 = no, 1 = yes');    
             $table->date('event_date');
             $table->string('duration');
             $table->string('country');

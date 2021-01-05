@@ -26,6 +26,20 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Lecturer:</label>
+                        <select name="user_id" class="custom-select">
+                            @foreach($users as $user)
+                            <?php
+                            $selected = '';
+                            if ( $current_id == $user->id ) {
+                                $selected = 'selected';
+                            }
+                            ?>
+                            <option value="{{ $user->id }}" {{ $selected }}>{{ $user->lecturer->lecturer_id.'. '. $user->lecturer->lecturer_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="nama">Date:</label>
                         <input type="date" class="form-control" id="date" name="event_date" value="{{ $event->event_date }}">
                     </div>

@@ -3,12 +3,7 @@
 
         <div class="container" style="margin-top: 20px;">
             <div class="row">
-                <h1 class="col">List Event</h1>
-            </div>
-            <div class="row">
-                <div class="col-md-2 offset-md-10">
-                    <a href="{{route('lecturer.event.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Add Individual Event</a>
-                </div>
+                <h1 class="col">List Group Event</h1>
             </div>
             <div class="row" style="margin-top: 30px;">
                 <table class="table table-striped">
@@ -29,7 +24,7 @@
                     <tbody>
                         @foreach ($events as $event)
                             <tr>
-                                <td><a href="@auth{{route('lecturer.event.show', $event)}}@endauth">{{$event->event}}</td>
+                                <td><a href="@auth{{route('student.event.show', $event)}}@endauth">{{$event->event}}</td>
                                 @if($event->type == 0)
                                     <td>Student Exchange</td>
                                 @else
@@ -46,9 +41,10 @@
                                     <td>Need Revision</td>
                                 @endif
                                 <td>
-                                    <form action="{{ route('lecturer.event.edit', $event) }}" method="GET">
+                                    <form action="{{ route('student.admin.join') }}" method="POST">
                                         @csrf
-                                        <button class="btn btn-primary" type="submit">Edit</button>
+                                        <input name="id" type="hidden" value="{{$event->event_id}}">
+                                        <button class="btn btn-primary" type="submit">Join</button>
                                     </form>
                                 </td>
                                 @if (Auth::user()->isAdmin())
