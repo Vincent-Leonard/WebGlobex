@@ -27,9 +27,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        $pages = 'event';
-        $users = User::all();
-        return view('event.addEvent', compact('pages', 'users'));
+        //
     }
 
     /**
@@ -40,8 +38,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        Event::create($request->all());
-        return redirect()->route('event.index');
+        //
     }
 
     /**

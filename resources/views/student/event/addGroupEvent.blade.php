@@ -2,11 +2,11 @@
 @section('content')
     <div class="container" style="margin-top: 20px;">
         <div class="row">
-            <h1 class="col">Add Event</h1>
+            <h1 class="col">Add Group Event</h1>
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{route('student.admin.store')}}" method="post">
+            <form action="{{route('student.group.store')}}" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
                     <div class="form-group">
                         <label for="nama">Event:</label>
