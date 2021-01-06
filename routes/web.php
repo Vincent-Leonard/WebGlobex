@@ -64,6 +64,9 @@ Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], fu
     Route::post('event/approve', [EventController::class, 'approve'])->name('event.approve');
     Route::post('event/reject', [EventController::class, 'reject'])->name('event.reject');
     Route::post('event/revise', [EventController::class, 'revise'])->name('event.revise');
+    Route::get('event/participant', [EventController::class, 'participant'])->name('event.participant');
+    Route::post('event/acceptStudent', [EventController::class, 'acceptStudent'])->name('event.acceptStudent');
+    Route::post('event/rejectStudent', [EventController::class, 'rejectStudent'])->name('event.rejectStudent');
 });
 
 Auth::routes();

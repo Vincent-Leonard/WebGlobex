@@ -2,28 +2,28 @@
 @section('content')
     <div class="container" style="margin-top: 20px;">
         <div class="row">
-            <h1 class="col">List Events</h1>
+            <h1 class="col">List Group Events</h1>
         </div>
         <div class="row">
             @if (Auth::user()->isStaff())
                 <div>
                     <a href="{{ route('staff.event.index') }}" class="col">My Event List</a>
                     <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.event.participant') }}" class="col">Joined Event List</a>
+                    <a href="{{ route('admin.event.participants') }}" class="col">Joined Event List</a>
                 </div>
             @endif
             @if (Auth::user()->isLecturer())
                 <div>
                     <a href="{{ route('lecturer.event.index') }}" class="col">My Event List</a>
                     <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.event.participant') }}" class="col">Joined Event List</a>
+                    <a href="{{ route('admin.event.participants') }}" class="col">Joined Event List</a>
                 </div>
             @endif
             @if (Auth::user()->isStudent())
                 <div>
                     <a href="{{ route('student.event.index') }}" class="col">My Event List</a>
                     <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.event.participant') }}" class="col">Joined Event List</a>
+                    <a href="{{ route('admin.event.participants') }}" class="col">Joined Event List</a>
                 </div>
             @endif
         </div>

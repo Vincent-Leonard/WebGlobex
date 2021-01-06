@@ -10,7 +10,7 @@
                 <div>
                     <a href="{{ route('student.event.index') }}" class="col"><b>My Event List</b></a>
                     <a href="{{ route('admin.event.index') }}" class="col">All Event List</a>
-                    <a href="{{ route('admin.event.index') }}" class="col">Joined Event List</a>
+                    <a href="{{ route('admin.event.participant') }}" class="col">Joined Event List</a>
                 </div>
             @endif
 
