@@ -17,6 +17,10 @@ class CreateUserEventTable extends Migration
             $table->id();
             $table->foreignID('event_id')->references('event_id')->on('events');
             $table->foreignID('user_id')->references('id')->on('users');
+            $table->enum('is_approved', ['0','1','2'])
+                ->default('0')
+                ->comment('0 = Pending, 1 = Approved, 2 = Rejected');
+            $table->timestamps();
         });
     }
 

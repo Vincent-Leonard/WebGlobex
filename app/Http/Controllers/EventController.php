@@ -119,21 +119,4 @@ class EventController extends Controller
         $event->update(['status' => '3']);
         return redirect()->back()->with('Success', 'Event Needs Revision');
     }
-
-    public function participant()
-    {
-        $events = Event::all()->where('is_group', 1);
-        $pages = 'event';
-        return view('event.groupEvent', compact('events', 'pages'));
-    }
-
-    public function acceptStudent(Request $request)
-    {
-
-    }
-
-    public function rejectStudent(Request $request)
-    {
-
-    }
 }

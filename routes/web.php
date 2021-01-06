@@ -4,6 +4,7 @@ use App\http\controllers\EventController;
 use App\http\controllers\LecturerController;
 use App\http\controllers\StaffController;
 use App\http\controllers\StudentController;
+use App\http\controllers\ApproveJoinController;
 
 use App\http\controllers\staff\UserController as StaffUserController;
 
@@ -60,13 +61,13 @@ Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], fu
     Route::resource('lecturer', LecturerController::class);
     Route::resource('staff', StaffController::class);
     Route::resource('event', EventController::class);
+    Route::resource('join', ApproveJoinController::class);
 
     Route::post('event/approve', [EventController::class, 'approve'])->name('event.approve');
     Route::post('event/reject', [EventController::class, 'reject'])->name('event.reject');
     Route::post('event/revise', [EventController::class, 'revise'])->name('event.revise');
-    Route::get('event/participant', [EventController::class, 'participant'])->name('event.participant');
-    Route::post('event/acceptStudent', [EventController::class, 'acceptStudent'])->name('event.acceptStudent');
-    Route::post('event/rejectStudent', [EventController::class, 'rejectStudent'])->name('event.rejectStudent');
+    Route::post('event/{id}/acceptStudent', [ApproveJoinController::class, 'acceptStudent'])->name('event.acceptStudent');
+    Route::post('event/{id}/rejectStudent', [ApproveJoinController::class, 'rejectStudent'])->name('event.rejectStudent');
 });
 
 Auth::routes();

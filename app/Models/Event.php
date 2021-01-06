@@ -27,4 +27,8 @@ class Event extends Model
     public function users(){
         return $this->belongsToMany(User::class, 'user_event', 'event_id', 'user_id');
     }
+
+    public function guests(){
+        return $this->belongsToMany(User::class, 'user_event', 'event_id', 'user_id')->withPivot('is_approved')->withTimeStamps();
+    }
 }

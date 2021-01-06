@@ -71,7 +71,7 @@ class GroupEventController extends Controller
             'status' => '1',
         ]);
 
-        $event->users()->attach($request->user_id);
+        $event->guests()->syncWithoutDetaching($request->user_id, ['is_approved' => '1']);
         return redirect()->route('student.event.index');
     }
 
