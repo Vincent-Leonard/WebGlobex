@@ -83,7 +83,7 @@
                                 </td>
                             @endif
                             <td>
-                                <form action="{{ route('student.event.destroy', $event) }}" method="post">
+                                <form action="{{ route('admin.event.destroy', $event) }}" method="post">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-danger">Delete</button>
