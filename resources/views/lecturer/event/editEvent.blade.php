@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{route('lecturer.event.update', $model->event_id)}}" method="post">
+            <form action="{{route('lecturer.event.update', $model->event_id)}}" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <input name="_method" type="hidden" value="PATCH">
                     <div class="form-group">
@@ -45,8 +45,9 @@
                         <label for="barcode">Organizer:</label>
                         <input type="text" class="form-control" id="organizer" name="organizer" value="{{ $event->organizer }}">
                     </div>
+                    <img style="height: 200px" src="/images/event/individual/{{ $event->file }}" alt="">
                     <div class="form-group">
-                        <label for="barcode">File/Photo</label>
+                        <label for="barcode">Change Photo</label>
                         <br>
                         <input type="file" id="file" name="file">
                     </div>

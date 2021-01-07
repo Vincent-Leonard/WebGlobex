@@ -83,8 +83,30 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        $event->update($request->all());
-        return redirect()->route('event.index');
+        $event->update([
+            'event' => $request->event,
+            'type' => $request->type,
+            'event_date' => $request->event_date,
+            'duration' => $request->duration,
+            'country' => $request->country,
+            'city' => $request->city,
+            'organizer' => $request->organizer,
+        ]);
+
+        if ($request->file != null) {
+            $data = $request->validate([
+                'file' => 'image',
+            ]);
+            if ($request->has('file')) {
+                $file_name = time() . '-' . $data['file']->getClientOriginalName();
+                $request->file->move(public_path('images\event\group'), $file_name);
+                $event->update([
+                    'file' => $file_name
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.event.index');
     }
 
     /**
@@ -96,7 +118,7 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         $event->delete();
-        return redirect()->route('event.index');
+        return redirect()->route('admin.event.index');
     }
 
     public function approve(Request $request)

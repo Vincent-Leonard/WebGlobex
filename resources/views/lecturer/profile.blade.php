@@ -104,6 +104,11 @@
                         : {{$user->lecturer->jaka->jaka_name}}
                     </div>
                 </div>
+                <br>
+                <form action="{{ route('lecturer.user.edit', $user) }}" method="GET">
+                    @csrf
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                </form>
             </div>
         </div>
     </div>

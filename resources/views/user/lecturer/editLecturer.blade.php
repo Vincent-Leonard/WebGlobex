@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{ route('admin.lecturer.update', $model->lecturer_id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.lecturer.update', $lecturer) }}" method="post" enctype="multipart/form-data">
                 @csrf
                     <input type="hidden" name="_method" value="PATCH"/>
                     <div class="form-group">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -49,7 +50,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $pages = 'student';
+        $pages = 'user';
         return view('student.profile', compact('user', 'pages'));
     }
 
@@ -59,9 +60,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $pages = 'user';
+        $departments = Department::all();
+        return view('student.editProfile', compact('user', 'departments', 'pages'));
     }
 
     /**
@@ -73,7 +76,21 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->student->update($request->except('student_photo', 'email'));
+
+        if ($request->student_photo != null) {
+            $data = $request->validate([
+                'student_photo' => 'image',
+            ]);
+            if ($request->has('student_photo')) {
+                $file_name = time() . '-' . $data['student_photo']->getClientOriginalName();
+                $request->student_photo->move(public_path('images\profile_picture\student'), $file_name);
+                $user->student->update([
+                    'student_photo' => $file_name
+                ]);
+            }
+        }
+        return redirect()->route('student.user.show', $user);
     }
 
     /**

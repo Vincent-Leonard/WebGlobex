@@ -46,7 +46,7 @@
                 <tbody>
                     @foreach ($events as $event)
                         <tr>
-                            <td><a href="@auth{{ route('lecturer.event.show', $event) }}@endauth">{{ $event->event }}</td>
+                            <td><a href="@auth{{ route('admin.event.show', $event) }}@endauth">{{ $event->event }}</td>
                             @if ($event->type == 0)
                                 <td>Student Exchange</td>
                             @else
@@ -76,14 +76,14 @@
                             @else
                                 <td>-</td>
                                 <td>
-                                    <form action="{{ route('student.event.edit', $event) }}" method="GET">
+                                    <form action="{{ route('admin.event.edit', $event) }}" method="GET">
                                         @csrf
                                         <button class="btn btn-primary" type="submit">Edit</button>
                                     </form>
                                 </td>
                             @endif
                             <td>
-                                <form action="{{ route('student.event.destroy', $event) }}" method="post">
+                                <form action="{{ route('admin.event.destroy', $event) }}" method="post">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-danger">Delete</button>

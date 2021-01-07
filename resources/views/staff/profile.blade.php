@@ -88,6 +88,11 @@
                         : {{$user->staff->title->title_name}}
                     </div>
                 </div>
+                <br>
+                <form action="{{ route('staff.user.edit', $user) }}" method="GET">
+                    @csrf
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                </form>
             </div>
         </div>
     </div>

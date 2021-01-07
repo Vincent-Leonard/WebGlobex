@@ -10,7 +10,7 @@
                 {{csrf_field()}}
                     <div class="form-group">
                         <label for="nama">Event:</label>
-                        <input type="text" class="form-control" id="event" name="event">
+                        <input type="text" class="form-control" id="event" name="event" required>
                     </div>
                     <div class="form-group">
                         <label for="user">Type:</label>
@@ -32,19 +32,19 @@
                     </div>
                     <div class="form-group">
                         <label for="nama">Date:</label>
-                        <input type="date" class="form-control" id="date" name="event_date">
+                        <input type="date" class="form-control" id="date" name="event_date" required>
                     </div>
                     <div class="form-group">
                         <label for="barcode">Duration:</label>
-                        <input type="text" class="form-control" id="duration" name="duration">
+                        <input type="text" class="form-control" id="duration" name="duration" required>
                     </div>
                     <div class="form-group">
                         <label for="nama">Country:</label>
-                        <input type="text" class="form-control" id="country" name="country">
+                        <input type="text" class="form-control" id="country" name="country" required>
                     </div>
                     <div class="form-group">
                         <label for="barcode">City:</label>
-                        <input type="text" class="form-control" id="city" name="city">
+                        <input type="text" class="form-control" id="city" name="city" required>
                     </div>
                     <div class="form-group">
                         <label for="barcode">Organizer:</label>
@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <label for="barcode">File/Photo</label>
                         <br>
-                        <input type="file" id="file" name="file">
+                        <input type="file" id="file" name="file" required>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Submit</button>

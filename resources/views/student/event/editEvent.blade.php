@@ -11,7 +11,7 @@
                 <input name="_method" type="hidden" value="PATCH">
                     <div class="form-group">
                         <label for="nama">Event:</label>
-                        <input type="text" class="form-control" id="event" name="event" value="{{ $event->event }}">
+                        <input type="text" class="form-control" id="event" name="event" value="{{ $event->event }}" required>
                     </div>
                     <div class="form-group">
                         <label for="user">Type:</label>
@@ -41,31 +41,30 @@
                     </div>
                     <div class="form-group">
                         <label for="nama">Date:</label>
-                        <input type="date" class="form-control" id="date" name="event_date" value="{{ $event->event_date }}">
+                        <input type="date" class="form-control" id="date" name="event_date" value="{{ $event->event_date }}" required>
                     </div>
                     <div class="form-group">
                         <label for="barcode">Duration:</label>
-                        <input type="text" class="form-control" id="duration" name="duration" value="{{ $event->duration }}">
+                        <input type="text" class="form-control" id="duration" name="duration" value="{{ $event->duration }}" required>
                     </div>
                     <div class="form-group">
                         <label for="nama">Country:</label>
-                        <input type="text" class="form-control" id="country" name="country" value="{{ $event->country }}">
+                        <input type="text" class="form-control" id="country" name="country" value="{{ $event->country }}" required>
                     </div>
                     <div class="form-group">
                         <label for="barcode">City:</label>
-                        <input type="text" class="form-control" id="city" name="city" value="{{ $event->city }}">
+                        <input type="text" class="form-control" id="city" name="city" value="{{ $event->city }}" required>
                     </div>
                     <div class="form-group">
                         <label for="barcode">Organizer:</label>
                         <input type="text" class="form-control" id="organizer" name="organizer" value="{{ $event->organizer }}">
                     </div>
+                    <img style="height: 200px" src="/images/event/individual/{{ $event->file }}" alt="">
                     <div class="form-group">
-                        <label for="barcode">File/Photo</label>
+                        <label for="barcode">Change Photo</label>
                         <br>
                         <input type="file" id="file" name="file">
                     </div>
-                    {{ $event->file }}
-                    <br>
                     <br>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

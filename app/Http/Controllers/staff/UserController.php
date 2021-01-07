@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Models\User;
+use App\Models\Department;
+use App\Models\Title;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -61,7 +63,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pages = 'user';
+        $departments = Department::all();
+        $titles = Title::all();
+        return view('staff.editProfile', compact('user', 'departments', 'titles', 'jakas', 'pages'));
     }
 
     /**
@@ -73,7 +78,21 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->staff->update($request->except('staff_photo', 'email'));
+
+        if ($request->staff_photo != null) {
+            $data = $request->validate([
+                'staff_photo' => 'image',
+            ]);
+            if ($request->has('staff_photo')) {
+                $file_name = time() . '-' . $data['staff_photo']->getClientOriginalName();
+                $request->staff_photo->move(public_path('images\profile_picture\staff'), $file_name);
+                $user->staff->update([
+                    'staff_photo' => $file_name
+                ]);
+            }
+        }
+        return redirect()->route('staff.user.show', $user);
     }
 
     /**
