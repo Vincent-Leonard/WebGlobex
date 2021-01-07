@@ -34,7 +34,6 @@
                                 <td><a href="{{ route('admin.lecturer.show', $lecturer) }}">{{ $lecturer->lecturer_name }}</a></td>
                                 <td>{{$lecturer->title_id}}</td>
                                 <td>{{$lecturer->department_id}}</td>
-                                {{-- @auth --}}
                                 <td>
                                     <form action="{{ route('admin.lecturer.edit', $lecturer) }}" method="GET">
                                         @csrf
@@ -48,7 +47,6 @@
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
                                 </td>
-                                {{-- @endauth --}}
                             </tr>
                         @endforeach
                     </tbody>

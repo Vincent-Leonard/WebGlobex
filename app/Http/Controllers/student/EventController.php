@@ -104,7 +104,6 @@ class EventController extends Controller
         $current = Event::find($id)->users->where('lecturer_id', '<>', null)->first();
         $current_id = $current->id;
         $users = User::all()->where('lecturer_id', '<>', null);
-        //dd($current);
         return view('student.event.editEvent', ['model' => $event], compact('event', 'pages', 'current_id', 'users'));
     }
 
@@ -117,7 +116,30 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        $event->update($request->all());
+        $event->update([
+            'event' => $request->event,
+            'type' => $request->type,
+            'event_date' => $request->event_date,
+            'duration' => $request->duration,
+            'country' => $request->country,
+            'city' => $request->city,
+            'organizer' => $request->organizer,
+            'status' => '0',
+        ]);
+
+        if ($request->file != null) {
+            $data = $request->validate([
+                'file' => 'image',
+            ]);
+            if ($request->has('file')) {
+                $file_name = time() . '-' . $data['file']->getClientOriginalName();
+                $request->file->move(public_path('images\event\individual'), $file_name);
+                $event->update([
+                    'file' => $file_name
+                ]);
+            }
+        }
+
         return redirect()->route('student.event.index');
     }
 

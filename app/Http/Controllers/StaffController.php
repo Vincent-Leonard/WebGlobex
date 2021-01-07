@@ -61,7 +61,7 @@ class StaffController extends Controller
             'nip' => $request->nim,
             'nidn' => $request->nidn,
             'staff_name' => $request->staff_name,
-            'staff_email' => $request->staff_email,
+            'staff_email' => $request->email,
             'description' => $request->description,
             'staff_photo' => $file_name,
             'staff_gender' => $request->staff_gender,
@@ -74,12 +74,12 @@ class StaffController extends Controller
 
         $user = User::create([
             'password' => Hash::make($request['password']),
-            'email' => $request['staff_email'],
+            'email' => $request->email,
             'staff_id' => $staff->staff_id,
             'role_id' => '1',
         ]);
 
-        return redirect()->route('staff.index');
+        return redirect()->route('admin.staff.index');
     }
 
     /**
@@ -121,8 +121,24 @@ class StaffController extends Controller
      */
     public function update(Request $request, Staff $staff)
     {
-        $staff->update($request->all());
-        return redirect()->route('staff.index');
+        $staff->update($request->except('staff_photo', 'email', 'is_admin'));
+        $staff->user->update([
+            'is_admin' => $request->is_admin
+        ]);
+
+        if ($request->staff_photo != null) {
+            $data = $request->validate([
+                'staff_photo' => 'image',
+            ]);
+            if ($request->has('staff_photo')) {
+                $file_name = time() . '-' . $data['staff_photo']->getClientOriginalName();
+                $request->staff_photo->move(public_path('images\profile_picture\staff'), $file_name);
+                $staff->update([
+                    'staff_photo' => $file_name
+                ]);
+            }
+        }
+        return redirect()->route('admin.staff.index');
     }
 
     /**
@@ -133,7 +149,8 @@ class StaffController extends Controller
      */
     public function destroy(Staff $staff)
     {
+        $staff->user->delete();
         $staff->delete();
-        return redirect()->route('staff.index');
+        return redirect()->route('admin.staff.index');
     }
 }

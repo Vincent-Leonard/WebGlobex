@@ -35,6 +35,6 @@ class Staff extends Model
     }
 
     public function user(){
-        return $this->hasMany(User::class);
+        return $this->hasOne(User::class, 'staff_id', 'staff_id');
     }
 }

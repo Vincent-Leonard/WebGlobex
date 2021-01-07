@@ -58,10 +58,10 @@ class LecturerController extends Controller
         }
 
         $lecturer = Lecturer::create([
-            'nip' => $request->nim,
+            'nip' => $request->nip,
             'nidn' => $request->nidn,
             'lecturer_name' => $request->lecturer_name,
-            'lecturer_email' => $request->lecturer_email,
+            'lecturer_email' => $request->email,
             'description' => $request->description,
             'lecturer_photo' => $file_name,
             'lecturer_gender' => $request->lecturer_gender,
@@ -74,12 +74,12 @@ class LecturerController extends Controller
 
         $user = User::create([
             'password' => Hash::make($request['password']),
-            'email' => $request['lecturer_email'],
+            'email' => $request->email,
             'lecturer_id' => $lecturer->lecturer_id,
             'role_id' => '2',
         ]);
 
-        return redirect()->route('lecturer.index');
+        return redirect()->route('admin.lecturer.index');
     }
 
     /**
@@ -122,8 +122,24 @@ class LecturerController extends Controller
      */
     public function update(Request $request, Lecturer $lecturer)
     {
-        $lecturer->update($request->all());
-        return redirect()->route('lecturer.index');
+        $lecturer->update($request->except('lecturer_photo', 'email', 'is_admin'));
+        $lecturer->user->update([
+            'is_admin' => $request->is_admin
+        ]);
+
+        if ($request->lecturer_photo != null) {
+            $data = $request->validate([
+                'lecturer_photo' => 'image',
+            ]);
+            if ($request->has('lecturer_photo')) {
+                $file_name = time() . '-' . $data['lecturer_photo']->getClientOriginalName();
+                $request->lecturer_photo->move(public_path('images\profile_picture\lecturer'), $file_name);
+                $lecturer->update([
+                    'lecturer_photo' => $file_name
+                ]);
+            }
+        }
+        return redirect()->route('admin.lecturer.index');
     }
 
     /**
@@ -134,7 +150,8 @@ class LecturerController extends Controller
      */
     public function destroy(Lecturer $lecturer)
     {
+        $lecturer->user->delete();
         $lecturer->delete();
-        return redirect()->route('lecturer.index');
+        return redirect()->route('admin.lecturer.index');
     }
 }

@@ -111,11 +111,23 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        $student->update($request->all());
-        // $student->user->update([
-        //     // 'password' => Hash::make($request['password']),
-        //     'email' => $request['student_email'],
-        // ]);
+        $student->update($request->except('student_photo', 'email', 'is_admin'));
+        $student->user->update([
+            'is_admin' => $request->is_admin
+        ]);
+
+        if ($request->student_photo != null) {
+            $data = $request->validate([
+                'student_photo' => 'image',
+            ]);
+            if ($request->has('student_photo')) {
+                $file_name = time() . '-' . $data['student_photo']->getClientOriginalName();
+                $request->student_photo->move(public_path('images\profile_picture\student'), $file_name);
+                $student->update([
+                    'student_photo' => $file_name
+                ]);
+            }
+        }
         return redirect()->route('admin.student.index');
     }
 
@@ -127,8 +139,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        $id = $student->student_id;
-        // User::delete()->where('student_id', $id);
+        $student->user->delete();
         $student->delete();
         return redirect()->route('admin.student.index');
     }
