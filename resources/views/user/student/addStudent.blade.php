@@ -10,31 +10,31 @@
                 @csrf
                     <div class="form-group">
                         <label>NIM:</label>
-                        <input type="text" class="form-control" name="nim">
+                        <input type="text" class="form-control" name="nim" required>
                     </div>
                     <div class="form-group">
                         <label>Name:</label>
-                        <input type="text" class="form-control" name="student_name">
+                        <input type="text" class="form-control" name="student_name" required>
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
-                        <input type="text" class="form-control" name="student_email">
+                        <input type="text" class="form-control" name="student_email" required>
                     </div>
                     <div class="form-group">
                         <label>Password:</label>
-                        <input type="password" class="form-control" name="password">
+                        <input type="password" class="form-control" name="password" required>
                     </div>
                     <div class="form-group">
                         <label>Batch:</label>
-                        <input type="year" class="form-control" name="batch">
+                        <input type="year" class="form-control" name="batch" required>
                     </div>
                     <div class="form-group">
                         <label>Description:</label>
-                        <input type="text" class="form-control" name="description">
+                        <input type="text" class="form-control" name="description" required>
                     </div>
                     <div class="form-group">
                         <label>Photo:</label><br>
-                        <input type="file" name="student_photo">
+                        <input type="file" name="student_photo" required>
                     </div>
                     <div class="form-group">
                         <label>Gender:</label>
@@ -45,11 +45,11 @@
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
-                        <input type="number" class="form-control" name="student_phone">
+                        <input type="number" class="form-control" name="student_phone" required>
                     </div>
                     <div class="form-group">
                         <label>Line Account:</label>
-                        <input type="text" class="form-control" name="student_line_account">
+                        <input type="text" class="form-control" name="student_line_account" required>
                     </div>
                     <div class="form-group">
                         <label>Department:</label>

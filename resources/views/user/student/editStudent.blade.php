@@ -6,31 +6,32 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{ route('admin.student.update', $model->student_id) }}" method="post">
+            <form action="{{ route('admin.student.update', $model->student_id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                     <input type="hidden" name="_method" value="PATCH"/>
                     <div class="form-group">
                         <label>NIM:</label>
-                        <input type="text" class="form-control" name="nim" value="{{ $student->nim }}">
+                        <input type="text" class="form-control" name="nim" value="{{ $student->nim }}" required>
                     </div>
                     <div class="form-group">
                         <label>Name:</label>
-                        <input type="text" class="form-control" name="student_name" value="{{ $student->student_name }}">
+                        <input type="text" class="form-control" name="student_name" value="{{ $student->student_name }}" required>
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
-                        <input type="text" class="form-control" name="email" value="{{ $student->student_email }}">
+                        <input type="text" class="form-control" name="email" value="{{ $student->student_email }}" readonly>
                     </div>
                     <div class="form-group">
                         <label>Batch:</label>
-                        <input type="year" class="form-control" name="batch" value="{{ $student->batch }}">
+                        <input type="year" class="form-control" name="batch" value="{{ $student->batch }}" required>
                     </div>
                     <div class="form-group">
                         <label>Description:</label>
-                        <input type="text" class="form-control" name="description" value="{{ $student->description }}">
+                        <input type="text" class="form-control" name="description" value="{{ $student->description }}" required>
                     </div>
+                    <img style="height: 200px" src="/images/profile_picture/student/{{$student->student_photo}}" alt="">
                     <div class="form-group">
-                        <label>Photo:</label><br>
+                        <label>Change Photo:</label><br>
                         <input type="file" name="student_photo" value="{{ $student->student_photo }}">
                     </div>
                     <div class="form-group">
@@ -52,11 +53,28 @@
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
-                        <input type="number" class="form-control" name="student_phone" value="{{ $student->student_phone }}">
+                        <input type="number" class="form-control" name="student_phone" value="{{ $student->student_phone }}" required>
                     </div>
                     <div class="form-group">
                         <label>Line Account:</label>
-                        <input type="text" class="form-control" name="student_line_account" value="{{ $student->student_line_account }}">
+                        <input type="text" class="form-control" name="student_line_account" value="{{ $student->student_line_account }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Admin:</label>
+                        <?php
+                        $selected_yes = '';
+                        if ( $student->user->is_admin == "1" ) {
+                            $selected_yes = 'selected';
+                        }
+                        $selected_no = '';
+                        if ( $student->user->is_admin == "0" ) {
+                            $selected_no = 'selected';
+                        }
+                        ?>
+                        <select name="is_admin" class="custom-select">
+                            <option value="0" {{ $selected_no }}>No</option>
+                            <option value="1" {{ $selected_yes }}>Yes</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Department:</label>
