@@ -95,8 +95,9 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        $event->users()->detach();
         $event->delete();
-        return redirect()->route('event.index');
+        return redirect()->back()->with('Success', 'Event Deleted');
     }
 
     public function approve(Request $request)
