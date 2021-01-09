@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<link type="text/css" href="{{ asset('public/css/style.css') }}" rel="stylesheet">
     <div class="container" style="margin-top: 20px;">
         <div class="row">
             <h1 class="col">List Events</h1>

@@ -65,6 +65,9 @@ section {
 }
 
 body {
+  background: url(image/Bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: 0;
   font-family: "Nunito", sans-serif;
   font-size: 0.9rem;
@@ -83,6 +86,15 @@ hr {
   box-sizing: content-box;
   height: 0;
   overflow: visible;
+}
+.colms {
+  border-collapse: collapse;
+
+}
+.colms, td{
+  border-radius: 1px solid #999;
+  margin: 0px 0px 20px;
+  padding: 0px 15px;
 }
 
 h1,
@@ -110,6 +122,7 @@ abbr[data-original-title] {
   -webkit-text-decoration-skip-ink: none;
           text-decoration-skip-ink: none;
 }
+
 
 address {
   margin-bottom: 1rem;

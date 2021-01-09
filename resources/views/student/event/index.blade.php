@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
-
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../public/css/style.css" />
+</head>
     <div class="container" style="margin-top: 20px;">
         <div class="row">
             <h1 class="col">My Events</h1>
@@ -42,6 +45,49 @@
                         <th scope="col">Delete</th>
                     </tr>
                 </thead>
+                <table class="colms">
+                        <tr>
+                            <td align="center" colspan="2">
+                                <?php
+                                echo'<b>event</b><br>';?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo 'Nama'?></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo 'Type'?></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo 'Date'?></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo 'Duration'?></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo 'Country'?></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo 'City'?></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo 'Orginizer'?></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo 'Status'?></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 <tbody>
                     @foreach ($events as $event)
                         <tr>
