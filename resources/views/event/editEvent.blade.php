@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{route('admin.event.update', $model->event_id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('admin.event.update', $event)}}" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <input name="_method" type="hidden" value="PATCH">
                     <div class="form-group">
@@ -23,6 +23,20 @@
                                 <option value="0">Student Exchange</option>
                                 <option value="1" selected>Student Excursion</option>
                             @endif
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Lecturer:</label>
+                        <select name="user_id" class="custom-select">
+                            @foreach($users as $user)
+                            <?php
+                            $selected = '';
+                            if ( $current_id == $user->id ) {
+                                $selected = 'selected';
+                            }
+                            ?>
+                            <option value="{{ $user->id }}" {{ $selected }}>{{ $user->lecturer->lecturer_id.'. '. $user->lecturer->lecturer_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
