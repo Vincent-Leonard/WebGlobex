@@ -18,11 +18,9 @@ class GroupEventController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-        // $userevents = User::find($id)->events->where('is_group', 1)->pluck('event_id');
         $users = Auth::user()->events->where('is_group', 1)->pluck('event_id');
         $eventsAll = Event::select('*')->from('events')->whereNotIn('event_id', $users)->get();
         $events = $eventsAll->where('is_group', 1);
-        // dd($events);
         $pages = 'event';
         return view('student.event.joinEvent', compact('events'));
     }
@@ -68,7 +66,7 @@ class GroupEventController extends Controller
             'city' => $request->city,
             'organizer' => $request->organizer,
             'file' => $file_name,
-            'status' => '1',
+            'status' => '4',
         ]);
 
         $event->guests()->syncWithoutDetaching($request->user_id, ['is_approved' => '1']);

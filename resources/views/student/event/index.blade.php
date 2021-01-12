@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('content')
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../../public/css/style.css" />
-</head>
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../../../public/css/style.css" />
+    </head>
     <div class="container" style="margin-top: 20px;">
         <div class="row">
             <h1 class="col">My Events</h1>
@@ -86,19 +87,28 @@
                                         </form>
                                     </td>
                                     <td>-</td>
-                                @else
+                                @elseif($event->status == 2)
                                     <td>Rejected</td>
                                     <td>-</td>
+                                    <td>-</td>
+                                @else
+                                    <td>Need Revision</td>
+                                    <td>
+                                        <form action="{{ route('student.event.edit', $event) }}" method="GET">
+                                            @csrf
+                                            <button class="btn btn-primary" type="submit">Edit</button>
+                                        </form>
+                                    </td>
                                     <td>-</td>
                                 @endif
                             @else
                                 <td>
                                     @if ($event->pivot->is_approved == 0)
-                                    Pending
+                                        Pending
                                     @elseif ($event->pivot->is_approved == 1)
-                                    Approved
+                                        Approved
                                     @elseif ($event->pivot->is_approved == 2)
-                                    Rejected
+                                        Rejected
                                     @endif
                                 </td>
                                 <td>-</td>

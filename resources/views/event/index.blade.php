@@ -75,7 +75,11 @@
                                     <td>-</td>
                                 @endif
                             @else
-                                <td>-</td>
+                                @if ($event->status == 4)
+                                    <td>Open</td>
+                                @else
+                                    <td>Close</td>
+                                @endif
                                 <td>
                                     <form action="{{ route('admin.event.edit', $event) }}" method="GET">
                                         @csrf

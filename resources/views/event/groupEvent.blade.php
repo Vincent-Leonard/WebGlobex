@@ -34,6 +34,7 @@
                         <th scope="col">Event</th>
                         <th scope="col">Type</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Paritcipants</th>
                     </tr>
                 </thead>
@@ -47,6 +48,11 @@
                                 <td>Student Excursion</td>
                             @endif
                             <td>{{ $event->event_date }}</td>
+                            @if ($event->status == 4)
+                                <td>Open</td>
+                            @else
+                                <td>Close</td>
+                            @endif
                             <td>
                                 <form action="{{ route('admin.join.edit', $event) }}" method="GET">
                                     @csrf

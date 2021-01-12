@@ -21,16 +21,16 @@ class CreateEventsTable extends Migration
                 ->comment('0 = student exchange, 1 = student excursion');
             $table->enum('is_group', ['0', '1'])
                 ->default('0')
-                ->comment('0 = no, 1 = yes');    
+                ->comment('0 = no, 1 = yes');
             $table->date('event_date');
             $table->string('duration');
             $table->string('country');
             $table->string('city');
             $table->string('organizer');
             $table->text('file');
-            $table->enum('status', ['0', '1', '2', '3'])
+            $table->enum('status', ['0', '1', '2', '3', '4', '5'])
                 ->default('0')
-                ->comment('0 = pending, 1 = approved, 2 = rejeced, 3 = revision');
+                ->comment('0 = pending, 1 = approved, 2 = rejected, 3 = revision, 4 = opened, 5 = closed');
             $table->timestamps();
         });
     }

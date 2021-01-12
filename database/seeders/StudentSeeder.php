@@ -34,7 +34,7 @@ class StudentSeeder extends Seeder
         $student->student_email = 'valentino@student.com';
         $student->batch = '2019';
         $student->description = 'Valentino';
-        $student->student_photo = 'Valentino';
+        $student->student_photo = 'valentino.jpg';
         $student->student_gender = '0';
         $student->student_phone = '0812372386';
         $student->student_line_account = 'Valentino';
