@@ -12,7 +12,6 @@ class Title extends Model
     protected $primaryKey = "title_id";
 
     protected $fillable = [
-        'initial',
         'title_name',
     ];
 

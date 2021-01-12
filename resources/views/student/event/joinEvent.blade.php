@@ -3,7 +3,16 @@
 
         <div class="container" style="margin-top: 20px;">
             <div class="row">
-                <h1 class="col">List Group Event</h1>
+                <h1 class="col">List Join Events</h1>
+            </div>
+            <div class="row">
+                @if (Auth::user()->isAdmin())
+                    <div>
+                        <a href="{{ route('student.event.index') }}" class="col">My Event List</a>
+                        <a href="{{ route('admin.event.index') }}" class="col">All Event List</a>
+                        <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
+                    </div>
+                @endif
             </div>
             <div class="row" style="margin-top: 30px;">
                 <table class="table table-striped">

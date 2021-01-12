@@ -10,21 +10,21 @@
                 <div>
                     <a href="{{ route('staff.event.index') }}" class="col">My Event List</a>
                     <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Joined Event List</a>
+                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
                 </div>
             @endif
             @if (Auth::user()->isLecturer())
                 <div>
                     <a href="{{ route('lecturer.event.index') }}" class="col">My Event List</a>
                     <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Joined Event List</a>
+                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
                 </div>
             @endif
             @if (Auth::user()->isStudent())
                 <div>
                     <a href="{{ route('student.event.index') }}" class="col">My Event List</a>
                     <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Joined Event List</a>
+                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
                 </div>
             @endif
         </div>

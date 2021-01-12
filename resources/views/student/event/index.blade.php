@@ -13,7 +13,7 @@
                 <div>
                     <a href="{{ route('student.event.index') }}" class="col"><b>My Event List</b></a>
                     <a href="{{ route('admin.event.index') }}" class="col">All Event List</a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Joined Event List</a>
+                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
                 </div>
             @endif
 
@@ -45,7 +45,7 @@
                         <th scope="col">Delete</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
                     @foreach ($events as $event)
                         <tr>
@@ -86,18 +86,9 @@
                                         </form>
                                     </td>
                                     <td>-</td>
-                                @elseif($event->status == 2)
+                                @else
                                     <td>Rejected</td>
                                     <td>-</td>
-                                    <td>-</td>
-                                @else
-                                    <td>Need Revision</td>
-                                    <td>
-                                        <form action="{{ route('student.event.edit', $event) }}" method="GET">
-                                            @csrf
-                                            <button class="btn btn-primary" type="submit">Re-Submit</button>
-                                        </form>
-                                    </td>
                                     <td>-</td>
                                 @endif
                             @else

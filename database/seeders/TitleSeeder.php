@@ -20,6 +20,11 @@ class TitleSeeder extends Seeder
         $title->save();
 
         $title = new Title();
+        $title->title_name = 'Kaprodi';
+        $title->timestamps = false;
+        $title->save();
+
+        $title = new Title();
         $title->title_name = 'Dekan';
         $title->timestamps = false;
         $title->save();

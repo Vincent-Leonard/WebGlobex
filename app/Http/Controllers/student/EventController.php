@@ -104,7 +104,7 @@ class EventController extends Controller
         $current = Event::find($id)->users->where('lecturer_id', '<>', null)->first();
         $current_id = $current->id;
         $users = User::all()->where('lecturer_id', '<>', null);
-        return view('student.event.editEvent', ['model' => $event], compact('event', 'pages', 'current_id', 'users'));
+        return view('student.event.editEvent', compact('event', 'pages', 'current_id', 'users'));
     }
 
     /**
@@ -139,6 +139,11 @@ class EventController extends Controller
                 ]);
             }
         }
+
+        $current_lecturer = Event::find($event->event_id)->users->where('lecturer_id', '<>', null)->first();
+        $event->users()->where('user_id', $current_lecturer->id)->update([
+            'user_id' => $request->user_id
+        ]);
 
         return redirect()->route('student.event.index');
     }
