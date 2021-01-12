@@ -18,7 +18,7 @@ class EventController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-        $events = User::find($id)->events;
+        $events = User::find($id)->attends;
         $pages = 'event';
         return view('student.event.index', compact('events'));
     }

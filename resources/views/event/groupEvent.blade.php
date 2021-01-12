@@ -31,28 +31,32 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th scope="col">ID</th>
                         <th scope="col">Event</th>
                         <th scope="col">Type</th>
-                        <th scope="col">Participation</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Waiting for Approval</th>
                         <th scope="col">Current Participants</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($events as $event)
                         <tr>
+                            <td>{{ $event->event_id}}</td>
                             <td><a href="@auth{{ route('admin.join.edit', $event) }}@endauth">{{ $event->event }}</td>
                             @if ($event->type == 0)
                                 <td>Student Exchange</td>
                             @else
                                 <td>Student Excursion</td>
                             @endif
+
+                            <td>{{ $event->event_date }}</td>
+                            
                             @if ($event->is_group == 0)
                                 <td>Individual</td>
                             @else
                                 <td>Group</td>
                             @endif
-                            <td>{{ $event->event_date }}</td>
                         </tr>
                     @endforeach
                 </tbody>

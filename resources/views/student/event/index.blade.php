@@ -45,49 +45,7 @@
                         <th scope="col">Delete</th>
                     </tr>
                 </thead>
-                <table class="colms">
-                        <tr>
-                            <td align="center" colspan="2">
-                                <?php
-                                echo'<b>event</b><br>';?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo 'Nama'?></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo 'Type'?></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo 'Date'?></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo 'Duration'?></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo 'Country'?></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo 'City'?></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo 'Orginizer'?></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo 'Status'?></td>
-                            <td></td>
-                        </tr>
-                    </table>
+                
                 <tbody>
                     @foreach ($events as $event)
                         <tr>
@@ -143,7 +101,15 @@
                                     <td>-</td>
                                 @endif
                             @else
-                                <td>-</td>
+                                <td>
+                                    @if ($event->pivot->is_approved == 0)
+                                    Pending
+                                    @elseif ($event->pivot->is_approved == 1)
+                                    Approved
+                                    @elseif ($event->pivot->is_approved == 2)
+                                    Rejected
+                                    @endif
+                                </td>
                                 <td>-</td>
                                 <td>-</td>
                             @endif
