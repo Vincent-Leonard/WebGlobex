@@ -15,7 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        $events = Event::all()->where('is_group', 0);
         $pages = 'event';
         return view('event.index', compact('events'));
     }
@@ -149,5 +149,19 @@ class EventController extends Controller
         $event = Event::findOrFail($request->id);
         $event->update(['status' => '3']);
         return redirect()->back()->with('Success', 'Event Needs Revision');
+    }
+
+    public function open(Request $request)
+    {
+        $event = Event::findOrFail($request->id);
+        $event->update(['status' => '4']);
+        return redirect()->back()->with('Success', 'Event Opened');
+    }
+
+    public function close(Request $request)
+    {
+        $event = Event::findOrFail($request->id);
+        $event->update(['status' => '5']);
+        return redirect()->back()->with('Success', 'Event Closed');
     }
 }

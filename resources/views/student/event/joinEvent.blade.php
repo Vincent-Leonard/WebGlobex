@@ -34,6 +34,7 @@
                                     <td>Student Excursion</td>
                                 @endif
                                 <td>{{$event->event_date}}</td>
+                                @if($event->status == 4)
                                 <td>
                                     <form action="{{ route('student.group.join') }}" method="POST">
                                         @csrf
@@ -41,6 +42,9 @@
                                         <button class="btn btn-primary" type="submit">Join</button>
                                     </form>
                                 </td>
+                                @elseif($event->status == 5)
+                                <td>Event Closed</td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

@@ -36,6 +36,7 @@
                         <th scope="col">Date</th>
                         <th scope="col">Status</th>
                         <th scope="col">Paritcipants</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,6 +60,23 @@
                                     <button class="btn btn-primary" type="submit">Details</button>
                                 </form>
                             </td>
+                            @if($event->status == 5)
+                            <td>
+                                <form action="{{ route('admin.event.open') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input name="id" type="hidden" value="{{ $event->event_id }}">
+                                    <button class="btn btn-primary btn-circle" title="Open" type="submit">Open</button>
+                                </form>
+                            </td>
+                            @elseif($event->status == 4)
+                            <td>
+                                <form action="{{ route('admin.event.close') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input name="id" type="hidden" value="{{ $event->event_id }}">
+                                    <button class="btn btn-danger btn-circle" title="Close" type="submit">Close</button>
+                                </form>
+                            </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
