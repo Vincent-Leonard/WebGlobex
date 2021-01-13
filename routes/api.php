@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\student\UserController as StudentUserController;
+use App\Http\Controllers\Api\student\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::post('refresh', [LoginController::class, 'refresh']);
 
 Route::group(['middleware'=>'auth:api'], function(){
     Route::post('logout', [LoginController::class, 'logout']);
-    Route::get('student-profile', [StudentUserController::class, 'show']);
+    // Route::get('student-profile', [StudentUserController::class, 'show']);
     Route::apiResource('events', EventController::class);
+    Route::apiResource('profile', UserController::class);
 });

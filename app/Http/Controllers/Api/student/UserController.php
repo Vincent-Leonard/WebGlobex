@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Api\StudentResource;
+use App\Http\Resources\Api\UserResource;
 
 class UserController extends Controller
 {
@@ -17,8 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $user = User::all();
-        // return StudentResource::collection($user);
+        $user = Auth::user()->get();
+        return UserResource::collection($user);
     }
 
     /**
@@ -50,8 +52,8 @@ class UserController extends Controller
      */
     public function show()
     {
-        $user = Auth::user();
-        return $user->student;
+        // $user = Auth::user()->student;
+        // return StudentResource::collection($user);
     }
 
     /**
