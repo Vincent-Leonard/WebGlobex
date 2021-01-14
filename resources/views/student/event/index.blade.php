@@ -117,6 +117,38 @@
                         </tr>
                     @endforeach
                 </tbody>
+                <table width="550px">
+                    <tr>
+                    <td width="800px" height="400px" ></td>
+            </table>
+            <table width="400px">
+                    <tr>
+                    <td width="800px" height="400px" >
+                    <div class="form-event">
+                        <label>Name :</label>
+                        <input type="text" class="form-control" name="name" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    </div>
+                    <div class="form-event">
+                        <label>Event :</label>
+                        <input type="text" class="form-control" name="event" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    </div>
+                    <div class="form-event">
+                        <label>Type :</label>
+                        <input type="text" class="form-control" name="type" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    </div>
+                    <div class="form-event">
+                        <label>Country :</label>
+                        <input type="text" class="form-control" name="country" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    </div>
+                    <div class="form-event">
+                        <label>City :</label>
+                        <input type="text" class="form-control" name="city" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    </div>
+                    <div class="form-event">
+                        <label>Orginizer :</label>
+                        <input type="text" class="form-control" name="orginizer" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    </div>
+                    </td>
             </table>
         </div>
     </div>
