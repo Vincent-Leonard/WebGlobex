@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Http\Resources\Api\EventResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -16,7 +17,10 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        $events = Auth::User()->attends->where('status', 0);
+        // $event = Auth::User()->whereHas('attends', function (Builder $query){
+        //     $query->where('is_approved', 0);
+        // })->get();
         return EventResource::collection($events);
     }
 

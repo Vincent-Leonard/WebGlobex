@@ -24,9 +24,9 @@ class LecturerResource extends JsonResource
             'lecturer_gender' => $this->lecturer_gender,
             'lecturer_phone' => $this->lecturer_phone,
             'lecturer_line_account' => $this->lecturer_line_account,
-            'department_id' => $this->department->department_name,
-            'title_id' => $this->title->title_name,
-            'jaka_id' => $this->jaka->jaka_name,
+            'department' => $this->department,
+            'title_id' => $this->title,
+            'jaka_id' => $this->jaka,
         ];
     }
 }

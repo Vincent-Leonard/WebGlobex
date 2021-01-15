@@ -23,8 +23,8 @@ class StaffResource extends JsonResource
             'staff_gender' => $this->staff_gender,
             'staff_phone' => $this->staff_phone,
             'staff_line_account' => $this->staff_line_account,
-            'department_id' => $this->department->department_name,
-            'title_id' => $this->title->title_name,
+            'department' => $this->department,
+            'title_id' => $this->title,
         ];
     }
 }

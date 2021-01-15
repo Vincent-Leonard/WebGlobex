@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class EventResource extends JsonResource
 {
@@ -15,10 +16,12 @@ class EventResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'event_id' => $this->event_id,
             'event' => $this->event,
             'type' => $this->type,
-            'date' => $this->event_date,
+            'date' => (string) $this->event_date,
             'status' => $this->status,
+            'pivot' => $this->pivot,
         ];
     }
 }

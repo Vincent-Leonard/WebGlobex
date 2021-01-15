@@ -4,6 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+
 class StudentResource extends JsonResource
 {
     /**
@@ -24,7 +25,7 @@ class StudentResource extends JsonResource
             'student_gender' => $this->student_gender,
             'student_phone' => $this->student_phone,
             'student_line_account' => $this->student_line_account,
-            'department_id' => $this->department->department_name,
+            'department' => $this->department,
         ];
     }
 }
