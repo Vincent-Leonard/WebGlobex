@@ -37,6 +37,7 @@
                         <th scope="col">Status</th>
                         <th scope="col">Paritcipants</th>
                         <th scope="col">Action</th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,6 +78,12 @@
                                 </form>
                             </td>
                             @endif
+                            <td>
+                                <form action="{{ route('admin.event.edit', $event) }}" method="GET">
+                                    @csrf
+                                    <button class="btn btn-primary" type="submit">Edit</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -37,7 +37,6 @@
                         <th scope="col">Participation</th>
                         <th scope="col">Date</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                         <th scope="col">Approve</th>
                         <th scope="col">Reject</th>
@@ -59,34 +58,19 @@
                                 <td>Group</td>
                             @endif
                             <td>{{ $event->event_date }}</td>
-                            @if ($event->is_group == 0)
                                 @if ($event->status == 0)
                                     <td>Pending</td>
-                                    <td>-</td>
-
                                 @elseif($event->status == 1)
                                     <td>Approved</td>
-                                    <td>-</td>
                                 @elseif($event->status == 2)
                                     <td>Rejected</td>
-                                    <td>-</td>
-                                @else
+                                @elseif($event->status == 3)
                                     <td>Need Revision</td>
-                                    <td>-</td>
-                                @endif
-                            @else
-                                @if ($event->status == 4)
+                                @elseif ($event->status == 4)
                                     <td>Open</td>
                                 @else
                                     <td>Close</td>
                                 @endif
-                                <td>
-                                    <form action="{{ route('admin.event.edit', $event) }}" method="GET">
-                                        @csrf
-                                        <button class="btn btn-primary" type="submit">Edit</button>
-                                    </form>
-                                </td>
-                            @endif
                             <td>
                                 <form action="{{ route('admin.event.destroy', $event) }}" method="post">
                                     @csrf
