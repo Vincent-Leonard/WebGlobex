@@ -7,7 +7,7 @@
     </head>
     <div class="container" style="margin-top: 20px;">
         <div class="row">
-            <h1 class="col">My Events</h1>
+            <h1 class="col text-center">My Events</h1>
         </div>
         <div class="row">
             @if (Auth::user()->isAdmin())
@@ -86,27 +86,24 @@
                         </tr>
                     @endforeach
                 </tbody>
-                <table width="550px">
-                    <tr>
-                    <td width="800px" height="400px" ></td>
             </table>
         </div>
-        <div style="width: 25%; float:left; margin-left: 100px; margin-top: 40px;">
+        <div class="detailfolder" style="width: 30%; float:left; margin-left: 100px; margin-top: 30px;">
                 <div class="form-event">
                     <label>Name :</label>
                     <input type="text" class="form-control" name="name" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
-                </div>
-                <div class="form-event">
-                    <label>Event :</label>
-                    <input type="text" class="form-control" name="event" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
                 </div>
                 <div class="form-event">
                     <label>Type :</label>
                     <input type="text" class="form-control" name="type" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
                 </div>
                 <div class="form-event">
-                    <label>Country :</label>
-                    <input type="text" class="form-control" name="country" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    <label>Date :</label>
+                    <input type="text" class="form-control" name="Date" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                </div>
+                <div class="form-event">
+                    <label>Duration :</label>
+                    <input type="text" class="form-control" name="duration" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
                 </div>
                 <div class="form-event">
                     <label>City :</label>

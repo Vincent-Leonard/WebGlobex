@@ -68,7 +68,6 @@ body {
   background: url(image/12.jpg);
   background-repeat: no-repeat;
   background-size: auto;
-  display: block;
   margin: 0;
   font-family: "Nunito", sans-serif;
   font-size: 0.9rem;
@@ -83,6 +82,7 @@ body {
   outline: 0 !important;
 }
 
+}
 hr {
   box-sizing: content-box;
   height: 0;
@@ -1314,7 +1314,7 @@ pre code {
   }
 
   .offset-md-1 {
-    margin-left: 8.3333333333%;
+    margin-left: 30%;
   }
 
   .offset-md-2 {
@@ -1786,6 +1786,7 @@ pre code {
   width: 100%;
   margin-bottom: 1rem;
   color: #212529;
+  background-color:#f7dce5d8 ;
 }
 
 .table th,
@@ -2681,23 +2682,22 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #3490dc;
-  border-color: #3490dc;
+  color: black;
+  text-align: center;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #227dc7;
-  border-color: #2176bd;
+  background-color: #F55168;
+  border-color: #F55168;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #227dc7;
-  border-color: #2176bd;
-  box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5);
+  background-color: #F55168;
+  border-color: #F55168;
+  box-shadow: 0 0 0 0.2rem rgba(245, 37, 64, 0.61);
 }
 
 .btn-primary.disabled,
