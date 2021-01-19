@@ -88,6 +88,7 @@ hr {
   height: 0;
   overflow: visible;
 }
+
 .colms {
   border-collapse: collapse;
 
@@ -1357,7 +1358,15 @@ pre code {
     margin-left: 91.6666666667%;
   }
 }
-
+.offset-md11{
+  margin-left: 37%;
+  position: relative;
+}
+.botn-set-2{
+  color: black;
+  text-align: center;
+ 
+}
 @media (min-width: 992px) {
   .col-lg {
     flex-basis: 0;

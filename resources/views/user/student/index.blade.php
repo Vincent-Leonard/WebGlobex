@@ -3,13 +3,13 @@
 
         <div class="container" style="margin-top: 20px;">
             <div class="row">
-                <h1 class="col">List Student</h1>
+                <h1 class="col text-center">List Student</h1>
             </div>
-            <div class="row">
+            <div class="row offset-md11">
                 <div>
-                    <a href="{{route('admin.student.index')}}" class="col"><b>Student</b></a>
-                    <a href="{{route('admin.lecturer.index')}}" class="col">Lecturer</a>
-                    <a href="{{route('admin.staff.index')}}" class="col">Staff</a>
+                    <a href="{{route('admin.student.index')}}" class="col botn-set-2"><b>Student</b></a>
+                    <a href="{{route('admin.lecturer.index')}}" class="col botn-set-2">Lecturer</a>
+                    <a href="{{route('admin.staff.index')}}" class="col botn-set-2">Staff</a>
                 </div>
                 <div class="col-md-2 offset-md-10">
                     <a href="{{route('admin.student.create')}}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
