@@ -88,7 +88,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="detailfolder" style="width: 30%; float:left; margin-left: 100px; margin-top: 30px;">
+        <div class="detailfolder" style="width: 25%; float:left; margin-left: 100px; margin-top: 30px;">
                 <div class="form-event">
                     <label>Name :</label>
                     <input type="text" class="form-control" name="name" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
