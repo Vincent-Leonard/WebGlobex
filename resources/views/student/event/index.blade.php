@@ -33,8 +33,9 @@
                     aria-pressed="true">Join Group Event</a>
             </div>
         </div>
-        <div class="row" style="margin-top: 30px; width:60%; float:left; margin-left: -5px;">
-            <table class="table table-striped">
+        <div class="row" style="margin-top: 30px; width:60%; float:left; margin-left: -5px; background: white; height: 500px; overflow-y: scroll;">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for event">
+            <table class="table table-striped" id="myTable">
                 <thead>
                     <tr>
                         <th scope="col">Event</th>
@@ -48,7 +49,7 @@
                 <tbody>
                     @foreach ($events as $event)
                         <tr>
-                            <td><a href="@auth{{ route('admin.event.show', $event) }}@endauth">{{ $event->event }}</td>
+                            <td><a href="@auth{{ route('student.event.show', $event) }}@endauth">{{ $event->event }}</td>
                             @if ($event->type == 0)
                                 <td>Student Exchange</td>
                             @else
@@ -80,39 +81,86 @@
                                         Rejected
                                     @endif
                                 </td>
-                                <td>-</td>
-                                <td>-</td>
                             @endif
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
+                <table width="550px">
+                    <tr>
+                        <td width="800px" height="400px"></td>
+                </table>
         </div>
-        <div class="detailfolder" style="width: 30%; float:left; margin-left: 80px; margin-top: 30px;">
+        @if ($pages == 'index')
+            <div style="width: 25%; float:left; margin-left: 100px; margin-top: 30px; padding:30px; background: white; height: 500px; overflow-y: scroll;">
                 <div class="form-event">
-                    <label>Name :</label>
-                    <input type="text" class="form-control" name="name" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    <label>Event :</label>
+                    <input type="text" class="form-control" name="event" readonly>
                 </div>
                 <div class="form-event">
                     <label>Type :</label>
-                    <input type="text" class="form-control" name="type" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    <input type="text" class="form-control" name="type" readonly>
                 </div>
                 <div class="form-event">
                     <label>Date :</label>
-                    <input type="text" class="form-control" name="Date" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    <input type="text" class="form-control" name="date" readonly>
                 </div>
                 <div class="form-event">
                     <label>Duration :</label>
-                    <input type="text" class="form-control" name="duration" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    <input type="text" class="form-control" name="duration" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Country :</label>
+                    <input type="text" class="form-control" name="country" readonly>
                 </div>
                 <div class="form-event">
                     <label>City :</label>
-                    <input type="text" class="form-control" name="city" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    <input type="text" class="form-control" name="city" readonly>
                 </div>
                 <div class="form-event">
                     <label>Orginizer :</label>
-                    <input type="text" class="form-control" name="orginizer" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
+                    <input type="text" class="form-control" name="orginizer" readonly>
                 </div>
-        </div>
+            </div>
+        @elseif($pages == 'showit')
+            <div style="width: 25%; float:left; margin-left: 100px; margin-top: 30px; padding:30px; background: white; height: 500px; overflow-y: scroll;">
+                <div class="form-event">
+                    <label>Event :</label>
+                    <input type="text" class="form-control" name="event" value="{{ $return->event }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Type :</label>
+                    <input type="text" class="form-control" name="type" value="{{ $return->type }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Date :</label>
+                    <input type="text" class="form-control" name="date" value="{{ $return->event_date }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Duration :</label>
+                    <input type="text" class="form-control" name="duration" value="{{ $return->duration }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Country :</label>
+                    <input type="text" class="form-control" name="country" value="{{ $return->country }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>City :</label>
+                    <input type="text" class="form-control" name="city" value="{{ $return->city }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Orginizer :</label>
+                    <input type="text" class="form-control" name="orginizer" value="{{ $return->organizer }}" readonly>
+                </div>
+                <form action="{{ route('student.event.edit', $return) }}" method="GET">
+                    @csrf
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                </form>
+                <form action="{{ route('student.event.destroy', $return) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        @endif
     </div>
 @endsection
