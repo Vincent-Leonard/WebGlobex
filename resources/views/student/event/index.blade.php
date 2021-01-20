@@ -33,8 +33,9 @@
                     aria-pressed="true">Join Group Event</a>
             </div>
         </div>
-        <div class="row" style="margin-top: 30px;">
-            <table class="table table-striped">
+        <div class="row" style="margin-top: 30px; width:60%; float:left; margin-left: -5px; background: white">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for event">
+            <table class="table table-striped" id="myTable">
                 <thead>
                     <tr>
                         <th scope="col">Event</th>
@@ -42,15 +43,13 @@
                         <th scope="col">Participation</th>
                         <th scope="col">Date</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($events as $event)
                         <tr>
-                            <td><a href="@auth{{ route('admin.event.show', $event) }}@endauth">{{ $event->event }}</td>
+                            <td><a href="@auth{{ route('student.event.show', $event) }}@endauth">{{ $event->event }}</td>
                             @if ($event->type == 0)
                                 <td>Student Exchange</td>
                             @else
@@ -65,41 +64,12 @@
                             @if ($event->is_group == 0)
                                 @if ($event->status == 0)
                                     <td>Pending</td>
-                                    <td>
-                                        <form action="{{ route('student.event.edit', $event) }}" method="GET">
-                                            @csrf
-                                            <button class="btn btn-primary" type="submit">Edit</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('student.event.destroy', $event) }}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
                                 @elseif($event->status == 1)
                                     <td>Approved</td>
-                                    <td>
-                                        <form action="{{ route('student.event.edit', $event) }}" method="GET">
-                                            @csrf
-                                            <button class="btn btn-primary" type="submit">Re-Submit</button>
-                                        </form>
-                                    </td>
-                                    <td>-</td>
                                 @elseif($event->status == 2)
                                     <td>Rejected</td>
-                                    <td>-</td>
-                                    <td>-</td>
                                 @else
                                     <td>Need Revision</td>
-                                    <td>
-                                        <form action="{{ route('student.event.edit', $event) }}" method="GET">
-                                            @csrf
-                                            <button class="btn btn-primary" type="submit">Edit</button>
-                                        </form>
-                                    </td>
-                                    <td>-</td>
                                 @endif
                             @else
                                 <td>
@@ -111,45 +81,110 @@
                                         Rejected
                                     @endif
                                 </td>
-                                <td>-</td>
-                                <td>-</td>
                             @endif
                         </tr>
                     @endforeach
                 </tbody>
                 <table width="550px">
                     <tr>
-                    <td width="800px" height="400px" ></td>
-            </table>
-            <table width="400px">
-                    <tr>
-                    <td width="800px" height="400px" >
-                    <div class="form-event">
-                        <label>Name :</label>
-                        <input type="text" class="form-control" name="name" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
-                    </div>
-                    <div class="form-event">
-                        <label>Event :</label>
-                        <input type="text" class="form-control" name="event" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
-                    </div>
-                    <div class="form-event">
-                        <label>Type :</label>
-                        <input type="text" class="form-control" name="type" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
-                    </div>
-                    <div class="form-event">
-                        <label>Country :</label>
-                        <input type="text" class="form-control" name="country" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
-                    </div>
-                    <div class="form-event">
-                        <label>City :</label>
-                        <input type="text" class="form-control" name="city" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
-                    </div>
-                    <div class="form-event">
-                        <label>Orginizer :</label>
-                        <input type="text" class="form-control" name="orginizer" onmouseover="this.style.boxShadow='0px 0px 15px LightSkyBlue'" onmouseout="this.style.boxShadow='0px 0px 0px LightSkyBlue'">
-                    </div>
-                    </td>
-            </table>
+                        <td width="800px" height="400px"></td>
+                </table>
         </div>
+        @if ($pages == 'index')
+            <div style="width: 25%; float:left; margin-left: 100px; margin-top: 30px; padding:30px; background: white;">
+                <div class="form-event">
+                    <label>Event :</label>
+                    <input type="text" class="form-control" name="event" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Type :</label>
+                    <input type="text" class="form-control" name="type" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Date :</label>
+                    <input type="text" class="form-control" name="date" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Duration :</label>
+                    <input type="text" class="form-control" name="duration" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Country :</label>
+                    <input type="text" class="form-control" name="country" readonly>
+                </div>
+                <div class="form-event">
+                    <label>City :</label>
+                    <input type="text" class="form-control" name="city" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Orginizer :</label>
+                    <input type="text" class="form-control" name="orginizer" readonly>
+                </div>
+            </div>
+        @elseif($pages == 'showit')
+            <div style="width: 25%; float:left; margin-left: 100px; margin-top: 30px; padding:30px; background: white;">
+                <div class="form-event">
+                    <label>Event :</label>
+                    <input type="text" class="form-control" name="event" value="{{ $return->event }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Type :</label>
+                    <input type="text" class="form-control" name="type" value="{{ $return->type }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Date :</label>
+                    <input type="text" class="form-control" name="date" value="{{ $return->event_date }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Duration :</label>
+                    <input type="text" class="form-control" name="duration" value="{{ $return->duration }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Country :</label>
+                    <input type="text" class="form-control" name="country" value="{{ $return->country }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>City :</label>
+                    <input type="text" class="form-control" name="city" value="{{ $return->city }}" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Orginizer :</label>
+                    <input type="text" class="form-control" name="orginizer" value="{{ $return->organizer }}" readonly>
+                </div>
+                <form action="{{ route('student.event.edit', $return) }}" method="GET">
+                    @csrf
+                    <button class="btn btn-primary" type="submit">Edit</button>
+                </form>
+                <form action="{{ route('student.event.destroy', $return) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        @endif
     </div>
+
+    <script>
+        function myFunction() {
+          // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+    </script>
 @endsection

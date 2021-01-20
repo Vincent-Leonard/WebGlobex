@@ -19,8 +19,8 @@ class EventController extends Controller
     {
         $id = Auth::user()->id;
         $events = User::find($id)->attends;
-        $pages = 'event';
-        return view('student.event.index', compact('events'));
+        $pages = 'index';
+        return view('student.event.index', compact('events', 'pages'));
     }
 
     /**
@@ -77,18 +77,14 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($detail)
     {
-        $pages = 'event';
-        $event = Event::findOrFail($id);
+        $id = Auth::user()->id;
+        $events = User::find($id)->attends;
+        $pages = 'showit';
+        $return = Event::Find($detail);
 
-        $events = Event::all()->except($id)->pluck('id');
-        // $guestList = User::whereNotIn('id', function($query) use ($events) {
-        //     $query->select('user_id')->from('event_user')
-        //         ->whereNotIn('event_id', $events);
-        // })->where('role_id', 3)->get();
-
-        // return view('creator.event.detail', compact('event', 'guestList'));
+        return view('student.event.index', compact('events', 'return', 'pages'));
     }
 
     /**
@@ -97,11 +93,11 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $event)
+    public function edit($detail)
     {
         $pages = 'event';
-        $id = $event->event_id;
-        $current = Event::find($id)->users->where('lecturer_id', '<>', null)->first();
+        $event = Event::Find($detail);
+        $current = Event::find($detail)->users->where('lecturer_id', '<>', null)->first();
         $current_id = $current->id;
         $users = User::all()->where('lecturer_id', '<>', null);
         return view('student.event.editEvent', compact('event', 'pages', 'current_id', 'users'));
