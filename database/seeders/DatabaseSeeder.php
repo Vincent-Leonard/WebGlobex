@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             StudentSeeder::class,
             LecturerSeeder::class,
             UserSeeder::class,
+            UserEventSeeder::class,
         ]);
 
         Model::reguard();
