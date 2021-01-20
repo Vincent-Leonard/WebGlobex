@@ -19,7 +19,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        $pages = 'student';
+        $pages = 'index';
         return view('user.student.index', compact('students', 'pages'));
     }
 
@@ -83,10 +83,12 @@ class StudentController extends Controller
      * @param  \App\Models\Student $student
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($detail)
     {
-        $student = Student::findOrFail($id);
-        return redirect()->route('admin.student.index');
+        $students = Student::all();
+        $pages = 'showit';
+        $return = Student::Find($detail);
+        return view('user.student.index', compact('students', 'return', 'pages'));
     }
 
     /**

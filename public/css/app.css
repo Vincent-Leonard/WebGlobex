@@ -65,9 +65,9 @@ section {
 }
 
 body {
-  background: url(image/12.jpg);
+  background: url(image/BG.png);
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: cover;
   margin: 0;
   font-family: "Nunito", sans-serif;
   font-size: 0.9rem;
@@ -75,14 +75,17 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-
 }
+
+.center {
+    margin: auto;
+    width: 70%;
+  }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
 }
 
-}
 hr {
   box-sizing: content-box;
   height: 0;
@@ -1365,7 +1368,7 @@ pre code {
 .botn-set-2{
   color: black;
   text-align: center;
- 
+
 }
 @media (min-width: 992px) {
   .col-lg {
@@ -1795,7 +1798,6 @@ pre code {
   width: 100%;
   margin-bottom: 1rem;
   color: #212529;
-  background-color:#f7dce5d8 ;
 }
 
 .table th,
@@ -2693,9 +2695,18 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
+.btn-normal {
+    background-color: #3490dc;
+    border-color: #3490dc;
+    color: #fff;
+    text-align: center;
+}
+
 .btn-primary {
   color: black;
   text-align: center;
+  background-color: white;
+  border-color:  white;
 }
 
 .btn-primary:hover {

@@ -20,7 +20,7 @@ class StaffController extends Controller
     public function index()
     {
         $staffs = Staff::all();
-        $pages = 'staff';
+        $pages = 'index';
         return view('user.staff.index', compact('staffs', 'pages'));
     }
 
@@ -88,13 +88,12 @@ class StaffController extends Controller
      * @param  \App\Models\Staff  $staff
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($detail)
     {
-        $pages = 'staff';
-        $staff = Staff::findOrFail($id);
-        $departments = Department::findOrFail($staff->department_id);
-        $titles = Title::findOrFail($staff->title_id);
-        return view('user.staff.profile', compact('departments', 'titles', 'staff', 'pages'));
+        $staffs = Staff::all();
+        $pages = 'showit';
+        $return = Staff::Find($detail);
+        return view('user.staff.index', compact('staffs', 'return', 'pages'));
     }
 
     /**

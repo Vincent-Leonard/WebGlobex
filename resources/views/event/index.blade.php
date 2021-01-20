@@ -1,34 +1,19 @@
 @extends('layouts.app')
 @section('content')
-<link type="text/css" href="{{ asset('public/css/style.css') }}" rel="stylesheet">
     <div class="container" style="margin-top: 20px;">
         <div class="row">
-            <h1 class="col">List Events</h1>
+            <h1 class="col text-center"><b>Individual Event Lists</b></h1>
+        </div>
+        <div class="row offset-md11">
+            <div>
+                <a href="{{ route('admin.event.index') }}" class="col col botn-set-2" style="margin-left: 25px"><b>All Individual</b></a>
+                <a href="{{ route('admin.join.index') }}" class="col col botn-set-2">All Group</a>
+            </div>
         </div>
         <div class="row">
-            @if (Auth::user()->isStaff())
-                <div>
-                    <a href="{{ route('staff.event.index') }}" class="col">My Event List</a>
-                    <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
-                </div>
-            @endif
-            @if (Auth::user()->isLecturer())
-                <div>
-                    <a href="{{ route('lecturer.event.index') }}" class="col">My Event List</a>
-                    <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
-                </div>
-            @endif
-            @if (Auth::user()->isStudent())
-                <div>
-                    <a href="{{ route('student.event.index') }}" class="col">My Event List</a>
-                    <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
-                </div>
-            @endif
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for event" style="border: 0; border-radius: 3px">
         </div>
-        <div class="row" style="margin-top: 30px;">
+        <div class="row" style="margin-top: 10px; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -58,19 +43,19 @@
                                 <td>Group</td>
                             @endif
                             <td>{{ $event->event_date }}</td>
-                                @if ($event->status == 0)
-                                    <td>Pending</td>
-                                @elseif($event->status == 1)
-                                    <td>Approved</td>
-                                @elseif($event->status == 2)
-                                    <td>Rejected</td>
-                                @elseif($event->status == 3)
-                                    <td>Need Revision</td>
-                                @elseif ($event->status == 4)
-                                    <td>Open</td>
-                                @else
-                                    <td>Close</td>
-                                @endif
+                            @if ($event->status == 0)
+                                <td>Pending</td>
+                            @elseif($event->status == 1)
+                                <td>Approved</td>
+                            @elseif($event->status == 2)
+                                <td>Rejected</td>
+                            @elseif($event->status == 3)
+                                <td>Need Revision</td>
+                            @elseif ($event->status == 4)
+                                <td>Open</td>
+                            @else
+                                <td>Close</td>
+                            @endif
                             <td>
                                 <form action="{{ route('admin.event.destroy', $event) }}" method="post">
                                     @csrf
