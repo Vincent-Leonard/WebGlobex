@@ -65,7 +65,7 @@ section {
 }
 
 body {
-  background: url(image/Bg.png);
+  background: url(image/BG.png);
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
@@ -75,8 +75,12 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-
 }
+
+.center {
+    margin: auto;
+    width: 70%;
+  }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
@@ -87,6 +91,7 @@ hr {
   height: 0;
   overflow: visible;
 }
+
 .colms {
   border-collapse: collapse;
 
@@ -1313,7 +1318,7 @@ pre code {
   }
 
   .offset-md-1 {
-    margin-left: 8.3333333333%;
+    margin-left: 30%;
   }
 
   .offset-md-2 {
@@ -1356,7 +1361,15 @@ pre code {
     margin-left: 91.6666666667%;
   }
 }
+.offset-md11{
+  margin-left: 37%;
+  position: relative;
+}
+.botn-set-2{
+  color: black;
+  text-align: center;
 
+}
 @media (min-width: 992px) {
   .col-lg {
     flex-basis: 0;
@@ -2628,7 +2641,10 @@ textarea.form-control.is-invalid {
     margin-bottom: 0;
   }
 }
-
+.detailfolder{
+  background-color: #f7dce5d8;
+  padding:15px ;
+}
 .btn {
   display: inline-block;
   font-weight: 400;
@@ -2679,24 +2695,32 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
+.btn-normal {
+    background-color: #3490dc;
+    border-color: #3490dc;
+    color: #fff;
+    text-align: center;
+}
+
 .btn-primary {
-  color: #fff;
-  background-color: #3490dc;
-  border-color: #3490dc;
+  color: black;
+  text-align: center;
+  background-color: white;
+  border-color:  white;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #227dc7;
-  border-color: #2176bd;
+  background-color: #F55168;
+  border-color: #F55168;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #227dc7;
-  border-color: #2176bd;
-  box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5);
+  background-color: #F55168;
+  border-color: #F55168;
+  box-shadow: 0 0 0 0.2rem rgba(245, 37, 64, 0.61);
 }
 
 .btn-primary.disabled,

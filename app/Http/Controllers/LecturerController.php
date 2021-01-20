@@ -20,7 +20,7 @@ class LecturerController extends Controller
     public function index()
     {
         $lecturers = Lecturer::all();
-        $pages = 'lecturer';
+        $pages = 'index';
         return view('user.lecturer.index', compact('lecturers', 'pages'));
     }
 
@@ -88,14 +88,12 @@ class LecturerController extends Controller
      * @param  \App\Models\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($detail)
     {
-        $pages = 'lecturer';
-        $lecturer = Lecturer::findOrFail($id);
-        $departments = Department::findOrFail($lecturer->department_id);
-        $titles = Title::findOrFail($lecturer->title_id);
-        $jakas = Jaka::findOrFail($lecturer->jaka_id);
-        return view('user.lecturer.profile', compact('departments', 'titles', 'jakas', 'lecturer', 'pages'));
+        $lecturers = Lecturer::all();
+        $pages = 'showit';
+        $return = Lecturer::Find($detail);
+        return view('user.lecturer.index', compact('lecturers', 'return', 'pages'));
     }
 
     /**

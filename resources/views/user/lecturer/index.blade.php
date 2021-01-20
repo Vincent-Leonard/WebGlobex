@@ -1,56 +1,177 @@
 @extends('layouts.app')
 @section('content')
-
-        <div class="container" style="margin-top: 20px;">
-            <div class="row">
-                <h1 class="col">List Lecturer</h1>
+    <div class="container" style="margin-top: 20px;">
+        <div class="row">
+            <h1 class="col text-center"><b>List Lecturer</b></h1>
+        </div>
+        <div class="row offset-md11">
+            <div>
+                <a href="{{ route('admin.student.index') }}" class="col botn-set-2" style="margin-left: 25px">Student</a>
+                <a href="{{ route('admin.lecturer.index') }}" class="col botn-set-2"><b>Lecturer</b></a>
+                <a href="{{ route('admin.staff.index') }}" class="col botn-set-2">Staff</a>
             </div>
-            <div class="row">
-                <div>
-                    <a href="{{route('admin.student.index')}}" class="col">Student</a>
-                    <a href="{{route('admin.lecturer.index')}}" class="col"><b>Lecturer</b></a>
-                    <a href="{{route('admin.staff.index')}}" class="col">Staff</a>
-                </div>
-                <div class="col-md-2 offset-md-10">
-                    <a href="{{ route('admin.lecturer.create') }}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Tambah</a>
-                </div>
-            </div>
-            <div class="row" style="margin-top: 30px;">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Department</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($lecturers as $lecturer)
-                            <tr>
-                                <td>{{$lecturer->lecturer_id}}</td>
-                                <td><a href="{{ route('admin.lecturer.show', $lecturer) }}">{{ $lecturer->lecturer_name }}</a></td>
-                                <td>{{$lecturer->title_id}}</td>
-                                <td>{{$lecturer->department_id}}</td>
-                                <td>
-                                    <form action="{{ route('admin.lecturer.edit', $lecturer) }}" method="GET">
-                                        @csrf
-                                        <button class="btn btn-primary" type="submit">Edit</button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="{{ route('admin.lecturer.destroy', $lecturer) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <div class="col-md-2 offset-md-9">
+                <a href="{{ route('admin.lecturer.create') }}" class="btn btn-primary" role="button"
+                    aria-pressed="true">Tambah</a>
             </div>
         </div>
+        <div class="row">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for lecturer.."
+                style="border: 0; border-radius: 3px">
+        </div>
+        <div class="row"
+            style="margin-top: 10px; width:60%; float:left; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Gender</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($lecturers as $lecturer)
+                        <tr>
+                            <td>{{ $lecturer->lecturer_id }}</td>
+                            <td><a href="{{ route('admin.lecturer.show', $lecturer) }}">{{ $lecturer->lecturer_name }}</a></td>
+                            <td>{{ $lecturer->department->department_name }}</td>
+                            <td>{{ $lecturer->title->title_name }}</td>
+                            <?php
+                            if ($lecturer->lecturer_gender == 0) {
+                                $gender = 'Male';
+                            } else {
+                                $gender = 'Female';
+                            }
+                            ?>
+                            <td>{{ $gender }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        @if ($pages == 'index')
+            <div
+                style="width: 32%; float:left; margin-left: 90px; margin-top: 10px; padding:20px; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
+                <div class="form-group">
+                    <label>NIP:</label>
+                    <input type="text" class="form-control" name="nip" readonly>
+                </div>
+                <div class="form-group">
+                    <label>NIDN:</label>
+                    <input type="text" class="form-control" name="nidn" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" class="form-control" name="lecturer_name" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="text" class="form-control" name="email" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Description:</label>
+                    <input type="text" class="form-control" name="description" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <input type="text" class="form-control" name="lecturer_gender" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="number" class="form-control" name="lecturer_phone" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Line Account:</label>
+                    <input type="text" class="form-control" name="lecturer_line_account" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Admin:</label>
+                    <input type="number" class="form-control" name="is_admin" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Department:</label>
+                    <input type="number" class="form-control" name="department_id" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Title:</label>
+                    <input type="year" class="form-control" name="title_id" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Jaka:</label>
+                    <input type="year" class="form-control" name="jaka_id" readonly>
+                </div>
+            </div>
+        @elseif($pages == 'showit')
+            <div
+                style="width: 32%; float:left; margin-left: 90px; margin-top: 10px; padding:20px; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
+                <div class="form-group">
+                    <label>NIP:</label>
+                    <input type="text" class="form-control" name="email" value="{{ $return->nip }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label>NIDN:</label>
+                    <input type="text" class="form-control" name="email" value="{{ $return->nidn }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" class="form-control" name="lecturer_name" value="{{ $return->lecturer_name }}"
+                        readonly>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="text" class="form-control" name="email" value="{{ $return->lecturer_email }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Description:</label>
+                    <input type="text" class="form-control" name="description" value="{{ $return->description }}" readonly>
+                </div>
+                <?php
+                if ($return->lecturer_gender == 0) {
+                    $gender = 'Male';
+                } else {
+                    $gender = 'Female';
+                }
+                ?>
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <input type="text" class="form-control" name="lecturer_gender" value="{{ $gender }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="number" class="form-control" name="lecturer_phone" value="{{ $return->lecturer_phone }}"
+                        readonly>
+                </div>
+                <div class="form-group">
+                    <label>Line Account:</label>
+                    <input type="text" class="form-control" name="lecturer_line_account"
+                        value="{{ $return->lecturer_line_account }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Department:</label>
+                    <input type="text" class="form-control" name="department_id" value="{{ $return->department->department_name }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" class="form-control" name="title_id" value="{{ $return->title->title_name }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Jaka:</label>
+                    <input type="text" class="form-control" name="jaka_id" value="{{ $return->jaka->jaka_name }}" readonly>
+                </div>
+                <img style="height: 200px" src="/images/profile_picture/lecturer/{{ $return->lecturer_photo }}" alt="">
+                <br><br>
+                <form action="{{ route('admin.lecturer.edit', $return) }}" method="GET">
+                    @csrf
+                    <button class="btn btn-normal" type="submit" style="float: left; margin-right: 10px">Edit</button>
+                </form>
+                <form action="{{ route('admin.lecturer.destroy', $return) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        @endif
+    </div>
 @endsection
