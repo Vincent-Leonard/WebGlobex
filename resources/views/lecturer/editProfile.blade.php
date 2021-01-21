@@ -10,8 +10,12 @@
                 @csrf
                     <input type="hidden" name="_method" value="PATCH"/>
                     <div class="form-group">
-                        <label>NIM:</label>
-                        <input type="text" class="form-control" name="nim" value="{{ $user->lecturer->nim }}" readonly>
+                        <label>NIP:</label>
+                        <input type="text" class="form-control" name="nim" value="{{ $user->lecturer->nip }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>NIDN:</label>
+                        <input type="text" class="form-control" name="nim" value="{{ $user->lecturer->nidn }}" readonly>
                     </div>
                     <div class="form-group">
                         <label>Name:</label>
@@ -20,10 +24,6 @@
                     <div class="form-group">
                         <label>Email:</label>
                         <input type="text" class="form-control" name="email" value="{{ $user->lecturer->lecturer_email }}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Batch:</label>
-                        <input type="year" class="form-control" name="batch" value="{{ $user->lecturer->batch }}" readonly>
                     </div>
                     <div class="form-group">
                         <label>Description:</label>
@@ -55,7 +55,15 @@
                     </div>
                     <div class="form-group">
                         <label>Department:</label>
-                        <input type="text" class="form-control" name="lecturer_line_account" value="{{ $user->lecturer->department->department_name.' ('. $user->lecturer->department->initial.')' }}" readonly>
+                        <input type="text" class="form-control" name="department" value="{{ $user->lecturer->department->department_name.' ('. $user->lecturer->department->initial.')' }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" class="form-control" name="title" value="{{ $user->lecturer->title->title_name }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Jaka:</label>
+                        <input type="text" class="form-control" name="jaka" value="{{ $user->lecturer->jaka->jaka_name }}" readonly>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-secondary">Submit</button>

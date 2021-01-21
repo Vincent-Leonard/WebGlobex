@@ -7,9 +7,10 @@
             </div>
             <br>
             <div style="float:left">
-                <img src="/images/profile_picture/lecturer/{{ $user->lecturer->lecturer_photo }}" style="height: 200px" alt="">
+                <img src="/images/profile_picture/lecturer/{{ $user->lecturer->lecturer_photo }}" style="height: 200px"
+                    alt="">
             </div>
-            <div style="border-left: 2px solid black; height: 490px; float: left; margin-left: 50px; margin-right: 30px">
+            <div style="border-left: 2px solid black; height: 590px; float: left; margin-left: 50px; margin-right: 30px">
             </div>
             <div class="row" style="font-size: 16px;">
                 <div class="col">
@@ -24,18 +25,18 @@
                     <br>
                     <div class="row">
                         <div class="col-md-3">
-                            NIM
+                            NIP
                         </div>
                         <div class="col-md-9">
-                            : {{ $user->lecturer->nim }}
+                            : {{ $user->lecturer->nip }}
                         </div>
                     </div><br>
                     <div class="row">
                         <div class="col-md-3">
-                            Batch
+                            NIDN
                         </div>
                         <div class="col-md-9">
-                            : {{ $user->lecturer->batch }}
+                            : {{ $user->lecturer->nidn }}
                         </div>
                     </div><br>
                     <div class="row">
@@ -91,6 +92,22 @@
                         </div>
                         <div class="col-md-9">
                             : {{ $user->lecturer->department->department_name }}
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Title
+                        </div>
+                        <div class="col-md-9">
+                            : {{ $user->lecturer->title->title_name }}
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Jaka
+                        </div>
+                        <div class="col-md-9">
+                            : {{ $user->lecturer->jaka->jaka_name }}
                         </div>
                     </div>
                     <br>

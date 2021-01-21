@@ -51,11 +51,11 @@
                     </div>
                     <div class="form-group">
                         <label>Department:</label>
-                        <input type="text" class="form-control" name="staff_line_account" value="{{ $user->staff->department->department_name.' ('. $user->staff->department->initial.')' }}" readonly>
+                        <input type="text" class="form-control" name="department" value="{{ $user->staff->department->department_name.' ('. $user->staff->department->initial.')' }}" readonly>
                     </div>
                     <div class="form-group">
                         <label>Title:</label>
-                        <input type="text" class="form-control" name="staff_line_account" value="{{ $user->staff->title->title_name }}" readonly>
+                        <input type="text" class="form-control" name="title" value="{{ $user->staff->title->title_name }}" readonly>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-secondary">Submit</button>

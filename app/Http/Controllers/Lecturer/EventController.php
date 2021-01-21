@@ -30,7 +30,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        $users = User::all()->where('lecturer_id', '<>', null);
+        $users = User::all()->where('student_id', '<>', null);
         return view('lecturer.event.addEvent', compact('users'));
     }
 
@@ -94,9 +94,9 @@ class EventController extends Controller
     public function edit($detail)
     {
         $event = Event::Find($detail);
-        $current = $event->users->where('lecturer_id', '<>', null)->first();
+        $current = $event->users->where('student_id', '<>', null)->first();
         $current_id = $current->id;
-        $users = User::all()->where('lecturer_id', '<>', null);
+        $users = User::all()->where('student_id', '<>', null);
         return view('lecturer.event.editEvent', compact('event', 'current_id', 'users'));
     }
 
@@ -133,7 +133,7 @@ class EventController extends Controller
             }
         }
 
-        $current_lecturer = Event::find($event->event_id)->users->where('lecturer_id', '<>', null)->first();
+        $current_lecturer = Event::find($event->event_id)->users->where('student_id', '<>', null)->first();
         $event->users()->where('user_id', $current_lecturer->id)->update([
             'user_id' => $request->user_id
         ]);
