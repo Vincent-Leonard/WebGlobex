@@ -153,7 +153,7 @@
                 @else
                     <img style="width: 100%;" src="/images/event/group/{{ $return->file }}" alt="">
                     <br><br>
-                    <form action="{{ route('lecturer.event.destroy', $return) }}" method="post">
+                    <form action="{{ route('lecturer.event.remove', $return) }}" method="post">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="btn btn-danger">Remove</button>

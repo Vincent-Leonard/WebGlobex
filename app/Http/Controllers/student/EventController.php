@@ -153,4 +153,11 @@ class EventController extends Controller
         $event->delete();
         return redirect()->route('student.event.index');
     }
+
+    public function remove(Event $event)
+    {
+        $user = Auth::user()->id;
+        $event->users()->where('user_id', $user)->detach();
+        return redirect()->route('student.event.index');
+    }
 }

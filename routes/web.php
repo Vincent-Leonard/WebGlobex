@@ -48,6 +48,7 @@ Route::group(['middleware' => 'staff', 'prefix' => 'staff', 'as' => 'staff.'], f
 
 Route::group(['middleware' => 'lecturer','prefix' => 'lecturer', 'as' => 'lecturer.'], function () {
     Route::resource('event', LecturerEventController::class);
+    Route::delete('remove/{event}', [LecturerEventController::class, 'remove'])->name('event.remove');
     Route::resource('user', LecturerUserController::class);
     Route::resource('join', LecturerJoinEventController::class);
     Route::post('join/group', [LecturerJoinEventController::class, 'join'])->name('join.group');
@@ -55,6 +56,7 @@ Route::group(['middleware' => 'lecturer','prefix' => 'lecturer', 'as' => 'lectur
 
 Route::group(['middleware' => 'student','prefix' => 'student', 'as' => 'student.'], function () {
     Route::resource('event', StudentEventController::class);
+    Route::delete('remove/{event}', [StudentEventController::class, 'remove'])->name('event.remove');
     Route::resource('user', StudentUserController::class);
     Route::resource('join', StudentJoinEventController::class);
     Route::post('join/group', [StudentJoinEventController::class, 'join'])->name('join.group');
