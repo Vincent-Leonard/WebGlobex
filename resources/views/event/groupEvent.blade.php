@@ -6,7 +6,7 @@
         </div>
         <div class="row offset-md11">
             <div>
-                <a href="{{ route('admin.individual.index') }}" class="col col botn-set-2" style="margin-left: 25px">All
+                <a href="{{ route('admin.individual.index') }}" class="col col botn-set-2" style="margin-left: 30px">All
                     Individual</a>
                 <a href="{{ route('admin.group.index') }}" class="col col botn-set-2"><b>All Group</b></a>
             </div>
@@ -143,7 +143,7 @@
                     <td>
                         <form action="{{ route('admin.group.open') }}" method="POST">
                             {{ csrf_field() }}
-                            <input name="id" type="hidden" value="{{ $event->event_id }}">
+                            <input name="id" type="hidden" value="{{ $return->event_id }}">
                             <button class="btn btn-normal btn-circle" title="Open" type="submit" style="float: left; margin-right: 10px;">Open</button>
                         </form>
                     </td>
@@ -151,14 +151,14 @@
                     <td>
                         <form action="{{ route('admin.group.close') }}" method="POST">
                             {{ csrf_field() }}
-                            <input name="id" type="hidden" value="{{ $event->event_id }}">
+                            <input name="id" type="hidden" value="{{ $return->event_id }}">
                             <button class="btn btn-danger btn-circle" title="Close" type="submit" style="float: left; margin-right: 10px;">Close</button>
                         </form>
                     </td>
                 @endif
-                <form action="{{ route('admin.join.edit', $event) }}" method="GET">
+                <form action="{{ route('admin.join.edit', $return) }}" method="GET">
                     @csrf
-                    <button class="btn btn-primary" type="submit">Details</button>
+                    <button class="btn btn-secondary" type="submit">Participants</button>
                 </form>
             </div>
         @endif

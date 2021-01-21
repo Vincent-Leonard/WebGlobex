@@ -77,8 +77,8 @@ Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], fu
     Route::post('group/close', [GroupEventController::class, 'close'])->name('group.close');
 
     Route::resource('join', ApproveJoinController::class);
-    Route::post('join/{id}/acceptStudent', [ApproveJoinController::class, 'acceptStudent'])->name('event.acceptStudent');
-    Route::post('join/{id}/rejectStudent', [ApproveJoinController::class, 'rejectStudent'])->name('event.rejectStudent');
+    Route::post('join/{id}/acceptStudent', [ApproveJoinController::class, 'acceptStudent'])->name('join.acceptStudent');
+    Route::post('join/{id}/rejectStudent', [ApproveJoinController::class, 'rejectStudent'])->name('join.rejectStudent');
 });
 
 Auth::routes();

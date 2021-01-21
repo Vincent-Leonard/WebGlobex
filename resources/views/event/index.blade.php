@@ -6,7 +6,7 @@
         </div>
         <div class="row offset-md11">
             <div>
-                <a href="{{ route('admin.individual.index') }}" class="col col botn-set-2" style="margin-left: 25px"><b>All
+                <a href="{{ route('admin.individual.index') }}" class="col col botn-set-2" style="margin-left: 30px"><b>All
                         Individual</b></a>
                 <a href="{{ route('admin.group.index') }}" class="col col botn-set-2">All Group</a>
             </div>

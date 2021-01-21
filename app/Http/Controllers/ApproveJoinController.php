@@ -100,7 +100,6 @@ class ApproveJoinController extends Controller
     {
         $user = User::findOrFail($id);
         $event = $user->attends->where('event_id', '=', $request->event_id)->first();
-        // dd($event);
         $event->pivot->update([
             'is_approved' => '2',
         ]);
