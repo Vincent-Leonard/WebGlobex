@@ -10,24 +10,20 @@
                 @csrf
                     <input type="hidden" name="_method" value="PATCH"/>
                     <div class="form-group">
-                        <label>NIM:</label>
-                        <input type="text" class="form-control" name="nim" value="{{ $user->staff->nim }}" required>
+                        <label>NIDN:</label>
+                        <input type="text" class="form-control" name="nidn" value="{{ $user->staff->nidn }}" readonly>
                     </div>
                     <div class="form-group">
                         <label>Name:</label>
-                        <input type="text" class="form-control" name="staff_name" value="{{ $user->staff->staff_name }}" required>
+                        <input type="text" class="form-control" name="staff_name" value="{{ $user->staff->staff_name }}" readonly>
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
                         <input type="text" class="form-control" name="email" value="{{ $user->staff->staff_email }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label>Batch:</label>
-                        <input type="year" class="form-control" name="batch" value="{{ $user->staff->batch }}" required>
-                    </div>
-                    <div class="form-group">
                         <label>Description:</label>
-                        <input type="text" class="form-control" name="description" value="{{ $user->staff->description }}" required>
+                        <input type="text" class="form-control" name="description" value="{{ $user->staff->description }}" readonly>
                     </div>
                     <img style="height: 200px" src="/images/profile_picture/staff/{{$user->staff->staff_photo}}" alt="">
                     <div class="form-group">
@@ -37,19 +33,13 @@
                     <div class="form-group">
                         <label>Gender:</label>
                         <?php
-                        $selected_male = '';
-                        if ( $user->staff->staff_gender == "0" ) {
-                            $selected_male = 'selected';
-                        }
-                        $selected_female = '';
-                        if ( $user->staff->staff_gender == "1" ) {
-                            $selected_female = 'selected';
-                        }
+                            if($user->staff->staff_gender == 0){
+                                $gender = "Male";
+                            }else{
+                                $gender = "Female";
+                            }
                         ?>
-                        <select name="staff_gender" class="custom-select">
-                            <option value="0" {{ $selected_male }}>Male</option>
-                            <option value="1" {{ $selected_female }}>Female</option>
-                        </select>
+                        <input type="text" class="form-control" name="staff_line_account" value="{{ $gender }}" readonly>
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
@@ -61,20 +51,14 @@
                     </div>
                     <div class="form-group">
                         <label>Department:</label>
-                        <select name="department_id" class="custom-select">
-                            @foreach($departments as $department)
-                            <?php
-                            $selected = '';
-                            if ( $user->staff->department_id == $department->department_id ) {
-                                $selected = 'selected';
-                            }
-                            ?>
-                            <option value="{{ $department->department_id }}" {{ $selected }}>{{$department->department_id.'. '. $department->department_name .'('. $department->initial .')' }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control" name="staff_line_account" value="{{ $user->staff->department->department_name.' ('. $user->staff->department->initial.')' }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" class="form-control" name="staff_line_account" value="{{ $user->staff->title->title_name }}" readonly>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-secondary">Submit</button>
                 </form>
             </div>
         </div>

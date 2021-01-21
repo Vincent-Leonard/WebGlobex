@@ -84,7 +84,7 @@ class LoginController extends Controller
             return redirect()->route('home');
         } elseif(Auth::attempt($staffadmin)){
             $this->isLogin(Auth::id());
-            return redirect()->route('admin.event.index');
+            return redirect()->route('admin.individual.index');
         }
 
 

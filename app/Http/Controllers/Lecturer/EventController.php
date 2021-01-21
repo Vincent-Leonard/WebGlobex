@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Lecturer;
+namespace App\Http\Controllers\lecturer;
 
 use App\Models\Event;
 use App\Models\User;
@@ -18,13 +18,9 @@ class EventController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-        // $events = Event::select('*')->from('user_event')->where('user_id', $id)->get();
-        // $events = Event::find(8);
-        // dd($events->users);
-        $events = User::find($id)->events;
-        // dd($events);
-        $pages = 'event';
-        return view('lecturer.event.index', compact('events'));
+        $events = User::find($id)->attends;
+        $pages = 'index';
+        return view('lecturer.event.index', compact('events', 'pages'));
     }
 
     /**
@@ -34,9 +30,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        $pages = 'event';
-        $users = User::all()->where('student_id', '<>', null);
-        return view('lecturer.event.addEvent', compact('pages', 'users'));
+        $users = User::all()->where('lecturer_id', '<>', null);
+        return view('lecturer.event.addEvent', compact('users'));
     }
 
     /**
@@ -47,7 +42,29 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $event = Event::create($request->except(['user_id']));
+        $data = $request->validate([
+            'file' => 'image',
+        ]);
+
+        if ($request->has('file')) {
+            $file_name = time() . '-' . $data['file']->getClientOriginalName();
+            $request->file->move(public_path('images\event\individual'), $file_name);
+        } else {
+            $file_name = null;
+        }
+
+        $event = Event::create([
+            'event' => $request->event,
+            'type' => $request->type,
+            'is_group' => $request->is_group,
+            'event_date' => $request->event_date,
+            'duration' => $request->duration,
+            'country' => $request->country,
+            'city' => $request->city,
+            'organizer' => $request->organizer,
+            'file' => $file_name,
+        ]);
+
         $event->users()->attach($request->user_id);
         $event->users()->attach(Auth::user()->id);
         return redirect()->route('lecturer.event.index');
@@ -59,18 +76,13 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($detail)
     {
-        $pages = 'event';
-        $event = Event::findOrFail($id);
-
-        $events = Event::all()->except($id)->pluck('id');
-        // $guestList = User::whereNotIn('id', function($query) use ($events) {
-        //     $query->select('user_id')->from('event_user')
-        //         ->whereNotIn('event_id', $events);
-        // })->where('role_id', 3)->get();
-
-        // return view('creator.event.detail', compact('event', 'guestList'));
+        $id = Auth::user()->id;
+        $events = User::find($id)->attends;
+        $pages = 'showit';
+        $return = Event::Find($detail);
+        return view('lecturer.event.index', compact('events', 'return', 'pages'));
     }
 
     /**
@@ -79,11 +91,13 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $event)
+    public function edit($detail)
     {
-        $pages = 'event';
-        $users = User::all();
-        return view('lecturer.event.editEvent', ['model' => $event], compact('event', 'pages'));
+        $event = Event::Find($detail);
+        $current = $event->users->where('lecturer_id', '<>', null)->first();
+        $current_id = $current->id;
+        $users = User::all()->where('lecturer_id', '<>', null);
+        return view('lecturer.event.editEvent', compact('event', 'current_id', 'users'));
     }
 
     /**
@@ -95,7 +109,35 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        $event->update($request->all());
+        $event->update([
+            'event' => $request->event,
+            'type' => $request->type,
+            'event_date' => $request->event_date,
+            'duration' => $request->duration,
+            'country' => $request->country,
+            'city' => $request->city,
+            'organizer' => $request->organizer,
+            'status' => '0',
+        ]);
+
+        if ($request->file != null) {
+            $data = $request->validate([
+                'file' => 'image',
+            ]);
+            if ($request->has('file')) {
+                $file_name = time() . '-' . $data['file']->getClientOriginalName();
+                $request->file->move(public_path('images\event\individual'), $file_name);
+                $event->update([
+                    'file' => $file_name
+                ]);
+            }
+        }
+
+        $current_lecturer = Event::find($event->event_id)->users->where('lecturer_id', '<>', null)->first();
+        $event->users()->where('user_id', $current_lecturer->id)->update([
+            'user_id' => $request->user_id
+        ]);
+
         return redirect()->route('lecturer.event.index');
     }
 
@@ -107,28 +149,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        $event->users()->detach();
         $event->delete();
         return redirect()->route('lecturer.event.index');
-    }
-
-    public function approve(Request $request)
-    {
-        $event = Event::findOrFail($request->id);
-        $event->update(['status' => '1']);
-        return redirect()->back()->with('Success', 'Event Approved');
-    }
-
-    public function reject(Request $request)
-    {
-        $event = Event::findOrFail($request->id);
-        $event->update(['status' => '2']);
-        return redirect()->back()->with('Success', 'Event Rejected');
-    }
-
-    public function revise(Request $request)
-    {
-        $event = Event::findOrFail($request->id);
-        $event->update(['status' => '3']);
-        return redirect()->back()->with('Success', 'Event Needs Revision');
     }
 }

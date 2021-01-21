@@ -41,22 +41,8 @@
                     @auth
                         <ul class="navbar-nav mr-auto">
                             @if (Auth::user()->isStaff() && Auth::user()->isAdmin())
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        Event List
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                                        @auth
-                                            <a class="dropdown-item" href="{{ route('lecturer.event.index') }}">
-                                                My Events
-                                            </a>
-                                            <a class="dropdown-item" href="{{ route('admin.event.index') }}">
-                                                All Events List
-                                            </a>
-                                        @endauth
-                                    </div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.individual.index') }}">All Event List</a>
                                 </li>
                             @endif
 
@@ -73,7 +59,7 @@
                                                 <a class="dropdown-item" href="{{ route('lecturer.event.index') }}">
                                                     My Events
                                                 </a>
-                                                <a class="dropdown-item" href="{{ route('admin.event.index') }}">
+                                                <a class="dropdown-item" href="{{ route('admin.individual.index') }}">
                                                     All Events List
                                                 </a>
                                             @endauth
@@ -99,7 +85,7 @@
                                                 <a class="dropdown-item" href="{{ route('student.event.index') }}">
                                                     My Events
                                                 </a>
-                                                <a class="dropdown-item" href="{{ route('admin.event.index') }}">
+                                                <a class="dropdown-item" href="{{ route('admin.individual.index') }}">
                                                     All Events List
                                                 </a>
                                             @endauth

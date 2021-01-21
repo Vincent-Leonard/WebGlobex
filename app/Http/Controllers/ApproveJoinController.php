@@ -16,9 +16,7 @@ class ApproveJoinController extends Controller
      */
     public function index()
     {
-        $events = Event::all()->where('is_group', 1);
-        $pages = 'join';
-        return view('event.groupEvent', compact('events'));
+        //
     }
 
     /**
@@ -61,13 +59,7 @@ class ApproveJoinController extends Controller
      */
     public function edit($id)
     {
-        // $pages = 'event';
-        // $id = $event->event_id;
-        // $current = Event::find($id)->users->where('lecturer_id', '<>', null)->first();
-        // $current_id = $current->id;
-        // $users = User::all()->where('lecturer_id', '<>', null);
         $events = Event::find($id);
-        // dd($users);
         return view('event.listParticipant', compact('events'));
     }
 

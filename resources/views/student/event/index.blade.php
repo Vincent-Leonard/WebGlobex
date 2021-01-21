@@ -10,12 +10,12 @@
                     aria-pressed="true">Create Individual Event</a>
             </div>
             <div class="col-md-2" style="margin: auto;">
-                <a href="{{ route('student.group.index') }}" class="btn btn-primary" role="button" aria-pressed="true">Join
+                <a href="{{ route('student.join.index') }}" class="btn btn-primary" role="button" aria-pressed="true">Join
                     Group Event</a>
             </div>
         </div>
         <div class="row">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for event" style="border: 0; border-radius: 3px">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for event.." style="border: 0; border-radius: 3px">
         </div>
         <div class="row" style="margin-top: 10px; width:60%; float:left; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
             <table class="table table-striped" id="myTable">
@@ -139,7 +139,7 @@
                     <input type="text" class="form-control" name="orginizer" value="{{ $return->organizer }}" readonly>
                 </div>
                 @if ($event->is_group == 0)
-                    <img style="height: 100%;" src="/images/event/individual/{{ $return->file }}" alt="">
+                    <img style="width: 100%;" src="/images/event/individual/{{ $return->file }}" alt="">
                     <br><br>
                     <form action="{{ route('student.event.edit', $return) }}" method="GET">
                         @csrf
@@ -162,7 +162,6 @@
             </div>
         @endif
     </div>
-
     <script>
         function myFunction() {
           // Declare variables

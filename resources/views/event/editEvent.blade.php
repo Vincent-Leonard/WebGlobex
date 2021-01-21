@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{route('admin.event.update', $event)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('admin.individual.update', $event)}}" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <input name="_method" type="hidden" value="PATCH">
                     <div class="form-group">
@@ -14,7 +14,7 @@
                         <input type="text" class="form-control" id="event" name="event" value="{{ $event->event }}">
                     </div>
                     <div class="form-group">
-                        <label for="user">Type:</label>
+                        <label>Type:</label>
                         <select name = "type" class = "custom-select">
                             @if($event->type == "0")
                                 <option value="0" selected>Student Exchange</option>

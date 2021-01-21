@@ -50,8 +50,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $pages = 'user';
-        return view('student.profile', compact('user', 'pages'));
+        return view('student.profile', compact('user'));
     }
 
     /**
@@ -62,9 +61,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $pages = 'user';
-        $departments = Department::all();
-        return view('student.editProfile', compact('user', 'departments', 'pages'));
+        return view('student.editProfile', compact('user'));
     }
 
     /**

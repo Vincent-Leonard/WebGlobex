@@ -19,14 +19,14 @@ class EventSeeder extends Seeder
         $event = new Event();
         $event->event = 'Japan Student Exchange';
         $event->type = '0';
-        $event->is_group = '0';
+        $event->is_group = '1';
         $event->event_date = Carbon::parse('2020-05-07');
         $event->duration = '6 months';
         $event->country = 'Japan';
         $event->city = 'Osaka';
         $event->organizer = 'L.E.O';
         $event->file = 'japan.jpg';
-        $event->status = '0';
+        $event->status = '4';
         $event->save();
 
         $event = new Event();
