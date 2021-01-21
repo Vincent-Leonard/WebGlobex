@@ -84,3 +84,4 @@ Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], fu
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/help', [App\Http\Controllers\HomeController::class, 'help'])->name('help');

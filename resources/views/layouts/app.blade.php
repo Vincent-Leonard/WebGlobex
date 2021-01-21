@@ -103,6 +103,10 @@
                                     <a class="nav-link" href="{{ route('admin.student.index') }}">User List</a>
                                 </li>
                             @endif
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('help') }}">Help</a>
+                            </li>
                         </ul>
                     @endauth
 
