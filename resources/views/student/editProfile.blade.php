@@ -55,10 +55,10 @@
                     </div>
                     <div class="form-group">
                         <label>Department:</label>
-                        <input type="text" class="form-control" name="student_line_account" value="{{ $user->student->department->department_name.' ('. $user->student->department->initial.')' }}" readonly>
+                        <input type="text" class="form-control" name="department" value="{{ $user->student->department->department_name.' ('. $user->student->department->initial.')' }}" readonly>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-secondary">Submit</button>
                 </form>
             </div>
         </div>

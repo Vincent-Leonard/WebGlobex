@@ -6,12 +6,12 @@
         </div>
         <div class="row">
             <div class="col">
-            <form action="{{route('lecturer.event.update', $model->event_id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('lecturer.event.update', $event)}}" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <input name="_method" type="hidden" value="PATCH">
                     <div class="form-group">
                         <label for="nama">Event:</label>
-                        <input type="text" class="form-control" id="event" name="event" value="{{ $event->event }}">
+                        <input type="text" class="form-control" id="event" name="event" value="{{ $event->event }}" required>
                     </div>
                     <div class="form-group">
                         <label for="user">Type:</label>
@@ -26,20 +26,34 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Student:</label>
+                        <select name="user_id" class="custom-select">
+                            @foreach($users as $user)
+                            <?php
+                            $selected = '';
+                            if ( $current_id == $user->id ) {
+                                $selected = 'selected';
+                            }
+                            ?>
+                            <option value="{{ $user->id }}" {{ $selected }}>{{ $user->student->student_id.'. '. $user->student->student_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="nama">Date:</label>
-                        <input type="date" class="form-control" id="date" name="event_date" value="{{ $event->event_date }}">
+                        <input type="date" class="form-control" id="date" name="event_date" value="{{ $event->event_date }}" required>
                     </div>
                     <div class="form-group">
                         <label for="barcode">Duration:</label>
-                        <input type="text" class="form-control" id="duration" name="duration" value="{{ $event->duration }}">
+                        <input type="text" class="form-control" id="duration" name="duration" value="{{ $event->duration }}" required>
                     </div>
                     <div class="form-group">
                         <label for="nama">Country:</label>
-                        <input type="text" class="form-control" id="country" name="country" value="{{ $event->country }}">
+                        <input type="text" class="form-control" id="country" name="country" value="{{ $event->country }}" required>
                     </div>
                     <div class="form-group">
                         <label for="barcode">City:</label>
-                        <input type="text" class="form-control" id="city" name="city" value="{{ $event->city }}">
+                        <input type="text" class="form-control" id="city" name="city" value="{{ $event->city }}" required>
                     </div>
                     <div class="form-group">
                         <label for="barcode">Organizer:</label>

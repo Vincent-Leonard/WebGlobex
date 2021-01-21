@@ -1,114 +1,181 @@
 @extends('layouts.app')
 @section('content')
-<link type="text/css" href="{{ asset('public/css/style.css') }}" rel="stylesheet">
     <div class="container" style="margin-top: 20px;">
         <div class="row">
-            <h1 class="col">List Events</h1>
+            <h1 class="col text-center"><b>Individual Event Lists</b></h1>
+        </div>
+        <div class="row offset-md11">
+            <div>
+                <a href="{{ route('admin.individual.index') }}" class="col col botn-set-2" style="margin-left: 25px"><b>All
+                        Individual</b></a>
+                <a href="{{ route('admin.group.index') }}" class="col col botn-set-2">All Group</a>
+            </div>
         </div>
         <div class="row">
-            @if (Auth::user()->isStaff())
-                <div>
-                    <a href="{{ route('staff.event.index') }}" class="col">My Event List</a>
-                    <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
-                </div>
-            @endif
-            @if (Auth::user()->isLecturer())
-                <div>
-                    <a href="{{ route('lecturer.event.index') }}" class="col">My Event List</a>
-                    <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
-                </div>
-            @endif
-            @if (Auth::user()->isStudent())
-                <div>
-                    <a href="{{ route('student.event.index') }}" class="col">My Event List</a>
-                    <a href="{{ route('admin.event.index') }}" class="col"><b>All Event List</b></a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
-                </div>
-            @endif
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for event.."
+                style="border: 0; border-radius: 3px">
         </div>
-        <div class="row" style="margin-top: 30px;">
-            <table class="table table-striped">
+        <div class="row"
+            style="margin-top: 10px; width:60%; float:left; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
+            <table class="table table-striped" id="myTable">
                 <thead>
                     <tr>
                         <th scope="col">Event</th>
                         <th scope="col">Type</th>
-                        <th scope="col">Participation</th>
                         <th scope="col">Date</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Delete</th>
-                        <th scope="col">Approve</th>
-                        <th scope="col">Reject</th>
-                        <th scope="col">Revise</th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($events as $event)
                         <tr>
-                            <td><a href="@auth{{ route('admin.event.show', $event) }}@endauth">{{ $event->event }}</td>
+                            <td><a href="@auth{{ route('admin.individual.show', $event) }}@endauth">{{ $event->event }}</td>
                             @if ($event->type == 0)
                                 <td>Student Exchange</td>
                             @else
                                 <td>Student Excursion</td>
                             @endif
-                            @if ($event->is_group == 0)
-                                <td>Individual</td>
-                            @else
-                                <td>Group</td>
-                            @endif
                             <td>{{ $event->event_date }}</td>
-                                @if ($event->status == 0)
-                                    <td>Pending</td>
-                                @elseif($event->status == 1)
-                                    <td>Approved</td>
-                                @elseif($event->status == 2)
-                                    <td>Rejected</td>
-                                @elseif($event->status == 3)
-                                    <td>Need Revision</td>
-                                @elseif ($event->status == 4)
-                                    <td>Open</td>
-                                @else
-                                    <td>Close</td>
-                                @endif
+                            @if ($event->status == 0)
+                                <td>Pending</td>
+                            @elseif($event->status == 1)
+                                <td>Approved</td>
+                            @elseif($event->status == 2)
+                                <td>Rejected</td>
+                            @elseif($event->status == 3)
+                                <td>Need Revision</td>
+                            @elseif ($event->status == 4)
+                                <td>Open</td>
+                            @else
+                                <td>Close</td>
+                            @endif
                             <td>
-                                <form action="{{ route('admin.event.destroy', $event) }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                <form action="{{ route('admin.individual.edit', $event) }}" method="GET">
+                                    {{ csrf_field() }}
+                                    <button class="btn btn-secondary" type="submit">Edit</button>
                                 </form>
                             </td>
-                            @if ($event->status == 0)
-                                <td>
-                                    <form action="{{ route('admin.event.approve') }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <input name="id" type="hidden" value="{{ $event->event_id }}">
-                                        <button class="btn btn-success btn-circle" title="Approve" type="submit"></button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="{{ route('admin.event.reject') }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <input name="id" type="hidden" value="{{ $event->event_id }}">
-                                        <button class="btn btn-danger btn-circle" title="Reject" type="submit"></button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="{{ route('admin.event.revise') }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <input name="id" type="hidden" value="{{ $event->event_id }}">
-                                        <button class="btn btn-warning btn-circle" title="Revise" type="submit"></button>
-                                    </form>
-                                </td>
-                            @else
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            @endif
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+        @if ($pages == 'index')
+            <div
+                style="width: 32%; float:left; margin-left: 90px; margin-top: 10px; padding:20px; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
+                <div class="form-event">
+                    <label>Event :</label>
+                    <input type="text" class="form-control" name="event" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Type :</label>
+                    <input type="text" class="form-control" name="type" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Date :</label>
+                    <input type="text" class="form-control" name="date" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Duration :</label>
+                    <input type="text" class="form-control" name="duration" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Country :</label>
+                    <input type="text" class="form-control" name="country" readonly>
+                </div>
+                <div class="form-event">
+                    <label>City :</label>
+                    <input type="text" class="form-control" name="city" readonly>
+                </div>
+                <div class="form-event">
+                    <label>Orginizer :</label>
+                    <input type="text" class="form-control" name="orginizer" readonly>
+                </div>
+            </div>
+        @elseif($pages == 'showit')
+            <div
+                style="width: 32%; float:left; margin-left: 90px; margin-top: 10px; padding:20px; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
+                <div class="form-event" style="margin-bottom: 10px;">
+                    <label>Event :</label>
+                    <input type="text" class="form-control" name="event" value="{{ $return->event }}" readonly>
+                </div>
+                <?php if ($return->type == 0) {
+                $type = 'Student Exchange';
+                } else {
+                $type = 'Student Excursion';
+                } ?>
+                <div class="form-event" style="margin-bottom: 10px;">
+                    <label>Type :</label>
+                    <input type="text" class="form-control" name="type" value="{{ $type }}" readonly>
+                </div>
+                <div class="form-event" style="margin-bottom: 10px;">
+                    <label>Date :</label>
+                    <input type="text" class="form-control" name="date" value="{{ $return->event_date }}" readonly>
+                </div>
+                <div class="form-event" style="margin-bottom: 10px;">
+                    <label>Duration :</label>
+                    <input type="text" class="form-control" name="duration" value="{{ $return->duration }}" readonly>
+                </div>
+                <div class="form-event" style="margin-bottom: 10px;">
+                    <label>Country :</label>
+                    <input type="text" class="form-control" name="country" value="{{ $return->country }}" readonly>
+                </div>
+                <div class="form-event" style="margin-bottom: 10px;">
+                    <label>City :</label>
+                    <input type="text" class="form-control" name="city" value="{{ $return->city }}" readonly>
+                </div>
+                <div class="form-event" style="margin-bottom: 10px;">
+                    <label>Orginizer :</label>
+                    <input type="text" class="form-control" name="orginizer" value="{{ $return->organizer }}" readonly>
+                </div>
+                @if ($return->is_group == 0)
+                    <img style="width: 100%;" src="/images/event/individual/{{ $return->file }}" alt="">
+                @else
+                    <img style="width: 100%;" src="/images/event/group/{{ $return->file }}" alt="">
+                @endif
+                <br><br>
+                @if ($return->status == 0)
+                    <form action="{{ route('admin.individual.approve') }}" method="POST">
+                        {{ csrf_field() }}
+                        <input name="id" type="hidden" value="{{ $return->event_id }}">
+                        <button class="btn btn-success btn-circle" title="Approve" type="submit" style="float: left; margin-right: 10px;">Approve</button>
+                    </form>
+                    <form action="{{ route('admin.individual.reject') }}" method="POST">
+                        {{ csrf_field() }}
+                        <input name="id" type="hidden" value="{{ $return->event_id }}">
+                        <button class="btn btn-danger btn-circle" title="Reject" type="submit" style="float: left; margin-right: 10px;">Reject</button>
+                    </form>
+                    <form action="{{ route('admin.individual.revise') }}" method="POST">
+                        {{ csrf_field() }}
+                        <input name="id" type="hidden" value="{{ $return->event_id }}">
+                        <button class="btn btn-warning btn-circle" title="Revise" type="submit" style="float:left; margin-right: 10px">Revision</button>
+                    </form>
+                @endif
+            </div>
+        @endif
     </div>
+    <script>
+        function myFunction() {
+          // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+    </script>
 @endsection

@@ -1,6 +1,7 @@
 <?php
 
-use App\http\controllers\EventController;
+use App\http\controllers\IndividualEventController;
+use App\http\controllers\GroupEventController;
 use App\http\controllers\LecturerController;
 use App\http\controllers\StaffController;
 use App\http\controllers\StudentController;
@@ -10,10 +11,11 @@ use App\http\controllers\staff\UserController as StaffUserController;
 
 use App\http\controllers\lecturer\EventController as LecturerEventController;
 use App\http\controllers\lecturer\UserController as LecturerUserController;
+use App\http\controllers\lecturer\JoinEventController as LecturerJoinEventController;
 
 use App\http\controllers\student\EventController as StudentEventController;
 use App\http\controllers\student\UserController as StudentUserController;
-use App\http\controllers\student\GroupEventController as StudentGroupController;
+use App\http\controllers\student\JoinEventController as StudentJoinEventController;
 
 use App\http\controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -47,29 +49,34 @@ Route::group(['middleware' => 'staff', 'prefix' => 'staff', 'as' => 'staff.'], f
 Route::group(['middleware' => 'lecturer','prefix' => 'lecturer', 'as' => 'lecturer.'], function () {
     Route::resource('event', LecturerEventController::class);
     Route::resource('user', LecturerUserController::class);
+    Route::resource('join', LecturerJoinEventController::class);
+    Route::post('join/group', [LecturerJoinEventController::class, 'join'])->name('join.group');
 });
 
 Route::group(['middleware' => 'student','prefix' => 'student', 'as' => 'student.'], function () {
     Route::resource('event', StudentEventController::class);
     Route::resource('user', StudentUserController::class);
-    Route::resource('group', StudentGroupController::class);
-    Route::post('group/join', [StudentGroupController::class, 'join'])->name('group.join');
+    Route::resource('join', StudentJoinEventController::class);
+    Route::post('join/group', [StudentJoinEventController::class, 'join'])->name('join.group');
 });
 
 Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('student', StudentController::class);
     Route::resource('lecturer', LecturerController::class);
     Route::resource('staff', StaffController::class);
-    Route::resource('event', EventController::class);
-    Route::resource('join', ApproveJoinController::class);
 
-    Route::post('event/approve', [EventController::class, 'approve'])->name('event.approve');
-    Route::post('event/reject', [EventController::class, 'reject'])->name('event.reject');
-    Route::post('event/revise', [EventController::class, 'revise'])->name('event.revise');
-    Route::post('event/open', [EventController::class, 'open'])->name('event.open');
-    Route::post('event/close', [EventController::class, 'close'])->name('event.close');
-    Route::post('event/{id}/acceptStudent', [ApproveJoinController::class, 'acceptStudent'])->name('event.acceptStudent');
-    Route::post('event/{id}/rejectStudent', [ApproveJoinController::class, 'rejectStudent'])->name('event.rejectStudent');
+    Route::resource('individual', IndividualEventController::class);
+    Route::post('individual/approve', [IndividualEventController::class, 'approve'])->name('individual.approve');
+    Route::post('individual/reject', [IndividualEventController::class, 'reject'])->name('individual.reject');
+    Route::post('individual/revise', [IndividualEventController::class, 'revise'])->name('individual.revise');
+
+    Route::resource('group', GroupEventController::class);
+    Route::post('group/open', [GroupEventController::class, 'open'])->name('group.open');
+    Route::post('group/close', [GroupEventController::class, 'close'])->name('group.close');
+
+    Route::resource('join', ApproveJoinController::class);
+    Route::post('join/{id}/acceptStudent', [ApproveJoinController::class, 'acceptStudent'])->name('event.acceptStudent');
+    Route::post('join/{id}/rejectStudent', [ApproveJoinController::class, 'rejectStudent'])->name('event.rejectStudent');
 });
 
 Auth::routes();

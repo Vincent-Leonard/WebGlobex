@@ -1,40 +1,23 @@
 @extends('layouts.app')
 @section('content')
-
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="../../../public/css/style.css" />
-    </head>
     <div class="container" style="margin-top: 20px;">
         <div class="row">
-            <h1 class="col">My Events</h1>
+            <h1 class="col text-center"><b>My Events</b></h1>
         </div>
         <div class="row">
-            @if (Auth::user()->isAdmin())
-                <div>
-                    <a href="{{ route('student.event.index') }}" class="col"><b>My Event List</b></a>
-                    <a href="{{ route('admin.event.index') }}" class="col">All Event List</a>
-                    <a href="{{ route('admin.join.index') }}" class="col">Paricipant List</a>
-                </div>
-            @endif
-
-            <div class="col-md-3 offset-md-1">
-                <a href="{{ route('student.event.create') }}" class="btn btn-primary btn-block" role="button"
+            <div class="col-md-3" style="margin-left: auto;">
+                <a href="{{ route('student.event.create') }}" class="btn btn-primary" role="button"
                     aria-pressed="true">Create Individual Event</a>
             </div>
-            @if (Auth::user()->isAdmin())
-                <div class="col-md-2 offset-md-0">
-                    <a href="{{ route('student.group.create') }}" class="btn btn-primary btn-block" role="button"
-                        aria-pressed="true">Create Group Event</a>
-                </div>
-            @endif
-            <div class="col-md-2 offset-md-0">
-                <a href="{{ route('student.group.index') }}" class="btn btn-primary btn-block" role="button"
-                    aria-pressed="true">Join Group Event</a>
+            <div class="col-md-2" style="margin: auto;">
+                <a href="{{ route('student.join.index') }}" class="btn btn-primary" role="button" aria-pressed="true">Join
+                    Group Event</a>
             </div>
         </div>
-        <div class="row" style="margin-top: 30px; width:60%; float:left; margin-left: -5px; background: white">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for event">
+        <div class="row">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for event.." style="border: 0; border-radius: 3px">
+        </div>
+        <div class="row" style="margin-top: 10px; width:60%; float:left; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
             <table class="table table-striped" id="myTable">
                 <thead>
                     <tr>
@@ -85,13 +68,11 @@
                         </tr>
                     @endforeach
                 </tbody>
-                <table width="550px">
-                    <tr>
-                        <td width="800px" height="400px"></td>
-                </table>
+            </table>
         </div>
         @if ($pages == 'index')
-            <div style="width: 25%; float:left; margin-left: 100px; margin-top: 30px; padding:30px; background: white;">
+            <div
+                style="width: 32%; float:left; margin-left: 90px; margin-top: 10px; padding:20px; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
                 <div class="form-event">
                     <label>Event :</label>
                     <input type="text" class="form-control" name="event" readonly>
@@ -122,48 +103,65 @@
                 </div>
             </div>
         @elseif($pages == 'showit')
-            <div style="width: 25%; float:left; margin-left: 100px; margin-top: 30px; padding:30px; background: white;">
-                <div class="form-event">
+            <div
+                style="width: 32%; float:left; margin-left: 90px; margin-top: 10px; padding:20px; background:rgba(255, 255, 255, 0.8); height: 450px; overflow-y: scroll;">
+                <div class="form-event" style="margin-bottom: 10px;">
                     <label>Event :</label>
                     <input type="text" class="form-control" name="event" value="{{ $return->event }}" readonly>
                 </div>
-                <div class="form-event">
+                <?php if ($return->type == 0) {
+                $type = 'Student Exchange';
+                } else {
+                $type = 'Student Excursion';
+                } ?>
+                <div class="form-event" style="margin-bottom: 10px;">
                     <label>Type :</label>
-                    <input type="text" class="form-control" name="type" value="{{ $return->type }}" readonly>
+                    <input type="text" class="form-control" name="type" value="{{ $type }}" readonly>
                 </div>
-                <div class="form-event">
+                <div class="form-event" style="margin-bottom: 10px;">
                     <label>Date :</label>
                     <input type="text" class="form-control" name="date" value="{{ $return->event_date }}" readonly>
                 </div>
-                <div class="form-event">
+                <div class="form-event" style="margin-bottom: 10px;">
                     <label>Duration :</label>
                     <input type="text" class="form-control" name="duration" value="{{ $return->duration }}" readonly>
                 </div>
-                <div class="form-event">
+                <div class="form-event" style="margin-bottom: 10px;">
                     <label>Country :</label>
                     <input type="text" class="form-control" name="country" value="{{ $return->country }}" readonly>
                 </div>
-                <div class="form-event">
+                <div class="form-event" style="margin-bottom: 10px;">
                     <label>City :</label>
                     <input type="text" class="form-control" name="city" value="{{ $return->city }}" readonly>
                 </div>
-                <div class="form-event">
+                <div class="form-event" style="margin-bottom: 10px;">
                     <label>Orginizer :</label>
                     <input type="text" class="form-control" name="orginizer" value="{{ $return->organizer }}" readonly>
                 </div>
-                <form action="{{ route('student.event.edit', $return) }}" method="GET">
-                    @csrf
-                    <button class="btn btn-primary" type="submit">Edit</button>
-                </form>
-                <form action="{{ route('student.event.destroy', $return) }}" method="post">
-                    @csrf
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                @if ($event->is_group == 0)
+                    <img style="width: 100%;" src="/images/event/individual/{{ $return->file }}" alt="">
+                    <br><br>
+                    <form action="{{ route('student.event.edit', $return) }}" method="GET">
+                        @csrf
+                        <button class="btn btn-normal" type="submit" style="float:left; margin-right: 10px">Edit</button>
+                    </form>
+                    <form action="{{ route('student.event.destroy', $return) }}" method="post">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                @else
+                    <img style="width: 100%;" src="/images/event/group/{{ $return->file }}" alt="">
+                    <br><br>
+                    <form action="{{ route('student.event.destroy', $return) }}" method="post">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                @endif
             </div>
         @endif
     </div>
-
     <script>
         function myFunction() {
           // Declare variables

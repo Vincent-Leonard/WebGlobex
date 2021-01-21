@@ -52,8 +52,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $pages = 'lecturer';
-        return view('lecturer.profile', compact('user', 'pages'));
+        return view('lecturer.profile', compact('user'));
     }
 
     /**
@@ -62,13 +61,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $pages = 'user';
-        $departments = Department::all();
-        $titles = Title::all();
-        $jakas = Jaka::all();
-        return view('lecturer.editProfile', compact('user', 'departments', 'titles', 'jakas', 'pages'));
+        return view('lecturer.editProfile', compact('user'));
     }
 
     /**

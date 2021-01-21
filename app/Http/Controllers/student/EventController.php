@@ -30,9 +30,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        $pages = 'event';
         $users = User::all()->where('lecturer_id', '<>', null);
-        return view('student.event.addEvent', compact('pages', 'users'));
+        return view('student.event.addEvent', compact('users'));
     }
 
     /**
@@ -83,7 +82,6 @@ class EventController extends Controller
         $events = User::find($id)->attends;
         $pages = 'showit';
         $return = Event::Find($detail);
-
         return view('student.event.index', compact('events', 'return', 'pages'));
     }
 
@@ -95,12 +93,11 @@ class EventController extends Controller
      */
     public function edit($detail)
     {
-        $pages = 'event';
         $event = Event::Find($detail);
-        $current = Event::find($detail)->users->where('lecturer_id', '<>', null)->first();
+        $current = $event->users->where('lecturer_id', '<>', null)->first();
         $current_id = $current->id;
         $users = User::all()->where('lecturer_id', '<>', null);
-        return view('student.event.editEvent', compact('event', 'pages', 'current_id', 'users'));
+        return view('student.event.editEvent', compact('event', 'current_id', 'users'));
     }
 
     /**

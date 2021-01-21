@@ -23,10 +23,11 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="background-color: white">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{-- {{ config('app.name', 'Laravel') }} --}}
+                    {{-- {{ config('app.name', 'Laravel') }}
+                    --}}
                     Globex
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -41,20 +42,60 @@
                         <ul class="navbar-nav mr-auto">
                             @if (Auth::user()->isStaff() && Auth::user()->isAdmin())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.event.index') }}">Event List</a>
+                                    <a class="nav-link" href="{{ route('admin.individual.index') }}">All Event List</a>
                                 </li>
                             @endif
 
                             @if (Auth::user()->isLecturer())
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('lecturer.event.index') }}">Event List</a>
-                                </li>
+                                @if (Auth::user()->isAdmin())
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            Event List
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                            @auth
+                                                <a class="dropdown-item" href="{{ route('lecturer.event.index') }}">
+                                                    My Events
+                                                </a>
+                                                <a class="dropdown-item" href="{{ route('admin.individual.index') }}">
+                                                    All Events List
+                                                </a>
+                                            @endauth
+                                        </div>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('lecturer.event.index') }}">Event List</a>
+                                    </li>
+                                @endif
                             @endif
 
                             @if (Auth::user()->isStudent())
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('student.event.index') }}">Event List</a>
-                                </li>
+                                @if (Auth::user()->isAdmin())
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            Event List
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                            @auth
+                                                <a class="dropdown-item" href="{{ route('student.event.index') }}">
+                                                    My Events
+                                                </a>
+                                                <a class="dropdown-item" href="{{ route('admin.individual.index') }}">
+                                                    All Events List
+                                                </a>
+                                            @endauth
+                                        </div>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('student.event.index') }}">Event List</a>
+                                    </li>
+                                @endif
                             @endif
 
                             @if (Auth::user()->isAdmin())
@@ -84,20 +125,32 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Account (
                                     @auth
-                                        @if (Auth::user()->isStaff())
-                                            {{ Auth::user()->staff->staff_name }}
+                                        @if (Auth::user()->isAdmin())
+                                            Admin (
+                                            @if (Auth::user()->isStaff())
+                                                {{ Auth::user()->staff->staff_name }} )
+                                            @endif
+                                            @if (Auth::user()->isLecturer())
+                                                {{ Auth::user()->lecturer->lecturer_name }} )
+                                            @endif
+                                            @if (Auth::user()->isStudent())
+                                                {{ Auth::user()->student->student_name }} )
+                                            @endif
+                                        @else
+                                            @if (Auth::user()->isStaff())
+                                                Staff (
+                                                {{ Auth::user()->staff->staff_name }} )
+                                            @endif
+                                            @if (Auth::user()->isLecturer())
+                                            Lecturer (
+                                                {{ Auth::user()->lecturer->lecturer_name }} )
+                                            @endif
+                                            @if (Auth::user()->isStudent())
+                                            Student (
+                                                {{ Auth::user()->student->student_name }} )
+                                            @endif
                                         @endif
-
-                                        @if (Auth::user()->isLecturer())
-                                            {{ Auth::user()->lecturer->lecturer_name }}
-                                        @endif
-
-                                        @if (Auth::user()->isStudent())
-                                            {{ Auth::user()->student->student_name }}
-                                        @endif
-                                    )
                                     @endauth
                                 </a>
 
@@ -124,7 +177,7 @@
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                 document.getElementById('logout-form').submit();">
+                                                                                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

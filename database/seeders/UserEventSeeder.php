@@ -45,5 +45,11 @@ class UserEventSeeder extends Seeder
         $user->user_id = '5';
         $user->is_approved = '1';
         $user->save();
+
+        $user = new UserEvent();
+        $user->event_id = '3';
+        $user->user_id = '4';
+        $user->is_approved = '1';
+        $user->save();
     }
 }
