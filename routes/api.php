@@ -36,9 +36,9 @@ Route::group(['middleware'=>'auth:api'], function(){
     Route::apiResource('histories', HistoryController::class);
     Route::apiResource('profile', UserController::class);
     Route::apiResource('admin', AllEventController::class);
-    Route::post('admin/approve', [AllEventController::class, 'approve'])->name('admin.approve');
-    Route::post('admin/reject', [AllEventController::class, 'reject'])->name('admin.reject');
-    Route::post('admin/revise', [AllEventController::class, 'revise'])->name('admin.revise');
-    Route::post('admin/open{id}', [AllEventController::class, 'open'])->name('admin.open');
+    Route::put('admin/approve/{id}', [AllEventController::class, 'approve'])->name('admin.approve');
+    Route::put('admin/reject/{id}', [AllEventController::class, 'reject'])->name('admin.reject');
+    Route::put('admin/revise/{id}', [AllEventController::class, 'revise'])->name('admin.revise');
+    Route::put('admin/open/{id}', [AllEventController::class, 'open'])->name('admin.open');
     Route::put('admin/close/{id}', [AllEventController::class, 'close'])->name('admin.close');
 });

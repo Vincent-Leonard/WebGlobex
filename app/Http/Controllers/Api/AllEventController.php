@@ -67,30 +67,42 @@ class AllEventController extends Controller
 
     public function approve(Request $request, $id)
     {
+        $id = $request->id;
         $event = Event::findOrFail($id);
         $event->update(['status' => '1']);
-        return redirect()->back()->with('Success', 'Event Approved');
+        return response([
+            'message' => 'Approve success',
+        ]);
     }
 
     public function reject(Request $request, $id)
     {
+        $id = $request->id;
         $event = Event::findOrFail($request->id);
         $event->update(['status' => '2']);
-        return redirect()->back()->with('Success', 'Event Rejected');
+        return response([
+            'message' => 'Reject success',
+        ]);
     }
 
     public function revise(Request $request, $id)
     {
+        $id = $request->id;
         $event = Event::findOrFail($request->id);
         $event->update(['status' => '3']);
-        return redirect()->back()->with('Success', 'Event Needs Revision');
+        return response([
+            'message' => 'Revise success',
+        ]);
     }
 
     public function open(Request $request, $id)
     {
+        $id = $request->id;
         $event = Event::findOrFail($id);
         $event->update(['status' => '4']);
-        return redirect()->back()->with('Success', 'Event Opened');
+        return response([
+            'message' => 'Open success',
+        ]);
     }
 
     public function close(Request $request, $id)
@@ -98,6 +110,8 @@ class AllEventController extends Controller
         $id = $request->id;
         $event = Event::findOrFail($id);
         $event->update(['status' => '5']);
-        return redirect()->back()->with('Success', 'Event Closed');
+        return response([
+            'message' => 'Close success',
+        ]);
     }
 }
