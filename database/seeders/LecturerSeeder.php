@@ -20,7 +20,7 @@ class LecturerSeeder extends Seeder
         $lecturer->nidn = '10001';
         $lecturer->lecturer_name = 'Jonathan';
         $lecturer->lecturer_email = 'jonathan@lecturer.com';
-        $lecturer->description = 'pinter';
+        $lecturer->description = 'jonathan';
         $lecturer->lecturer_photo = 'jonathan.png';
         $lecturer->lecturer_gender = '0';
         $lecturer->lecturer_phone = '081237238';

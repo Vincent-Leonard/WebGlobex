@@ -24,7 +24,7 @@
             <table class="table table-striped" id="myTable">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        {{-- <th scope="col">ID</th> --}}
                         <th scope="col">Name</th>
                         <th scope="col">Department</th>
                         <th scope="col">Batch</th>
@@ -34,7 +34,7 @@
                 <tbody>
                     @foreach ($students as $student)
                         <tr>
-                            <td>{{ $student->student_id }}</td>
+                            {{-- <td>{{ $student->student_id }}</td> --}}
                             <td><a href="{{ route('admin.student.show', $student) }}">{{ $student->student_name }}</a></td>
                             <td>{{ $student->department->department_name }}</td>
                             <td>{{ $student->batch }}</td>

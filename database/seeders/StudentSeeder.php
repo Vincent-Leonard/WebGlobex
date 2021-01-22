@@ -20,7 +20,7 @@ class StudentSeeder extends Seeder
         $student->student_name = 'Vincent';
         $student->student_email = 'vincent@student.com';
         $student->batch = '2019';
-        $student->description = 'sultan';
+        $student->description = 'vincent';
         $student->student_photo = 'vincent.png';
         $student->student_gender = '0';
         $student->student_phone = '0812372385';
